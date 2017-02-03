@@ -29,8 +29,12 @@ public class Company {
     private Set<Condominium> condominiums;
 
     @ManyToMany
-    @JoinTable(name = "company_companyUser", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
-    private Set<CompanyUser> companyUsers;
+    @JoinTable(name = "company_ceoUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
+    private Set<CompanyUser> ceoUsers;
+
+    @ManyToMany
+    @JoinTable(name = "company_managerUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
+    private Set<CompanyUser> managerUsers;
 
     private Company() {
     }

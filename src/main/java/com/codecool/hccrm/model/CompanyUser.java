@@ -12,18 +12,29 @@ import java.util.Set;
 @Table(name = "companyUser")
 public class CompanyUser extends User {
 
-    @ManyToMany(mappedBy = "companyUsers")
-    private Set<Company> companies;
+    @ManyToMany(mappedBy = "ceoUsers")
+    private Set<Company> companyCeos;
+
+    @ManyToMany(mappedBy = "managerUsers")
+    private Set<Company> companyManagers;
 
     private CompanyUser() {
         super();
     }
 
-    public Set<Company> getCompanies() {
-        return companies;
+    public Set<Company> getCompanyCeos() {
+        return companyCeos;
     }
 
-    public void setCompanies(Set<Company> companies) {
-        this.companies = companies;
+    public void setCompanyCeos(Set<Company> companyCeos) {
+        this.companyCeos = companyCeos;
+    }
+
+    public Set<Company> getCompanyManagers() {
+        return companyManagers;
+    }
+
+    public void setCompanyManagers(Set<Company> companyManagers) {
+        this.companyManagers = companyManagers;
     }
 }
