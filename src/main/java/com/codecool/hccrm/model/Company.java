@@ -24,6 +24,9 @@ public class Company {
     @OneToMany
     private Set<Condominium> condominiums;
 
+    private Company() {
+    }
+
     public long getId() {
         return id;
     }
