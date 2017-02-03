@@ -10,16 +10,16 @@ public class Company {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String companyName;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String taxNumber;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String premise;
 
     @Column
@@ -36,7 +36,7 @@ public class Company {
     @JoinTable(name = "company_managerUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
     private Set<CompanyUser> managerUsers;
 
-    private Company() {
+    public Company() {
     }
 
     public long getId() {

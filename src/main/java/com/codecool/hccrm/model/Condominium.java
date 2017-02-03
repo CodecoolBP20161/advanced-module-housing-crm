@@ -8,7 +8,7 @@ import java.util.Date;
 public class Condominium {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
     private String address;
@@ -26,9 +26,12 @@ public class Condominium {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-    // todo: as well...manager?????
 
-    private Condominium() {
+    @ManyToOne
+    @JoinColumn(name = "companyUser_id")
+    private CompanyUser managerUser;
+
+    public Condominium() {
     }
 
     public long getId() {
@@ -87,11 +90,19 @@ public class Condominium {
         this.regDate = regDate;
     }
 
-    public Company getOwnerCompany() {
+    public Company getCompany() {
         return company;
     }
 
-    public void setOwnerCompany(Company ownerCompany) {
-        this.company = ownerCompany;
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public CompanyUser getManagerUser() {
+        return managerUser;
+    }
+
+    public void setManagerUser(CompanyUser managerUser) {
+        this.managerUser = managerUser;
     }
 }

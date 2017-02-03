@@ -2,6 +2,7 @@ package com.codecool.hccrm.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
@@ -18,7 +19,18 @@ public class CompanyUser extends User {
     @ManyToMany(mappedBy = "managerUsers")
     private Set<Company> companyManagers;
 
-    private CompanyUser() {
+    public Set<Condominium> getCondominiums() {
+        return condominiums;
+    }
+
+    public void setCondominiums(Set<Condominium> condominiums) {
+        this.condominiums = condominiums;
+    }
+
+    @OneToMany(mappedBy = "managerUser")
+    private Set<Condominium> condominiums;
+
+    public CompanyUser() {
         super();
     }
 
