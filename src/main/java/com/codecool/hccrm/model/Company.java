@@ -12,17 +12,25 @@ public class Company {
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     @Column(nullable = false, unique = true)
     private String companyName;
+
     @Column(nullable = false, unique = true)
     private String taxNumber;
+
     @Column(nullable = false, unique = true)
     private String premise;
+
     @Column
     private Date regDate;
-//    todo: complete with parameters!
-    @OneToMany
+
+    @OneToMany(mappedBy = "company")
     private Set<Condominium> condominiums;
+
+    @ManyToMany
+    @JoinTable(name = "company_companyUser", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
+    private Set<CompanyUser> companyUsers;
 
     private Company() {
     }

@@ -2,7 +2,6 @@ package com.codecool.hccrm.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "condominium")
@@ -23,9 +22,10 @@ public class Condominium {
     private Date generalMeetingResolutionDate;
     @Column
     private Date regDate;
-    // todo: complete with appropriate parameters
+
     @ManyToOne
-    private Set<Company> ownerCompany;
+    @JoinColumn(name = "company_id")
+    private Company company;
     // todo: as well...manager?????
 
     private Condominium() {
@@ -87,11 +87,11 @@ public class Condominium {
         this.regDate = regDate;
     }
 
-    public Set<Company> getOwnerCompany() {
-        return ownerCompany;
+    public Company getOwnerCompany() {
+        return company;
     }
 
-    public void setOwnerCompany(Set<Company> ownerCompany) {
-        this.ownerCompany = ownerCompany;
+    public void setOwnerCompany(Company ownerCompany) {
+        this.company = ownerCompany;
     }
 }
