@@ -25,9 +25,6 @@ public class Company {
     @Column
     private Date regDate;
 
-    @OneToMany(mappedBy = "company")
-    private Set<Condominium> condominiums;
-
     @ManyToMany
     @JoinTable(name = "company_ceoUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
     private Set<CompanyUser> ceoUsers;
@@ -79,11 +76,20 @@ public class Company {
         this.regDate = regDate;
     }
 
-    public Set<Condominium> getCondominiums() {
-        return condominiums;
+
+    public Set<CompanyUser> getCeoUsers() {
+        return ceoUsers;
     }
 
-    public void setCondominiums(Set<Condominium> condominiums) {
-        this.condominiums = condominiums;
+    public void setCeoUsers(Set<CompanyUser> ceoUsers) {
+        this.ceoUsers = ceoUsers;
+    }
+
+    public Set<CompanyUser> getManagerUsers() {
+        return managerUsers;
+    }
+
+    public void setManagerUsers(Set<CompanyUser> managerUsers) {
+        this.managerUsers = managerUsers;
     }
 }
