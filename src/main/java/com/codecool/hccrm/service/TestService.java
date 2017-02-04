@@ -3,10 +3,7 @@ package com.codecool.hccrm.service;
 import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.model.CompanyUser;
 import com.codecool.hccrm.model.Condominium;
-import com.codecool.hccrm.repository.CompanyQueryRepository;
-import com.codecool.hccrm.repository.CompanyRepository;
-import com.codecool.hccrm.repository.CompanyUserRepository;
-import com.codecool.hccrm.repository.CondominiumRepository;
+import com.codecool.hccrm.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +28,16 @@ public class TestService {
     private CondominiumRepository condominiumRepository;
 
     @Autowired
-    CompanyQueryRepository companyQueryRepository;
+    private CompanyQueryRepository companyQuery;
+
+    @Autowired
+    private CondominiumQueryRepository condominiumQuery;
+
+    @Autowired
+    private CompanyUserQueryRepository companyUserQuery;
+
+    @Autowired
+    private UserQueryRepository userQuery;
 
     @Transactional
     public void testClient() throws Exception {
@@ -47,14 +53,28 @@ public class TestService {
         Set<Condominium> s = new HashSet<>();
         s.add(condominium);
         condominium.setCompany(company);
+
+        Set<CompanyUser> managers = new HashSet<>();
+        managers.add(user);
+        company.setManagerUsers(managers);
+
         companyUserRepository.save(user);
         companyRepository.save(company);
         condominiumRepository.save(condominium);
+
         Company company2 = companyRepository.findByCompanyName("Lex Corp");
         System.out.println(company2.getId());
-        List condoms = companyQueryRepository.getCondoms(company2);
+        List condoms = companyQuery.getCondominiums(company2);
         System.out.println(condoms);
-        System.out.println(companyQueryRepository.getCompanies());
+        System.out.println("companies:");
+        System.out.println(companyQuery.selectAll());
+        System.out.println("condominiums:");
+        System.out.println(condominiumQuery.selectAll());
+        System.out.println("companyUsers:");
+        System.out.println(companyUserQuery.selectAll());
+        System.out.println("Users:");
+        System.out.println(userQuery.selectAll());
+
 
     }
 
