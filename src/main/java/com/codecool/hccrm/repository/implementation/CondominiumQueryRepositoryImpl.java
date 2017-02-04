@@ -1,6 +1,7 @@
-package com.codecool.hccrm.repository;
+package com.codecool.hccrm.repository.implementation;
 
 import com.codecool.hccrm.model.Condominium;
+import com.codecool.hccrm.repository.CondominiumQueryRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
