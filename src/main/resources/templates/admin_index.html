@@ -1,96 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8" />
-    <title>HCCRM ADMIN</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-    <!-- styles -->
-    <link href="../css/styles.css" rel="stylesheet" />
-
+<head th:replace="admin_fragments :: head">
 </head>
 <body>
-<div th:replace="fragments/admin_header.html :: header"></div>
+<div th:replace="admin_fragments :: navbar">
+</div>
 <div class="page-content">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="sidebar content-box" style="display: block;">
-                <ul class="nav">
-                    <!-- Main menu -->
-                    <li class="current"><a href="admin_index.html"><i class="glyphicon glyphicon-home"></i> Companies</a></li>
-                    <li class="submenu">
-                        <a href="#">
-                            <i class="glyphicon glyphicon-list"></i> Pages
-                            <span class="caret pull-right"></span>
-                        </a>
-                        <!-- Sub menu -->
-                        <ul>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="signup.html">Signup</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-10">
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="content-box-large">
-                        <div class="panel-heading">
-                            <div class="panel-title">Company list</div>
-                        </div>
-                        <div class="panel-body">
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="companies_table">
-                                <thead>
-                                <tr>
-                                    <th>Company name</th>
-                                    <th>CEO</th>
-                                    <th>Registered</th>
-                                    <th>Updated</th>
-                                    <th>Status</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="odd gradeX">
-                                    <td>Malacka kft.</td>
-                                    <td>Malacka ur</td>
-                                    <td>2017.01.01</td>
-                                    <td>2017.02.01</td>
-                                    <td class="center">ACCEPTED</td>
-                                </tr>
-                                <tr class="even gradeC">
-                                    <td>Trident bt.</td>
-                                    <td>Kovacs Janos</td>
-                                    <td>2017.01.09</td>
-                                    <td>2017.02.02</td>
-                                    <td class="center">PENDING</td>
-                                </tr>
-                                <tr class="even gradeC">
-                                    <td>Tridd kft.</td>
-                                    <td>Kovacs Janos</td>
-                                    <td>2017.01.09</td>
-                                    <td>2017.02.02</td>
-                                    <td class="center">PENDING</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+    <div th:include="admin_fragments :: menu">
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="content-box-large">
+                    <div class="panel-heading">
+                        <div class="panel-title">Company list</div>
                     </div>
-
-
+                    <div class="panel-body">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="companies_table">
+                            <thead>
+                            <tr>
+                                <th>Company name</th>
+                                <th>CEO</th>
+                                <th>Registered</th>
+                                <th>Updated</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd gradeX">
+                                <td>Malacka kft.</td>
+                                <td>Malacka ur</td>
+                                <td>2017.01.01</td>
+                                <td>2017.02.01</td>
+                                <td class="center">ACCEPTED</td>
+                            </tr>
+                            <tr class="even gradeC">
+                                <td>Trident bt.</td>
+                                <td>Kovacs Janos</td>
+                                <td>2017.01.09</td>
+                                <td>2017.02.02</td>
+                                <td class="center">PENDING</td>
+                            </tr>
+                            <tr class="even gradeC">
+                                <td>Tridd kft.</td>
+                                <td>Kovacs Janos</td>
+                                <td>2017.01.09</td>
+                                <td>2017.02.02</td>
+                                <td class="center">PENDING</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- custom js -->
-    <script src="../js/custom.js"></script>
+    <script th:src="@{js/custom.js}"></script>
 
 </body>
 </html>
