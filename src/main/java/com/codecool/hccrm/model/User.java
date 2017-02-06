@@ -32,7 +32,7 @@ public class User {
     private Date regDate;
 
     @Column
-    private boolean verified;
+    private Boolean verified;
 
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -105,5 +105,9 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Boolean getVerified() {
+        return verified;
     }
 }
