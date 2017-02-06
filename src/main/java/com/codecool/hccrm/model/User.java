@@ -31,11 +31,16 @@ public class User {
     @Column
     private Date regDate;
 
+    @Column
+    private boolean verified;
+
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
+        super();
+        this.verified = false;
     }
 
     public long getId() {
