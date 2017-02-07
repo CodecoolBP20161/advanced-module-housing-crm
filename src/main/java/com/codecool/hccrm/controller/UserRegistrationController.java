@@ -1,6 +1,9 @@
 package com.codecool.hccrm.controller;
 
 import com.codecool.hccrm.dto.UserDTO;
+import com.codecool.hccrm.error.EmailAlreadyExistsException;
+import com.codecool.hccrm.event.OnRegistrationCompleteEvent;
+import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -29,7 +33,9 @@ public class UserRegistrationController {
     @Autowired
     ApplicationEventPublisher eventPublisher;
 
-    // just a very basic registration form using Thymeleaf (and some magic)
+    /**
+     * just a very basic registration form using Thymeleaf (and some magic)
+     */
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
     public String showBasicForm(WebRequest request, Model model) {
         UserDTO user = new UserDTO();
@@ -37,33 +43,60 @@ public class UserRegistrationController {
         return "register";
     }
 
-    // NOTES:
-    // we need model to pass on to the view later the e-mail address
-    // we need the request for later security stuff, like check for secure connection, etc
-    // BindingResult is for easy validation http://codetutr.com/2013/05/28/spring-mvc-form-validation/
+    /**
+     * NOTES:
+     * we need model to pass on to the view later the e-mail address
+     * we need the request for later security stuff, like check for secure connection, etc
+     * BindingResult is for easy validation http://codetutr.com/2013/05/28/spring-mvc-form-validation/
+     * check for existing e-mail can only be done during the transaction to save user!!!
+     *
+     * @param userDTO
+     * @param result
+     * @param request
+     * @param errors
+     * @param model
+     * @return
+     */
+
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-    public String submit(
+    public ModelAndView submit(
                         @Valid @ModelAttribute("user") UserDTO userDTO,
                         BindingResult result,
-                        WebRequest request, Errors errors,
+                        WebRequest request,
+                        Errors errors,
                         ModelMap model) {
 
-        // do validation here for form input
+
+        if (!result.hasErrors()) {
+
+        }
         if (result.hasErrors()) {
-            return "error";
+            return new ModelAndView("register", "user", userDTO);
         }
 
-        // do validation for user in database, e.g. check if we already have e-mail then save, set role, etc
-        // userService.createFromDTO(user);
-        // you have to check for existing user while saving
+        User registered = createFromDTO(userDTO, result);
+        if (registered == null) {
+            result.rejectValue("email", "message.regError");
+        }
 
-        // send verification e-mail
+        try {
+            String appUrl = request.getContextPath();
+            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
+        } catch (Exception me) {
+            return new ModelAndView("emailError", "user", userDTO);
+        }
 
-        // pass on views depending on what happened
-        model.addAttribute("id", userDTO.getId());
-        model.addAttribute("email", userDTO.getEmail());
-        model.addAttribute("password", userDTO.getPassword());
-        return "userView";
+        return new ModelAndView("userView", "user", userDTO);
+    }
+
+    private User createFromDTO(UserDTO userDTO, BindingResult result) {
+        User user;
+        try {
+            user = userService.createNewUser(userDTO);
+        } catch (EmailAlreadyExistsException e) {
+            return null;
+        }
+        return user;
     }
 
 }
