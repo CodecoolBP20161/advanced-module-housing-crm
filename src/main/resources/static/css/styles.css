@@ -624,7 +624,7 @@ body {
     .header .form{
         margin:10px auto;
     }
-    .sidebar, content-box{
+    .sidebar, .content-box{
         margin-bottom:30px;
         width:100%;
         float:none;
@@ -650,4 +650,9 @@ body {
         box-shadow:0px 0px 1px #0fa6bc;
         border-radius:10px;
     }
+
+    tfoot {
+        display: table-header-group;
+    }
+
 }
