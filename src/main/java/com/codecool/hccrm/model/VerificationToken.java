@@ -26,6 +26,25 @@ public class VerificationToken {
 
     private Date expirationDate;
 
+    public VerificationToken() {
+        super();
+    }
+
+    public VerificationToken(final String token) {
+        super();
+
+        this.token = token;
+        this.expirationDate = calculateExpirationDate(EXPIRATION_TIME);
+    }
+
+    public VerificationToken(final String token, final User user) {
+        super();
+
+        this.token = token;
+        this.user = user;
+        this.expirationDate = calculateExpirationDate(EXPIRATION_TIME);
+    }
+
     private Date calculateExpirationDate(int expirationTimeInMinutes) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Timestamp(cal.getTime().getTime()));

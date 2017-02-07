@@ -3,7 +3,9 @@ package com.codecool.hccrm.service;
 import com.codecool.hccrm.dto.UserDTO;
 import com.codecool.hccrm.error.EmailAlreadyExistsException;
 import com.codecool.hccrm.model.User;
+import com.codecool.hccrm.model.VerificationToken;
 import com.codecool.hccrm.repository.UserRepository;
+import com.codecool.hccrm.repository.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,10 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private VerificationTokenRepository tokenRepository;
+
+    @Override
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -51,5 +57,26 @@ public class UserService {
         else {
             return true;
         }
+    }
+
+    @Override
+    public User getUser(String verificationToken) {
+        User user = tokenRepository.findByToken(verificationToken).getUser();
+        return user;
+    }
+
+    @Override
+    public VerificationToken getVerificationToken(String VerificationToken) {
+        return tokenRepository.findByToken(VerificationToken);
+    }
+
+    @Override
+    public void createVerificationToken(User user, String token) {
+        VerificationToken myToken = new VerificationToken(token, user);
+        tokenRepository.save(myToken);
+    }
+
+    public User getUser() {
+        return user;
     }
 }
