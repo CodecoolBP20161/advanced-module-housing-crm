@@ -20,7 +20,7 @@ public class PageController {
     public String index() throws Exception {
         logger.info(LogFormatter.FORMAT.getFormatter() + "Index page is called.");
 
-        service.testClient();
+//        service.testClient();
         return "index";
     }
 }
