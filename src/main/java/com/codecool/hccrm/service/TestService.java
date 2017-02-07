@@ -1,8 +1,8 @@
 package com.codecool.hccrm.service;
 
 import com.codecool.hccrm.model.Company;
-import com.codecool.hccrm.model.CompanyUser;
 import com.codecool.hccrm.model.Condominium;
+import com.codecool.hccrm.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +20,6 @@ public class TestService {
     @Autowired
     CompanyService companyService;
     @Autowired
-    CompanyUserService companyUserService;
-    @Autowired
     UserService userService;
     @Autowired
     CondominiumService condominiumService;
@@ -33,7 +31,7 @@ public class TestService {
 
         Condominium condominium = new Condominium();
 
-        CompanyUser user = new CompanyUser();
+        User user = new User();
 
 
         condominium.setManagerUser(user);
@@ -41,11 +39,11 @@ public class TestService {
         s.add(condominium);
         condominium.setCompany(company);
 
-        Set<CompanyUser> managers = new HashSet<>();
+        Set<User> managers = new HashSet<>();
         managers.add(user);
         company.setManagerUsers(managers);
 
-        companyUserService.save(user);
+        userService.save(user);
         companyService.save(company);
         condominiumService.save(condominium);
 
@@ -57,8 +55,6 @@ public class TestService {
         System.out.println(companyService.findAll());
         System.out.println("condominiums:");
         System.out.println(condominiumService.findAll());
-        System.out.println("companyUsers:");
-        System.out.println(companyUserService.findAll());
         System.out.println("Users:");
         System.out.println(userService.findAll());
 
