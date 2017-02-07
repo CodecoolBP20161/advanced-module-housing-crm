@@ -25,7 +25,6 @@ public class UserService {
     @Autowired
     private VerificationTokenRepository tokenRepository;
 
-    @Override
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -59,24 +58,17 @@ public class UserService {
         }
     }
 
-    @Override
     public User getUser(String verificationToken) {
         User user = tokenRepository.findByToken(verificationToken).getUser();
         return user;
     }
 
-    @Override
     public VerificationToken getVerificationToken(String VerificationToken) {
         return tokenRepository.findByToken(VerificationToken);
     }
 
-    @Override
     public void createVerificationToken(User user, String token) {
         VerificationToken myToken = new VerificationToken(token, user);
         tokenRepository.save(myToken);
-    }
-
-    public User getUser() {
-        return user;
     }
 }
