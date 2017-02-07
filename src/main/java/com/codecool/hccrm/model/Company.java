@@ -23,7 +23,6 @@ public class Company {
     private String premise;
 
 
-
     @Column
     private Date regDate;
 
