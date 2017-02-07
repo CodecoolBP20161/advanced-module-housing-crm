@@ -1,5 +1,6 @@
-package com.codecool.hccrm.model;
+package com.codecool.hccrm.dto;
 
+import com.codecool.hccrm.validation.PasswordChecked;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -8,6 +9,8 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by prezi on 2017. 02. 07..
  */
+
+@PasswordChecked
 public class UserDTO {
 
     @NotNull
