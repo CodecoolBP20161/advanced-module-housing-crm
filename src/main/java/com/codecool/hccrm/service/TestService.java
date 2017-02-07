@@ -82,6 +82,7 @@ public class TestService {
         roleService.save(manager_r);
         userService.save(user1);
         userService.save(user2);
+        userService.save(user3);
         companyService.save(company);
         condominiumService.save(condominium1);
         condominiumService.save(condominium2);
