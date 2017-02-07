@@ -22,16 +22,18 @@ public class Company {
     @Column(nullable = true, unique = true)
     private String premise;
 
+
+
     @Column
     private Date regDate;
 
     @ManyToMany
     @JoinTable(name = "company_ceoUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
-    private Set<CompanyUser> ceoUsers;
+    private Set<User> ceoUsers;
 
     @ManyToMany
     @JoinTable(name = "company_managerUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
-    private Set<CompanyUser> managerUsers;
+    private Set<User> managerUsers;
 
     public Company() {
     }
@@ -76,20 +78,19 @@ public class Company {
         this.regDate = regDate;
     }
 
-
-    public Set<CompanyUser> getCeoUsers() {
+    public Set<User> getCeoUsers() {
         return ceoUsers;
     }
 
-    public void setCeoUsers(Set<CompanyUser> ceoUsers) {
+    public void setCeoUsers(Set<User> ceoUsers) {
         this.ceoUsers = ceoUsers;
     }
 
-    public Set<CompanyUser> getManagerUsers() {
+    public Set<User> getManagerUsers() {
         return managerUsers;
     }
 
-    public void setManagerUsers(Set<CompanyUser> managerUsers) {
+    public void setManagerUsers(Set<User> managerUsers) {
         this.managerUsers = managerUsers;
     }
 }

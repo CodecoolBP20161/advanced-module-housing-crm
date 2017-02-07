@@ -35,6 +35,13 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @ManyToMany(mappedBy = "ceoUsers")
+    private Set<Company> companyCeos;
+
+    @ManyToMany(mappedBy = "managerUsers")
+    private Set<Company> companyManagers;
+
+
     public User() {
     }
 
