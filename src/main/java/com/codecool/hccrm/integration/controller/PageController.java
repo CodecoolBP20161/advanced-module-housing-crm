@@ -1,4 +1,4 @@
-package com.codecool.hccrm.controller;
+package com.codecool.hccrm.integration.controller;
 
 import com.codecool.hccrm.logging.LogFormatter;
 import com.codecool.hccrm.service.TestService;

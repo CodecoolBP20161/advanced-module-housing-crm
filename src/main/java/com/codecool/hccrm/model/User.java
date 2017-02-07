@@ -1,7 +1,7 @@
 package com.codecool.hccrm.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 @Entity
@@ -13,23 +13,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String phoneNumber;
 
     @Column
-    private Date regDate;
+    private Calendar regDate;
 
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -42,7 +42,16 @@ public class User {
     private Set<Company> companyManagers;
 
 
-    public User() {
+    protected User() {
+    }
+
+    public User(String firstName, String lastName, String email, String password, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.regDate = Calendar.getInstance();
     }
 
     public long getId() {
@@ -93,11 +102,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getRegDate() {
+    public Calendar getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Date regDate) {
+    public void setRegDate(Calendar regDate) {
         this.regDate = regDate;
     }
 
@@ -107,5 +116,21 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Company> getCompanyCeos() {
+        return companyCeos;
+    }
+
+    public void setCompanyCeos(Set<Company> companyCeos) {
+        this.companyCeos = companyCeos;
+    }
+
+    public Set<Company> getCompanyManagers() {
+        return companyManagers;
+    }
+
+    public void setCompanyManagers(Set<Company> companyManagers) {
+        this.companyManagers = companyManagers;
     }
 }

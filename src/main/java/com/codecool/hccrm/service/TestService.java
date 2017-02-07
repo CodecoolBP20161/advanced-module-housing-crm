@@ -31,32 +31,32 @@ public class TestService {
 
         Condominium condominium = new Condominium();
 
-        User user = new User();
+//        User user = new User();
 
 
-        condominium.setManagerUser(user);
-        Set<Condominium> s = new HashSet<>();
-        s.add(condominium);
-        condominium.setCompany(company);
-
-        Set<User> managers = new HashSet<>();
-        managers.add(user);
-        company.setManagerUsers(managers);
-
-        userService.save(user);
-        companyService.save(company);
-        condominiumService.save(condominium);
-
-        Company company2 = companyService.findByCompanyName("Lex Corp");
-        List<Condominium> condoms = condominiumService.findByCompany(company2);
-        System.out.println(condoms);
-
-        System.out.println("companies:");
-        System.out.println(companyService.findAll());
-        System.out.println("condominiums:");
-        System.out.println(condominiumService.findAll());
-        System.out.println("Users:");
-        System.out.println(userService.findAll());
+//        condominium.setManagerUser(user);
+//        Set<Condominium> s = new HashSet<>();
+//        s.add(condominium);
+//        condominium.setCompany(company);
+//
+//        Set<User> managers = new HashSet<>();
+//        managers.add(user);
+//        company.setManagerUsers(managers);
+//
+//        userService.save(user);
+//        companyService.save(company);
+//        condominiumService.save(condominium);
+//
+//        Company company2 = companyService.findByCompanyName("Lex Corp");
+//        List<Condominium> condoms = condominiumService.findByCompany(company2);
+//        System.out.println(condoms);
+//
+//        System.out.println("companies:");
+//        System.out.println(companyService.findAll());
+//        System.out.println("condominiums:");
+//        System.out.println(condominiumService.findAll());
+//        System.out.println("Users:");
+//        System.out.println(userService.findAll());
 
 
     }
