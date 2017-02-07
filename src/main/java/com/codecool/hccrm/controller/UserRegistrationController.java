@@ -1,6 +1,7 @@
 package com.codecool.hccrm.controller;
 
 import com.codecool.hccrm.model.User;
+import com.codecool.hccrm.model.UserDTO;
 import com.codecool.hccrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -27,23 +28,43 @@ public class UserRegistrationController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
+
+    // just a very basic registration form using Thymeleaf (and some magic)
     @RequestMapping(value = "/user/register", method = RequestMethod.GET)
-    public ModelAndView showBasicForm() {
-        return new ModelAndView("register", "user", new User());
+    public String showBasicForm(WebRequest request, Model model) {
+        UserDTO user = new UserDTO();
+        model.addAttribute("user", user);//bind to model (magic)
+        return "register";
     }
 
+    // NOTES:
+    // we need model to pass on to the view later the e-mail address
+    // we need the request for later security stuff, like check for secure connection, etc
+    // BindingResult is for easy validation http://codetutr.com/2013/05/28/spring-mvc-form-validation/
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     public String submit(
-                        @Valid @ModelAttribute("user") User user,
+                        @Valid @ModelAttribute("user") UserDTO userDTO,
                         BindingResult result,
+                        WebRequest request, Errors errors,
                         ModelMap model) {
+
+        // do validation here for form input
         if (result.hasErrors()) {
             return "error";
         }
-        userService.save(user);
-        model.addAttribute("id", user.getId());
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("password", user.getPassword());
+
+        // do validation for user in database, e.g. check if we already have e-mail then save, set role, etc
+        // userService.createFromDTO(user);
+        // you have to check for existing user while saving
+
+        // send verification e-mail
+
+        // pass on views depending on what happened
+        model.addAttribute("id", userDTO.getId());
+        model.addAttribute("email", userDTO.getEmail());
+        model.addAttribute("password", userDTO.getPassword());
         return "userView";
     }
 
