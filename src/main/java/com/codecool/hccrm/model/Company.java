@@ -1,7 +1,7 @@
 package com.codecool.hccrm.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 @Entity
@@ -13,18 +13,17 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String companyName;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String taxNumber;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String premise;
 
-
     @Column
-    private Date regDate;
+    private Calendar regDate;
 
     @ManyToMany
     @JoinTable(name = "company_ceoUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
@@ -34,7 +33,14 @@ public class Company {
     @JoinTable(name = "company_managerUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
     private Set<User> managerUsers;
 
-    public Company() {
+    protected Company() {
+    }
+
+    public Company(String companyName, String taxNumber, String premise) {
+        this.companyName = companyName;
+        this.taxNumber = taxNumber;
+        this.premise = premise;
+        this.regDate = Calendar.getInstance();
     }
 
     public long getId() {
@@ -69,11 +75,11 @@ public class Company {
         this.premise = premise;
     }
 
-    public Date getRegDate() {
+    public Calendar getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Date regDate) {
+    public void setRegDate(Calendar regDate) {
         this.regDate = regDate;
     }
 

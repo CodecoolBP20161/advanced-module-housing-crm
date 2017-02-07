@@ -1,7 +1,7 @@
 package com.codecool.hccrm.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "condominium")
@@ -10,18 +10,24 @@ public class Condominium {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column
     private String address;
+
     @Column
     private String topographicalNumber;
+
     @Column
     private Integer parcelNumber;
+
     @Column
-    private Date contractingDate;
+    private Calendar contractingDate;
+
     @Column
-    private Date generalMeetingResolutionDate;
+    private Calendar generalMeetingResolutionDate;
+
     @Column
-    private Date regDate;
+    private Calendar regDate;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
@@ -31,7 +37,16 @@ public class Condominium {
     @JoinColumn(name = "user_id")
     private User managerUser;
 
-    public Condominium() {
+    protected Condominium() {
+    }
+
+    public Condominium(String address, String topographicalNumber, Integer parcelNumber, Calendar contractingDate, Calendar generalMeetingResolutionDate) {
+        this.address = address;
+        this.topographicalNumber = topographicalNumber;
+        this.parcelNumber = parcelNumber;
+        this.contractingDate = contractingDate;
+        this.generalMeetingResolutionDate = generalMeetingResolutionDate;
+        this.regDate = Calendar.getInstance();
     }
 
     public long getId() {
@@ -66,28 +81,27 @@ public class Condominium {
         this.parcelNumber = parcelNumber;
     }
 
-    public Date getContractingDate() {
+    public Calendar getContractingDate() {
         return contractingDate;
     }
 
-    public void setContractingDate(Date contractingDate) {
+    public void setContractingDate(Calendar contractingDate) {
         this.contractingDate = contractingDate;
     }
 
-    public Date getGeneralMeetingResolutionDate() {
+    public Calendar getGeneralMeetingResolutionDate() {
         return generalMeetingResolutionDate;
     }
 
-    public void setGeneralMeetingResolutionDate(Date generalMeetingResolutionDate) {
+    public void setGeneralMeetingResolutionDate(Calendar generalMeetingResolutionDate) {
         this.generalMeetingResolutionDate = generalMeetingResolutionDate;
     }
 
-
-    public Date getRegDate() {
+    public Calendar getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Date regDate) {
+    public void setRegDate(Calendar regDate) {
         this.regDate = regDate;
     }
 

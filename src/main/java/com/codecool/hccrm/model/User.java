@@ -41,7 +41,6 @@ public class User {
     @ManyToMany(mappedBy = "managerUsers")
     private Set<Company> companyManagers;
 
-
     protected User() {
     }
 
