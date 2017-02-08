@@ -19,7 +19,7 @@ public class Company {
     @Column(nullable = false, unique = true)
     private String taxNumber;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String premise;
 
     @Column
