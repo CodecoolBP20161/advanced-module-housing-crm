@@ -1,11 +1,10 @@
 package com.codecool.hccrm.service;
 
 import com.codecool.hccrm.model.Company;
-import com.codecool.hccrm.model.CompanyUser;
 import com.codecool.hccrm.model.Condominium;
-import com.codecool.hccrm.repository.*;
+import com.codecool.hccrm.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,38 +14,24 @@ import java.util.Set;
  * Created by balag3 on 2017.02.03..
  */
 
-@org.springframework.stereotype.Service
+@Service
 public class TestService {
 
     @Autowired
-    private CompanyUserRepository companyUserRepository;
-
+    CompanyService companyService;
     @Autowired
-    private CompanyRepository companyRepository;
-
+    UserService userService;
     @Autowired
-    private CondominiumRepository condominiumRepository;
+    CondominiumService condominiumService;
 
-    @Autowired
-    private CompanyQueryRepository companyQuery;
 
-    @Autowired
-    private CondominiumQueryRepository condominiumQuery;
-
-    @Autowired
-    private CompanyUserQueryRepository companyUserQuery;
-
-    @Autowired
-    private UserQueryRepository userQuery;
-
-    @Transactional
     public void testClient() throws Exception {
         Company company = new Company();
         //company.setCompanyName("Lex Corp");
 
         Condominium condominium = new Condominium();
 
-        CompanyUser user = new CompanyUser();
+        User user = new User();
 
 
         condominium.setManagerUser(user);
@@ -54,26 +39,24 @@ public class TestService {
         s.add(condominium);
         condominium.setCompany(company);
 
-        Set<CompanyUser> managers = new HashSet<>();
+        Set<User> managers = new HashSet<>();
         managers.add(user);
         company.setManagerUsers(managers);
 
-        companyUserRepository.save(user);
-        companyRepository.save(company);
-        condominiumRepository.save(condominium);
+        userService.save(user);
+        companyService.save(company);
+        condominiumService.save(condominium);
 
-        Company company2 = companyRepository.findByCompanyName("Lex Corp");
-        System.out.println(company2.getId());
-        List condoms = companyQuery.getCondominiums(company2);
+        Company company2 = companyService.findByCompanyName("Lex Corp");
+        List<Condominium> condoms = condominiumService.findByCompany(company2);
         System.out.println(condoms);
+
         System.out.println("companies:");
-        System.out.println(companyQuery.selectAll());
+        System.out.println(companyService.findAll());
         System.out.println("condominiums:");
-        System.out.println(condominiumQuery.selectAll());
-        System.out.println("companyUsers:");
-        System.out.println(companyUserQuery.selectAll());
+        System.out.println(condominiumService.findAll());
         System.out.println("Users:");
-        System.out.println(userQuery.selectAll());
+        System.out.println(userService.findAll());
 
 
     }

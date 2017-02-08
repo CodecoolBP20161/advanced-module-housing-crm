@@ -28,8 +28,8 @@ public class Condominium {
     private Company company;
 
     @ManyToOne
-    @JoinColumn(name = "companyUser_id")
-    private CompanyUser managerUser;
+    @JoinColumn(name = "user_id")
+    private User managerUser;
 
     public Condominium() {
     }
@@ -82,6 +82,7 @@ public class Condominium {
         this.generalMeetingResolutionDate = generalMeetingResolutionDate;
     }
 
+
     public Date getRegDate() {
         return regDate;
     }
@@ -98,11 +99,11 @@ public class Condominium {
         this.company = company;
     }
 
-    public CompanyUser getManagerUser() {
+    public User getManagerUser() {
         return managerUser;
     }
 
-    public void setManagerUser(CompanyUser managerUser) {
+    public void setManagerUser(User managerUser) {
         this.managerUser = managerUser;
     }
 }
