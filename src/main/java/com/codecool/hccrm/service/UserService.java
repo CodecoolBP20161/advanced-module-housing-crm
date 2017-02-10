@@ -71,8 +71,8 @@ public class UserService {
         return tokenRepository.findByToken(VerificationToken);
     }
 
-    public void createVerificationToken(User user, String token) {
-        VerificationToken myToken = new VerificationToken(token, user);
+    public void createVerificationToken(String token) {
+        VerificationToken myToken = new VerificationToken(token);
         tokenRepository.save(myToken);
     }
 }

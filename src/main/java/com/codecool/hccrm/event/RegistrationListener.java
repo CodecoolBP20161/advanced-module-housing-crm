@@ -36,7 +36,7 @@ public class RegistrationListener implements
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         User user = event.getUser();
         String token = UUID.randomUUID().toString();
-        userService.createVerificationToken(user, token);
+        userService.createVerificationToken(token);
 
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
