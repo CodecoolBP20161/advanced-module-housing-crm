@@ -8,7 +8,7 @@
 
 <body>
     <h1>Register</h1>
-    <form action="#" th:action="@{/user/register}" th:object="${user}" th:modelAttribute="user" method="post">
+    <form action="#" th:action="@{/registration}" th:object="${user}" th:modelAttribute="user" method="post">
         <p>First name: <input type="text" th:field="*{firstName}" /></p>
         <p>Last name: <input type="text" th:field="*{lastName}" /></p>
         <p>E-mail: <input type="text" th:field="*{email}" /></p>
