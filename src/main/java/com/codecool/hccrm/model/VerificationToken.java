@@ -9,9 +9,9 @@ import java.util.Date;
  * Created by prezi on 2017. 02. 06..
  */
 @Entity
-@Table(name="verificationToken")
+@Table(name = "verificationToken")
 public class VerificationToken {
-    private static final int EXPIRATION_TIME = 60*24;
+    private static final int EXPIRATION_TIME = 60 * 24;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -60,11 +60,11 @@ public class UserRegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView submit(
-                        @Valid @ModelAttribute("user") UserDTO userDTO,
-                        BindingResult result,
-                        WebRequest request,
-                        Errors errors,
-                        ModelMap model) {
+            @Valid @ModelAttribute("user") UserDTO userDTO,
+            BindingResult result,
+            WebRequest request,
+            Errors errors,
+            ModelMap model) {
 
         if (result.hasErrors()) {
             return new ModelAndView("register", "user", userDTO);

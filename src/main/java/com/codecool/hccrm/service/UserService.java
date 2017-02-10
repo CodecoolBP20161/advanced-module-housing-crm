@@ -58,7 +58,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    private boolean alreadyExists(String email){
+    private boolean alreadyExists(String email) {
         User user = findFirstByEmail(email);
         return user != null;
     }

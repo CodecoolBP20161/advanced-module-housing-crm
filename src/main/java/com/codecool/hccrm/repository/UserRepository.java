@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 @RepositoryRestResource(collectionResourceRel = "user", path = "user")
 public interface UserRepository extends JpaRepository<User, Long> {
     User findFirstByEmail(String email);
+
     User findByEmailAndVerifiedTrue(String email);
 }

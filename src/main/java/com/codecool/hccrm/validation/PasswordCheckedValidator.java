@@ -3,6 +3,7 @@ package com.codecool.hccrm.validation;
 /**
  * Created by prezi on 2017. 02. 07..
  */
+
 import com.codecool.hccrm.dto.UserDTO;
 
 import javax.validation.ConstraintValidator;

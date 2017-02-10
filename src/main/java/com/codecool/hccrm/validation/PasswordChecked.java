@@ -13,11 +13,10 @@ import javax.validation.Payload;
 
 /**
  * Created by prezi on 2017. 02. 07..
- *
+ * <p>
  * This is what basically creates the @PasswordChecked decorator
- *
  */
-@Target({ TYPE, ANNOTATION_TYPE })
+@Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = PasswordCheckedValidator.class)
 @Documented
