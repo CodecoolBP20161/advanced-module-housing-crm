@@ -31,6 +31,9 @@ public class User {
     @Column
     private Calendar regDate;
 
+    @Column
+    private Boolean verified;
+
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -51,6 +54,7 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.regDate = Calendar.getInstance();
+        this.verified = false;
     }
 
     public long getId() {
@@ -107,6 +111,14 @@ public class User {
 
     public void setRegDate(Calendar regDate) {
         this.regDate = regDate;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     public Set<Role> getRoles() {

@@ -23,4 +23,9 @@ public class PageController {
         service.testClient();
         return "index";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
 }

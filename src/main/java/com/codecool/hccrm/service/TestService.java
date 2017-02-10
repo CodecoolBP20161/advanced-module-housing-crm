@@ -1,15 +1,7 @@
 package com.codecool.hccrm.service;
 
-import com.codecool.hccrm.model.Company;
-import com.codecool.hccrm.model.Condominium;
-import com.codecool.hccrm.model.Role;
-import com.codecool.hccrm.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by balag3 on 2017.02.03..
@@ -30,36 +22,42 @@ public class TestService {
     @Autowired
     RoleService roleService;
 
+
     public void testClient() throws Exception {
         // generate roles
-        Role admin_r = new Role("ROLE_ADMIN");
-        Role ceo_r = new Role("ROLE_CEO");
-        Role manager_r = new Role("ROLE_MANAGER");
+//        Role admin_r = new Role("ROLE_ADMIN");
+//        Role ceo_r = new Role("ROLE_CEO");
+//        Role manager_r = new Role("ROLE_MANAGER");
 
         // generate companies
-        Company company = new Company("Lex Corporation", "1234567890", "Hamel");
-        Company company1 = new Company("Partition Ltd.", "1234567891", "Ringwood");
-        Company company2 = new Company("Landrum Temporary Services", "1234567892", "Inverlaw");
-        Company company3 = new Company("Morris Downing & Sherred", "1234567893", "Burpengary");
-        Company company4 = new Company("Vincent J Petti & Co", "1234567894", "New York");
-        Company company5 = new Company("Swanson Peterson Fnrl Home Inc", "1234567895", "Maylands");
-        Company company6 = new Company("Angelo International", "1234567896", "New York");
-        Company company7 = new Company("Gateway Refrigeration", "1234567897", "New York");
-        Company company8 = new Company("Anchorage Yamaha", "1234567898", "Maylands");
-        Company company9 = new Company("Kansas Association Ins Agtts", "1234567899", "Kennedy");
-        Company company10 = new Company("Public Works Department", "1234567811", "New York");
+//        Company company = new Company("Lex Corporation", "1234567890", "Hamel");
+//        Company company1 = new Company("Partition Ltd.", "1234567891", "Ringwood");
+//        Company company2 = new Company("Landrum Temporary Services", "1234567892", "Inverlaw");
+//        Company company3 = new Company("Morris Downing & Sherred", "1234567893", "Burpengary");
+//        Company company4 = new Company("Vincent J Petti & Co", "1234567894", "New York");
+//        Company company5 = new Company("Swanson Peterson Fnrl Home Inc", "1234567895", "Maylands");
+//        Company company6 = new Company("Angelo International", "1234567896", "New York");
+//        Company company7 = new Company("Gateway Refrigeration", "1234567897", "New York");
+//        Company company8 = new Company("Anchorage Yamaha", "1234567898", "Maylands");
+//        Company company9 = new Company("Kansas Association Ins Agtts", "1234567899", "Kennedy");
+//        Company company10 = new Company("Public Works Department", "1234567811", "New York");
 
-        companyService.save(company);
-        companyService.save(company1);
-        companyService.save(company2);
-        companyService.save(company3);
-        companyService.save(company4);
-        companyService.save(company5);
-        companyService.save(company6);
-        companyService.save(company7);
-        companyService.save(company8);
-        companyService.save(company9);
-        companyService.save(company10);
+//        companyService.save(company);
+//        companyService.save(company1);
+//        companyService.save(company2);
+//        companyService.save(company3);
+//        companyService.save(company4);
+//        companyService.save(company5);
+//        companyService.save(company6);
+//        companyService.save(company7);
+//        companyService.save(company8);
+//        companyService.save(company9);
+//        companyService.save(company10);
+
+        /*User admin1 = new User("Condom", "JustAdmin", "hccrm.robotkutya+3@gmail.com", "115654", "+36301234569");
+        admin1.setVerified(Boolean.TRUE);
+        userService.save(admin1);*/
+
 
         // generate condominiums
 //        Condominium condominium1 = new Condominium("87 Sylvan Ave", "331535", 255165, GregorianCalendar.getInstance(), GregorianCalendar.getInstance());
@@ -94,7 +92,7 @@ public class TestService {
 //        User user10 = new User("Lavonne", "Geffers", "hccrm.robotkutya+10@gmail.com", "115611", "+36301234516");
 //        User user11 = new User("Ben", "Ploszaj", "hccrm.robotkutya+11@gmail.com", "115612", "+36301234517");
 
-         // set admin - only admin role
+        // set admin - only admin role
 //        Set<Role> r = new HashSet<>();
 //        r.add(admin_r);
 //        admin1.setRoles(r);
