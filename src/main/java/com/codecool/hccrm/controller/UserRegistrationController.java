@@ -36,7 +36,7 @@ public class UserRegistrationController {
     /**
      * just a very basic registration form using Thymeleaf (and some magic)
      */
-    @RequestMapping(value = "/user/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String showBasicForm(WebRequest request, Model model) {
         UserDTO user = new UserDTO();
         model.addAttribute("user", user);//bind to model (magic)
@@ -58,7 +58,7 @@ public class UserRegistrationController {
      * @return
      */
 
-    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView submit(
                         @Valid @ModelAttribute("user") UserDTO userDTO,
                         BindingResult result,
@@ -66,10 +66,6 @@ public class UserRegistrationController {
                         Errors errors,
                         ModelMap model) {
 
-
-        if (!result.hasErrors()) {
-
-        }
         if (result.hasErrors()) {
             return new ModelAndView("register", "user", userDTO);
         }
