@@ -7,6 +7,7 @@ import com.codecool.hccrm.model.VerificationToken;
 import com.codecool.hccrm.repository.UserRepository;
 import com.codecool.hccrm.repository.VerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,9 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
     private VerificationTokenRepository tokenRepository;
 
     public User save(User user) {
@@ -37,17 +41,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User findFirstByEmail(String email) {
+        return userRepository.findFirstByEmail(email);
+    }
+
+    public User findByEmailAndVerifiedTrue(String email) {
+        return userRepository.findByEmailAndVerifiedTrue(email);
+    }
+
     @Transactional
     public User createNewUser(UserDTO dto) throws EmailAlreadyExistsException {
         if (alreadyExists(dto.getEmail())) {
             throw new EmailAlreadyExistsException("Already have user with " + dto.getEmail());
         }
-        User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), dto.getPassword(), dto.getPhoneNumber());
+        User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhoneNumber());
         return userRepository.save(user);
     }
 
     private boolean alreadyExists(String email){
-        User user = userRepository.findFirstByEmail(email);
+        User user = findFirstByEmail(email);
         return user != null;
     }
 
