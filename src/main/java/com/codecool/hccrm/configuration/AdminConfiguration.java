@@ -41,16 +41,14 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/registration", "/", "/admin/**").permitAll().anyRequest()
-                .authenticated()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
+            .antMatchers("/registration", "/").permitAll()
+            .antMatchers("/admin/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+            .formLogin()
+            .loginPage("/login")
                 .and()
-                .logout()
-                .permitAll();
+            .logout();
     }
 
     /* Set the global passwordencoder to bycryptpwencoder. */
