@@ -46,6 +46,7 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
                 .and()
             .formLogin()
+                // TODO: fix loginpage in registry?
 //                .loginPage("/login")
 //                .permitAll()
                 .and()
