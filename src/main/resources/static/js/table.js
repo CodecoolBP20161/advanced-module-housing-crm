@@ -6,9 +6,8 @@ $(document).ready(function() {
     });
 
     // Setup datatable
-    $('#company_list').DataTable({
+    var table = $('#company_list').DataTable({
         ajax: {
-            stateSave: true,
             url: 'admin/company',
             dataSrc: '_embedded.company'
         },
@@ -17,11 +16,9 @@ $(document).ready(function() {
             {data: 'taxNumber'},
             {data: 'premise'},
             {data: 'regDate'}
-        ]
+        ],
+        stateSave: true
     });
-
-    // // TEST
-    // localStorage.setItem( 'mykey', JSON.stringify( "asdasd" ) );
 
     // Apply the search
     table.columns().every(function () {
