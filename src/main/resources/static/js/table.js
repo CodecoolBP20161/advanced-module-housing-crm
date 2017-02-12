@@ -20,6 +20,9 @@ $(document).ready(function() {
         stateSave: true
     });
 
+    // TODO: LOCALSTORAGE NOT SAVING ADDITIONAL SEARCH QUERIES
+    // BUT SAVING THE RESULT, FOR QUICK FIX -> delete the empty input fields
+
     // Apply the search
     table.columns().every(function () {
         var that = this;
