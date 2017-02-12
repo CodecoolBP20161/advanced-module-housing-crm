@@ -46,7 +46,6 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
                 .and()
             .formLogin()
-            .loginPage("/login")
                 .and()
             .logout();
     }
