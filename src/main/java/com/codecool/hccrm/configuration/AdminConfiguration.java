@@ -23,19 +23,6 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("user")
-                .password("password")
-                .roles("USER")
-            .and()
-                .withUser("admin")
-                .password("password")
-                .roles("ADMIN");
-
-    }
     /* Override the configure method and permit all user to see the login and registration page
     and to log out. */
     @Override
