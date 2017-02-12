@@ -23,14 +23,27 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
+    public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("user")
+                .password("password")
+                .roles("USER")
+            .and()
+                .withUser("admin")
+                .password("password")
+                .roles("ADMIN");
+
+    }
     /* Override the configure method and permit all user to see the login and registration page
     and to log out. */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/registration").permitAll().anyRequest()
+                .antMatchers("/registration", "/", "/admin/**").permitAll().anyRequest()
                 .authenticated()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
