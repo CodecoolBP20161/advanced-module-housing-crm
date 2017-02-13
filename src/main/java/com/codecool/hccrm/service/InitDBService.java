@@ -3,6 +3,7 @@ package com.codecool.hccrm.service;
 import com.codecool.hccrm.model.Role;
 import com.codecool.hccrm.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,9 @@ public class InitDBService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @PostConstruct
     private void init() {
         Role roleAdmin = new Role(adminString);
@@ -41,11 +45,12 @@ public class InitDBService {
         Role roleManager = new Role(managerString);
         roleService.save(roleManager);
 
-        User admin = new User("John", "Smith", userEmail, "password", "+36709861178");
+        User admin = new User("John", "Smith", userEmail, passwordEncoder.encode("password"), "+36709861178");
 
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(roleAdmin);
         admin.setRoles(roleSet);
+        admin.setVerified(Boolean.TRUE);
         userService.save(admin);
     }
 
