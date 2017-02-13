@@ -2,6 +2,7 @@ package com.codecool.hccrm.event;
 
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.service.UserService;
+import com.codecool.hccrm.service.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
@@ -23,6 +24,9 @@ public class RegistrationListener implements
     private UserService userService;
 
     @Autowired
+    private VerificationTokenService verificationTokenService;
+
+    @Autowired
     private MessageSource messages;
 
     @Autowired
@@ -36,7 +40,7 @@ public class RegistrationListener implements
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         User user = event.getUser();
         String token = UUID.randomUUID().toString();
-        userService.createVerificationToken(token);
+        userService.createVerificationToken(user, token);
 
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";
