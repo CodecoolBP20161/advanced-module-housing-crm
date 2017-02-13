@@ -25,17 +25,11 @@ public class VerificationToken {
 
     private Date expirationDate;
 
-    public VerificationToken() {
+    protected VerificationToken() {
     }
 
     public VerificationToken(final String token) {
         this.token = token;
-        this.expirationDate = calculateExpirationDate(EXPIRATION_TIME);
-    }
-
-    public VerificationToken(final String token, final User user) {
-        this.token = token;
-        this.user = user;
         this.expirationDate = calculateExpirationDate(EXPIRATION_TIME);
     }
 

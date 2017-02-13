@@ -2,6 +2,7 @@ package com.codecool.hccrm.service;
 
 import com.codecool.hccrm.dto.UserDTO;
 import com.codecool.hccrm.error.EmailAlreadyExistsException;
+import com.codecool.hccrm.model.Role;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
 import com.codecool.hccrm.repository.UserRepository;
@@ -11,7 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by balag3 on 2017.02.05..
@@ -19,6 +22,9 @@ import java.util.List;
 @Service
 @Transactional
 public class UserService {
+
+    @Autowired
+    RoleService roleService;
 
     @Autowired
     UserRepository userRepository;
@@ -55,6 +61,9 @@ public class UserService {
             throw new EmailAlreadyExistsException("Already have user with " + dto.getEmail());
         }
         User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhoneNumber());
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByName("ROLE_USER"));
+        user.setRoles(roles);
         return userRepository.save(user);
     }
 
@@ -72,7 +81,8 @@ public class UserService {
     }
 
     public void createVerificationToken(User user, String token) {
-        VerificationToken myToken = new VerificationToken(token, user);
+        VerificationToken myToken = new VerificationToken(token);
+        myToken.setUser(user);
         tokenRepository.save(myToken);
     }
 }
