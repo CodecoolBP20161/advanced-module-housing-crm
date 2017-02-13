@@ -55,6 +55,7 @@ public class UserService {
             throw new EmailAlreadyExistsException("Already have user with " + dto.getEmail());
         }
         User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhoneNumber());
+
         return userRepository.save(user);
     }
 

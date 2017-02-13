@@ -3,9 +3,12 @@ package com.codecool.hccrm.controller;
 import com.codecool.hccrm.dto.UserDTO;
 import com.codecool.hccrm.error.EmailAlreadyExistsException;
 import com.codecool.hccrm.event.OnRegistrationCompleteEvent;
+import com.codecool.hccrm.logging.LogFormatter;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
 import com.codecool.hccrm.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,7 @@ import java.util.Locale;
 
 @Controller
 public class UserRegistrationController {
+    private Logger logger = LoggerFactory.getLogger(UserRegistrationController.class);
 
     @Autowired
     UserService userService;
@@ -50,7 +54,7 @@ public class UserRegistrationController {
     public String showBasicForm(WebRequest request, Model model) {
         UserDTO user = new UserDTO();
         model.addAttribute("user", user);//bind to model (magic)
-        return "register";
+        return "register_user";
     }
 
     /**
@@ -77,7 +81,7 @@ public class UserRegistrationController {
             ModelMap model) {
 
         if (result.hasErrors()) {
-            return new ModelAndView("register", "user", userDTO);
+            return new ModelAndView("register_user", "user", userDTO);
         }
 
         User registered = createFromDTO(userDTO, result);
@@ -86,6 +90,7 @@ public class UserRegistrationController {
         }
 
         try {
+
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
         } catch (Exception me) {
