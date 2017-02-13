@@ -1,0 +1,32 @@
+<configuration>
+
+    <!--Responsible for setting log messages seen in console-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="com.codecool.hccrm.logging.SampleFilter"/>
+        <encoder>
+            <pattern>%date{ISO8601} | %highlight(%-5level) | %logger:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--Responsible for setting log messages seen in log files-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="com.codecool.hccrm.logging.SampleFilter"/>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Daily rollover -->
+            <fileNamePattern>log/%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- Keep 7 days' worth of history -->
+            <maxHistory>7</maxHistory>
+
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{ISO8601} [%-5level] %logger:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

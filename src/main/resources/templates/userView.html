@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>successful registration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h2>Submitted User Information</h2>
+<table>
+    <tr>
+        <td>email :</td>
+        <td th:text="${email}"></td>
+    </tr>
+    <tr>
+        <td>ID :</td>
+        <td th:text="${id}"></td>
+    </tr>
+    <tr>
+        <td>Password :</td>
+        <td th:text="${password}"></td>
+    </tr>
+</table>
+</body>
+</html>
