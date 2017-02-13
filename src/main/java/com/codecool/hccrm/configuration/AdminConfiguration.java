@@ -28,15 +28,17 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/registration").permitAll().anyRequest()
-                .authenticated()
+                .antMatchers("/regitrationConfirm", "/registration").permitAll()
+                .antMatchers("/","/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
                 .and()
-                .formLogin()
+            .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
-                .logout()
+            .logout()
+                .logoutSuccessUrl("/login?logout")
                 .permitAll();
     }
 

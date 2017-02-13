@@ -3,7 +3,6 @@ package com.codecool.hccrm.controller;
 import com.codecool.hccrm.dto.UserDTO;
 import com.codecool.hccrm.error.EmailAlreadyExistsException;
 import com.codecool.hccrm.event.OnRegistrationCompleteEvent;
-import com.codecool.hccrm.logging.LogFormatter;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
 import com.codecool.hccrm.service.UserService;
@@ -11,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.context.MessageSource;
-
 import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
@@ -33,7 +31,7 @@ import java.util.Locale;
 /**
  * Created by prezi on 2017. 02. 06..
  */
-
+// TODO: CONFIGURE ROUTES NORMALLY ! pls
 @Controller
 public class UserRegistrationController {
     private Logger logger = LoggerFactory.getLogger(UserRegistrationController.class);
@@ -134,6 +132,6 @@ public class UserRegistrationController {
 
         user.setVerified(true);
         userService.save(user);
-        return "redirect:/login.html";
+        return "index";
     }
 }
