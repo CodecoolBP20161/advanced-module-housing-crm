@@ -55,6 +55,7 @@ public class UserService {
             throw new EmailAlreadyExistsException("Already have user with " + dto.getEmail());
         }
         User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhoneNumber());
+
         return userRepository.save(user);
     }
 
@@ -71,8 +72,8 @@ public class UserService {
         return tokenRepository.findByToken(VerificationToken);
     }
 
-    public void createVerificationToken(String token) {
-        VerificationToken myToken = new VerificationToken(token);
+    public void createVerificationToken(User user, String token) {
+        VerificationToken myToken = new VerificationToken(token, user);
         tokenRepository.save(myToken);
     }
 }
