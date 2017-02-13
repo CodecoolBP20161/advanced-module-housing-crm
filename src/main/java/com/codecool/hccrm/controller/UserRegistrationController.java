@@ -5,6 +5,7 @@ import com.codecool.hccrm.error.EmailAlreadyExistsException;
 import com.codecool.hccrm.event.OnRegistrationCompleteEvent;
 import com.codecool.hccrm.logging.LogFormatter;
 import com.codecool.hccrm.model.User;
+import com.codecool.hccrm.model.VerificationToken;
 import com.codecool.hccrm.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,16 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.springframework.context.MessageSource;
+
 import javax.validation.Valid;
+import java.util.Calendar;
+import java.util.Locale;
+
 
 /**
  * Created by prezi on 2017. 02. 06..
@@ -36,6 +43,9 @@ public class UserRegistrationController {
 
     @Autowired
     ApplicationEventPublisher eventPublisher;
+
+    @Autowired
+    private MessageSource messages;
 
     /**
      * just a very basic registration form using Thymeleaf (and some magic)
@@ -98,5 +108,32 @@ public class UserRegistrationController {
             return null;
         }
         return user;
+    }
+
+    @RequestMapping(value = "/regitrationConfirm", method = RequestMethod.GET)
+    public String confirmRegistration
+            (WebRequest request, Model model, @RequestParam("token") String token) {
+
+        // We need this for messages to work
+        Locale locale = request.getLocale();
+
+        VerificationToken verificationToken = userService.getVerificationToken(token);
+        if (verificationToken == null) {
+            String message = messages.getMessage("auth.message.invalidToken", null, locale);
+            model.addAttribute("message", message);
+            return "redirect:/badUser.html";
+        }
+
+        User user = verificationToken.getUser();
+        Calendar cal = Calendar.getInstance();
+        if ((verificationToken.getExpirationDate().getTime() - cal.getTime().getTime()) <= 0) {
+            String messageValue = messages.getMessage("auth.message.expired", null, locale);
+            model.addAttribute("message", messageValue);
+            return "redirect:/badUser.html";
+        }
+
+        user.setVerified(true);
+        userService.save(user);
+        return "redirect:/login.html";
     }
 }
