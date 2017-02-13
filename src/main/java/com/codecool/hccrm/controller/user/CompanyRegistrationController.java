@@ -74,10 +74,6 @@ public class CompanyRegistrationController {
         ceos.add(currentUser);
         registeredCompany.setCeoUsers(ceos);
 
-//        Role manager = new Role("ROLE_MANAGER");
-//        roles.add(manager);
-        // more ceos? --- registration flow (how to add more ceos?)
-
         // setting CEO role to User
         Role ceo = roleService.findByName("ROLE_CEO");
         Set<Role> roles = new HashSet<>();
@@ -89,7 +85,6 @@ public class CompanyRegistrationController {
         userService.save(currentUser);
 
         return new ModelAndView("companyView", "company", companyDTO);
-
     }
 
     private Company createFromDTO(CompanyDTO companyDTO) {
