@@ -17,10 +17,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.HashSet;
@@ -42,9 +40,7 @@ public class CompanyRegistrationController {
     RoleService roleService;
 
     @RequestMapping(value = "/user/registration_company", method = RequestMethod.GET)
-    public String renderRegisterCompanyForm(Model model, HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        System.out.println(principal.getName());
+    public String renderRegisterCompanyForm(Model model) {
         CompanyDTO company = new CompanyDTO();
         model.addAttribute("company", company);
         return "register_company";
@@ -58,6 +54,7 @@ public class CompanyRegistrationController {
             ModelMap modelMap,
             HttpServletRequest request) {
 
+
         // COMPANY
         Company registeredCompany = createFromDTO(companyDTO);
         if (registeredCompany == null) {
@@ -69,12 +66,12 @@ public class CompanyRegistrationController {
         // USER
         User currentUser = userService.findFirstByEmail(principal.getName());
 
-        // setting ceo
+        // setting ceo to company
         Set<User> ceos = new HashSet<>();
         ceos.add(currentUser);
         registeredCompany.setCeoUsers(ceos);
 
-        // setting CEO role to User
+        // setting ROLE_CEO to User
         Role ceo = roleService.findByName("ROLE_CEO");
         Set<Role> roles = new HashSet<>();
         roles.add(ceo);
