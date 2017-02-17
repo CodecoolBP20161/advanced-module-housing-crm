@@ -1,29 +1,26 @@
 package com.codecool.hccrm.controller;
 
-import com.codecool.hccrm.dto.UserDTO;
+import com.codecool.hccrm.dto.UserCompanyRegistrationDTO;
+import com.codecool.hccrm.error.CompanyAlreadyExistsException;
 import com.codecool.hccrm.error.EmailAlreadyExistsException;
-import com.codecool.hccrm.event.OnRegistrationCompleteEvent;
-import com.codecool.hccrm.logging.LogFormatter;
+import com.codecool.hccrm.model.Address;
+import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
-import com.codecool.hccrm.service.UserService;
+import com.codecool.hccrm.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
-
-import org.springframework.context.MessageSource;
 
 import javax.validation.Valid;
 import java.util.Calendar;
@@ -42,19 +39,29 @@ public class UserRegistrationController {
     UserService userService;
 
     @Autowired
+    CompanyService companyService;
+
+    @Autowired
     ApplicationEventPublisher eventPublisher;
 
     @Autowired
     private MessageSource messages;
 
-    /**
-     * just a very basic registration form using Thymeleaf (and some magic)
-     */
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @Autowired
+    private RoleService roleService;
+
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private RegistrationService registrationService;
+
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String showBasicForm(WebRequest request, Model model) {
-        UserDTO user = new UserDTO();
-        model.addAttribute("user", user);//bind to model (magic)
-        return "register_user";
+        UserCompanyRegistrationDTO usercompany = new UserCompanyRegistrationDTO();
+        model.addAttribute("usercompany", usercompany);
+        return "signup";
     }
 
     /**
@@ -64,50 +71,64 @@ public class UserRegistrationController {
      * BindingResult is for easy validation http://codetutr.com/2013/05/28/spring-mvc-form-validation/
      * check for existing e-mail can only be done during the transaction to save user!!!
      *
-     * @param userDTO
+     * @param usercompany
      * @param result
      * @param request
-     * @param errors
-     * @param model
      * @return
      */
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView submit(
-            @Valid @ModelAttribute("user") UserDTO userDTO,
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String submit(
+            @Valid @ModelAttribute("usercompany") UserCompanyRegistrationDTO usercompany,
             BindingResult result,
             WebRequest request,
-            Errors errors,
-            ModelMap model) {
-
-        if (result.hasErrors()) {
-            return new ModelAndView("register_user", "user", userDTO);
-        }
-
-        User registered = createFromDTO(userDTO, result);
-        if (registered == null) {
-            result.rejectValue("email", "message.regError");
-        }
+            Model model) {
 
         try {
-
-            String appUrl = request.getContextPath();
-            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
-        } catch (Exception me) {
-            return new ModelAndView("emailError", "user", userDTO);
+            registrationService.register(usercompany);
+        } catch (CompanyAlreadyExistsException e) {
+            e.printStackTrace();
+        } catch (EmailAlreadyExistsException e) {
+            e.printStackTrace();
         }
 
-        return new ModelAndView("userView", "user", userDTO);
+
+//        try {
+//
+//            String appUrl = request.getContextPath();
+//            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
+//        } catch (Exception me) {
+//            return new ModelAndView("emailError", "user", usercompany);
+//        }
+
+        return "user_dashboard";
     }
 
-    private User createFromDTO(UserDTO userDTO, BindingResult result) {
+    private User createUserFromDTO(UserCompanyRegistrationDTO usercompany, BindingResult result) {
         User user;
         try {
-            user = userService.createNewUser(userDTO);
+            user = userService.createNewUser(usercompany);
         } catch (EmailAlreadyExistsException e) {
+            e.printStackTrace();
             return null;
         }
         return user;
+    }
+
+    private Company createCompanyFromDTO(UserCompanyRegistrationDTO usercompany, BindingResult result) {
+        Company company;
+        try {
+            company = companyService.createNewCompany(usercompany);
+
+        } catch (CompanyAlreadyExistsException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return company;
+    }
+
+    private Address createAddressFromDTO(UserCompanyRegistrationDTO usercompany, BindingResult result) {
+        return addressService.createNewAddress(usercompany);
     }
 
     @RequestMapping(value = "/regitrationConfirm", method = RequestMethod.GET)

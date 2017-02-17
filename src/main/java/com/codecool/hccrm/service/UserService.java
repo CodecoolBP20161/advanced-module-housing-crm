@@ -1,6 +1,6 @@
 package com.codecool.hccrm.service;
 
-import com.codecool.hccrm.dto.UserDTO;
+import com.codecool.hccrm.dto.UserCompanyRegistrationDTO;
 import com.codecool.hccrm.error.EmailAlreadyExistsException;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
@@ -50,7 +50,7 @@ public class UserService {
     }
 
     @Transactional
-    public User createNewUser(UserDTO dto) throws EmailAlreadyExistsException {
+    public User createNewUser(UserCompanyRegistrationDTO dto) throws EmailAlreadyExistsException {
         if (alreadyExists(dto.getEmail())) {
             throw new EmailAlreadyExistsException("Already have user with " + dto.getEmail());
         }
@@ -73,7 +73,7 @@ public class UserService {
     }
 
     public void createVerificationToken(User user, String token) {
-        VerificationToken myToken = new VerificationToken(token, user);
+        VerificationToken myToken = new VerificationToken(token);
         tokenRepository.save(myToken);
     }
 }

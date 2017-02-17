@@ -1,6 +1,5 @@
 package com.codecool.hccrm.controller.user;
 
-import com.codecool.hccrm.dto.CompanyDTO;
 import com.codecool.hccrm.error.CompanyAlreadyExistsException;
 import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.model.Role;

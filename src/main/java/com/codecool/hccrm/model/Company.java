@@ -1,9 +1,12 @@
 package com.codecool.hccrm.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "company")
 public class Company {
@@ -12,6 +15,11 @@ public class Company {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column(nullable = false, unique = true)
     private String companyName;
@@ -33,69 +41,7 @@ public class Company {
     @JoinTable(name = "company_managerUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
     private Set<User> managerUsers;
 
-    protected Company() {
+    public Company() {
     }
 
-    public Company(String companyName, String taxNumber, String premise) {
-        this.companyName = companyName;
-        this.taxNumber = taxNumber;
-        this.premise = premise;
-        this.regDate = Calendar.getInstance();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getTaxNumber() {
-        return taxNumber;
-    }
-
-    public void setTaxNumber(String taxNumber) {
-        this.taxNumber = taxNumber;
-    }
-
-    public String getPremise() {
-        return premise;
-    }
-
-    public void setPremise(String premise) {
-        this.premise = premise;
-    }
-
-    public Calendar getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(Calendar regDate) {
-        this.regDate = regDate;
-    }
-
-    public Set<User> getCeoUsers() {
-        return ceoUsers;
-    }
-
-    public void setCeoUsers(Set<User> ceoUsers) {
-        this.ceoUsers = ceoUsers;
-    }
-
-    public Set<User> getManagerUsers() {
-        return managerUsers;
-    }
-
-    public void setManagerUsers(Set<User> managerUsers) {
-        this.managerUsers = managerUsers;
-    }
 }

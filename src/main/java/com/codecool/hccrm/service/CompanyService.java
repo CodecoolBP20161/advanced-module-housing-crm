@@ -1,6 +1,6 @@
 package com.codecool.hccrm.service;
 
-import com.codecool.hccrm.dto.CompanyDTO;
+import com.codecool.hccrm.dto.UserCompanyRegistrationDTO;
 import com.codecool.hccrm.error.CompanyAlreadyExistsException;
 import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.repository.CompanyRepository;
@@ -37,21 +37,23 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Company findByPremiseAndTaxNumber(String premise, String taxNumber) {
-        return companyRepository.findByPremiseAndTaxNumber(premise, taxNumber);
+    public Company findByCompanyNameOrTaxNumber(String name, String taxNumber) {
+        return companyRepository.findByCompanyNameOrTaxNumber(name, taxNumber);
     }
 
     @Transactional
-    public Company createNewCompany(CompanyDTO dto) throws CompanyAlreadyExistsException {
-        if (alreadyExists(dto.getPremise(), dto.getTaxNumber())) {
+    public Company createNewCompany(UserCompanyRegistrationDTO dto) throws CompanyAlreadyExistsException {
+        if (alreadyExists(dto.getCompanyName(), dto.getTaxNumber())) {
             throw new CompanyAlreadyExistsException("Already have a company with tax number " + dto.getTaxNumber() + " in " + dto.getPremise() + " registered.");
         }
-        Company company  = new Company(dto.getCompanyName(), dto.getTaxNumber(), dto.getPremise());
+        Company company  = new Company();
+        company.setCompanyName(dto.getCompanyName());
+        company.setTaxNumber(dto.getTaxNumber());
         return companyRepository.save(company);
     }
 
-    private boolean alreadyExists(String premise, String taxNumber) {
-        Company company = findByPremiseAndTaxNumber(premise, taxNumber);
+    private boolean alreadyExists(String name, String taxNumber) {
+        Company company = findByCompanyNameOrTaxNumber(name, taxNumber);
         return company != null;
     }
 }
