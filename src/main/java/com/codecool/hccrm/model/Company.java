@@ -1,17 +1,18 @@
 package com.codecool.hccrm.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Set;
 
+/**
+ * Created by dorasztanko on 2017.02.02..
+ * Last edited by dorasztanko on 2017.02.18..
+ */
+@Data
 @Entity
 @Table(name = "company")
-public class Company {
-
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Company extends AbstractEntity {
 
     @Column(nullable = false, unique = true)
     private String companyName;
@@ -22,8 +23,9 @@ public class Company {
     @Column(nullable = false)
     private String premise;
 
-    @Column
-    private Calendar regDate;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @ManyToMany
     @JoinTable(name = "company_ceoUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
@@ -33,69 +35,12 @@ public class Company {
     @JoinTable(name = "company_managerUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
     private Set<User> managerUsers;
 
-    protected Company() {
+    public Company() {
     }
 
     public Company(String companyName, String taxNumber, String premise) {
         this.companyName = companyName;
         this.taxNumber = taxNumber;
         this.premise = premise;
-        this.regDate = Calendar.getInstance();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getTaxNumber() {
-        return taxNumber;
-    }
-
-    public void setTaxNumber(String taxNumber) {
-        this.taxNumber = taxNumber;
-    }
-
-    public String getPremise() {
-        return premise;
-    }
-
-    public void setPremise(String premise) {
-        this.premise = premise;
-    }
-
-    public Calendar getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(Calendar regDate) {
-        this.regDate = regDate;
-    }
-
-    public Set<User> getCeoUsers() {
-        return ceoUsers;
-    }
-
-    public void setCeoUsers(Set<User> ceoUsers) {
-        this.ceoUsers = ceoUsers;
-    }
-
-    public Set<User> getManagerUsers() {
-        return managerUsers;
-    }
-
-    public void setManagerUsers(Set<User> managerUsers) {
-        this.managerUsers = managerUsers;
     }
 }
