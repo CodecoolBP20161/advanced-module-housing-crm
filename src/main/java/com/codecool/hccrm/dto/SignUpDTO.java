@@ -1,8 +1,8 @@
 package com.codecool.hccrm.dto;
 
-//import com.codecool.hccrm.validation.PasswordChecked;
+import com.codecool.hccrm.validation.PasswordMatches;
+import com.codecool.hccrm.validation.ValidEmail;
 import lombok.Data;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -11,10 +11,10 @@ import javax.validation.constraints.NotNull;
  * Created by dorasztanko on 2017.02.18..
  */
 @Data
-//@PasswordChecked
+@PasswordMatches
 public class SignUpDTO {
 
-    @NotNull
+    @NotNull()
     @NotEmpty
     private String firstName;
 
@@ -24,7 +24,7 @@ public class SignUpDTO {
 
     @NotNull
     @NotEmpty
-    @Email
+    @ValidEmail
     private String email;
 
     @NotNull
@@ -34,7 +34,7 @@ public class SignUpDTO {
     @NotNull
     @NotEmpty
     private String password;
-    private String passwordCheck;
+    private String matchingPassword;
 
     @NotNull
     @NotEmpty
