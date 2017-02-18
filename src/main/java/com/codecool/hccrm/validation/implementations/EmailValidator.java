@@ -26,12 +26,16 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
     }
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context){
-        return (validateEmail(email)) && userService.findFirstByEmail(email) == null;
+        return (validateEmail(email) && notRegisteredEmail(email));
 
     }
     private boolean validateEmail(String email) {
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    private boolean notRegisteredEmail(String email) {
+        return userService.findFirstByEmail(email) == null;
     }
 }
