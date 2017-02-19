@@ -1,4 +1,4 @@
-package com.codecool.hccrm.validation.implementations;
+package com.codecool.hccrm.validation.constraint;
 
 /**
  * Created by prezi on 2017. 02. 07..

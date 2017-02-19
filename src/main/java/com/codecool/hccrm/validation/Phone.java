@@ -1,6 +1,6 @@
 package com.codecool.hccrm.validation;
 
-import com.codecool.hccrm.validation.constraint.PasswordMatchesValidator;
+import com.codecool.hccrm.validation.constraint.PhoneConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -8,19 +8,20 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Created by prezi on 2017. 02. 07..
+ * Created by dorasztanko on 2017.02.19..
  */
-@Target({TYPE, ANNOTATION_TYPE})
+@Target({METHOD, FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = PasswordMatchesValidator.class)
+@Constraint(validatedBy = PhoneConstraintValidator.class)
 @Documented
-public @interface PasswordMatches {
-    String message() default "Passwords don't match.";
+public @interface Phone {
+    String message() default "{Phone}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
+
 }
+
