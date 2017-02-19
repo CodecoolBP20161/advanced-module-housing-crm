@@ -1,13 +1,13 @@
 package com.codecool.hccrm.dto;
 
 import com.codecool.hccrm.validation.PasswordMatches;
+import com.codecool.hccrm.validation.Phone;
 import com.codecool.hccrm.validation.ValidEmail;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by dorasztanko on 2017.02.18..
@@ -16,26 +16,25 @@ import javax.validation.constraints.NotNull;
 @PasswordMatches
 public class SignUpDTO {
 
-    @NotNull
-    @NotEmpty
+    @Size(min=2, max=30)
     private String firstName;
 
-    @NotNull
-    @NotEmpty
+    @Size(min=2, max=30)
     private String lastName;
 
-    @NotNull
-    @NotEmpty
     @ValidEmail
     private String email;
 
-    @NotNull
-    @NotEmpty
+    @Phone
     private String phoneNumber;
 
     @NotNull
     @NotEmpty
+    @Size(min = 8)
     private String password;
+
+    @NotNull
+    @NotEmpty
     private String matchingPassword;
 
     @NotNull
