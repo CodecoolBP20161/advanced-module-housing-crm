@@ -11,6 +11,10 @@ import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.codecool.hccrm.model.RoleEnum.ROLE_ADMIN;
+import static com.codecool.hccrm.model.RoleEnum.ROLE_CEO;
+import static com.codecool.hccrm.model.RoleEnum.ROLE_MANAGER;
+
 /**
  * Created by dorasztanko on 2017. 02. 09..
  * Last edited by dorasztanko on 2017. 02. 17..
@@ -18,10 +22,6 @@ import java.util.Set;
 @Transactional
 @Service
 public class InitDBService {
-
-    private final String adminString = "ROLE_ADMIN";
-    private final String ceoString = "ROLE_CEO";
-    private final String managerString = "ROLE_MANAGER";
 
     private final String userEmail = "hccrm.robotkutya@gmail.com";
 
@@ -36,8 +36,8 @@ public class InitDBService {
 
     @PostConstruct
     private void init() {
-        if (roleService.findByName("ROLE_ADMIN") == null) {
-            Role roleAdmin = new Role(adminString);
+        if (roleService.findByName(ROLE_ADMIN.getRole()) == null) {
+            Role roleAdmin = new Role(ROLE_ADMIN.getRole());
             roleService.save(roleAdmin);
 
             User admin = new User("Ádám", "Kocsis", userEmail, passwordEncoder.encode("codecool"), "+36709861178");
@@ -48,12 +48,12 @@ public class InitDBService {
             admin.setVerified(Boolean.TRUE);
             userService.save(admin);
         }
-        if (roleService.findByName("ROLE_CEO") == null) {
-            Role roleCeo = new Role(ceoString);
+        if (roleService.findByName(ROLE_CEO.getRole()) == null) {
+            Role roleCeo = new Role(ROLE_CEO.getRole());
             roleService.save(roleCeo);
         }
-        if (roleService.findByName("ROLE_MANAGER") == null) {
-            Role roleManager = new Role(managerString);
+        if (roleService.findByName(ROLE_MANAGER.getRole()) == null) {
+            Role roleManager = new Role(ROLE_MANAGER.getRole());
             roleService.save(roleManager);
         }
     }
