@@ -14,8 +14,9 @@ import java.util.Calendar;
 @Table(name = "condominium")
 public class Condominium extends AbstractEntity {
 
-    @Column
-    private String address;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column
     private String topographicalNumber;
@@ -40,7 +41,7 @@ public class Condominium extends AbstractEntity {
     public Condominium() {
     }
 
-    public Condominium(String address, String topographicalNumber, Integer parcelNumber, Calendar contractingDate, Calendar generalMeetingResolutionDate) {
+    public Condominium(Address address, String topographicalNumber, Integer parcelNumber, Calendar contractingDate, Calendar generalMeetingResolutionDate) {
         this.address = address;
         this.topographicalNumber = topographicalNumber;
         this.parcelNumber = parcelNumber;
