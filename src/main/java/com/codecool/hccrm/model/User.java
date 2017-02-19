@@ -52,6 +52,6 @@ public class User extends AbstractEntity {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.verified = true;
+        this.verified = false;
     }
 }
