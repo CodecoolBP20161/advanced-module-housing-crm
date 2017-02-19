@@ -14,7 +14,7 @@ public class PageController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() throws Exception {
-        logger.info(FORMAT.getFormatter() + "Index page is called.");
+        logger.info(FORMAT.getFormatter() + "Index page is rendered.");
 
         return "index";
     }
@@ -24,3 +24,4 @@ public class PageController {
         return "login";
     }
 }
+
