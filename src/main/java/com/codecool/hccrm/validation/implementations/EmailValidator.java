@@ -24,11 +24,13 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
     public void initialize(ValidEmail constraintAnnotation) {
 
     }
+
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context){
         return (validateEmail(email) && notRegisteredEmail(email));
 
     }
+
     private boolean validateEmail(String email) {
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);

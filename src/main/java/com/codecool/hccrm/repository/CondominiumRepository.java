@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 @RepositoryRestResource(collectionResourceRel = "condominium", path = "condominium")
 public interface CondominiumRepository extends JpaRepository<Condominium, Long> {
-    List<Condominium> findByCompany(Company c);
+    List<Condominium> findByCompany(Company company);
 }
