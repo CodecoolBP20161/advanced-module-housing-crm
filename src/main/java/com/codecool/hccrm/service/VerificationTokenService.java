@@ -37,4 +37,9 @@ public class VerificationTokenService {
         return verificationTokenRepository.findByUser(user);
     }
 
+    public void createVerificationToken(User user, String token) {
+        VerificationToken myToken = new VerificationToken(token);
+        myToken.setUser(user);
+        save(myToken);
+    }
 }
