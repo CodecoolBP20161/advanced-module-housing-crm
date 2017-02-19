@@ -1,6 +1,6 @@
 package com.codecool.hccrm.validation;
 
-import com.codecool.hccrm.validation.constraint.EmailConstraintValidator;
+import com.codecool.hccrm.validation.constraint.UnReservedCompanyNameConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -16,10 +16,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({TYPE, ANNOTATION_TYPE, FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = EmailConstraintValidator.class)
+@Constraint(validatedBy = UnReservedCompanyNameConstraintValidator.class)
 @Documented
-public @interface ValidEmail {
-    String message() default "Invalid email address.";
+public @interface UnReservedCompanyName {
+    String message() default "Already registered company name.";
 
     Class<?>[] groups() default {};
 

@@ -25,21 +25,16 @@ public class EmailConstraintValidator implements ConstraintValidator<ValidEmail,
     }
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext context){
+    public boolean isValid(String email, ConstraintValidatorContext context) {
         if (email == null || email.isEmpty()) {
             return false;
         }
-        return (validateEmail(email) && notRegisteredEmail(email));
-
+        return (validateEmail(email));
     }
 
     private boolean validateEmail(String email) {
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
         return matcher.matches();
-    }
-
-    private boolean notRegisteredEmail(String email) {
-        return userService.findFirstByEmail(email) == null;
     }
 }

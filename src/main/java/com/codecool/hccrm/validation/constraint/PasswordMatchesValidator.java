@@ -1,8 +1,5 @@
 package com.codecool.hccrm.validation.constraint;
 
-/**
- * Created by prezi on 2017. 02. 07..
- */
 
 import com.codecool.hccrm.dto.SignUpDTO;
 import com.codecool.hccrm.validation.PasswordMatches;
@@ -10,6 +7,9 @@ import com.codecool.hccrm.validation.PasswordMatches;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * Created by prezi on 2017. 02. 07..
+ */
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
     @Override
@@ -17,7 +17,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     }
 
     @Override
-    public boolean isValid(Object obj, ConstraintValidatorContext context){
+    public boolean isValid(Object obj, ConstraintValidatorContext context) {
         SignUpDTO dto = (SignUpDTO) obj;
         return dto.getPassword().equals(dto.getMatchingPassword());
     }

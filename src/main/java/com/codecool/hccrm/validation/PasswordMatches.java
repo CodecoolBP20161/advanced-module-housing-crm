@@ -14,6 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Created by prezi on 2017. 02. 07..
+ * Last edited by dorasztanko on 2017.02.19..
  */
 @Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
@@ -21,6 +22,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface PasswordMatches {
     String message() default "Passwords don't match.";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
