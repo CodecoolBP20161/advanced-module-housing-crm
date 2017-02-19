@@ -40,8 +40,8 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Company findByPremiseAndTaxNumber(String premise, String taxNumber) {
-        return companyRepository.findByPremiseAndTaxNumber(premise, taxNumber);
+    Company findByCompanyNameOrTaxNumber(String companyName, String taxNumber) {
+        return companyRepository.findByCompanyNameOrTaxNumber(companyName, taxNumber);
     }
 
     @Transactional
