@@ -1,8 +1,6 @@
 package com.codecool.hccrm.dto;
 
-import com.codecool.hccrm.validation.PasswordMatches;
-import com.codecool.hccrm.validation.Phone;
-import com.codecool.hccrm.validation.ValidEmail;
+import com.codecool.hccrm.validation.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -23,6 +21,7 @@ public class SignUpDTO {
     private String lastName;
 
     @ValidEmail
+    @UnReservedEmail
     private String email;
 
     @Phone
@@ -39,6 +38,7 @@ public class SignUpDTO {
 
     @NotNull
     @NotEmpty
+    @UnReservedCompanyName
     private String companyName;
 
     @NotNull
@@ -47,6 +47,7 @@ public class SignUpDTO {
 
     @NotNull
     @NotEmpty
+    @UnReservedCompanyTaxNumber
     private String taxNumber;
 
     @NotNull
