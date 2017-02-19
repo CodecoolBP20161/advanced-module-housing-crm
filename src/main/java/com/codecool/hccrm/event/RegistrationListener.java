@@ -22,9 +22,6 @@ public class RegistrationListener implements
         ApplicationListener<OnRegistrationCompleteEvent> {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private VerificationTokenService verificationTokenService;
 
     @Autowired
