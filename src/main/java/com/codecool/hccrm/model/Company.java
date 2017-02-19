@@ -1,7 +1,5 @@
 package com.codecool.hccrm.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -9,7 +7,6 @@ import java.util.Set;
  * Created by dorasztanko on 2017.02.02..
  * Last edited by dorasztanko on 2017.02.18..
  */
-@Data
 @Entity
 @Table(name = "company")
 public class Company extends AbstractEntity {
@@ -42,5 +39,53 @@ public class Company extends AbstractEntity {
         this.companyName = companyName;
         this.taxNumber = taxNumber;
         this.premise = premise;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getTaxNumber() {
+        return taxNumber;
+    }
+
+    public void setTaxNumber(String taxNumber) {
+        this.taxNumber = taxNumber;
+    }
+
+    public String getPremise() {
+        return premise;
+    }
+
+    public void setPremise(String premise) {
+        this.premise = premise;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<User> getCeoUsers() {
+        return ceoUsers;
+    }
+
+    public void setCeoUsers(Set<User> ceoUsers) {
+        this.ceoUsers = ceoUsers;
+    }
+
+    public Set<User> getManagerUsers() {
+        return managerUsers;
+    }
+
+    public void setManagerUsers(Set<User> managerUsers) {
+        this.managerUsers = managerUsers;
     }
 }
