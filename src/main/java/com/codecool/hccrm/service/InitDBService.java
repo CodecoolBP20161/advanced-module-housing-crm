@@ -40,7 +40,7 @@ public class InitDBService {
             Role roleAdmin = new Role(ROLE_ADMIN.getRole());
             roleService.save(roleAdmin);
 
-            User admin = new User("Ádám", "Kocsis", userEmail, passwordEncoder.encode("codecool"), "+36709861178");
+            User admin = new User("Ádám", "Kocsis", userEmail, passwordEncoder.encode("codecool"), "0036709861178");
 
             Set<Role> roleSet = new HashSet<>();
             roleSet.add(roleAdmin);
