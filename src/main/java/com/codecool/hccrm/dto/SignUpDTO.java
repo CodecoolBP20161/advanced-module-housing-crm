@@ -5,6 +5,8 @@ import com.codecool.hccrm.validation.ValidEmail;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @PasswordMatches
 public class SignUpDTO {
 
-    @NotNull()
+    @NotNull
     @NotEmpty
     private String firstName;
 
@@ -47,4 +49,22 @@ public class SignUpDTO {
     @NotNull
     @NotEmpty
     private String taxNumber;
+
+    @NotNull
+    @NotEmpty
+    private String country;
+
+    @NotNull
+    @NotEmpty
+    private String zipCode;
+
+    @NotNull
+    @NotEmpty
+    private String city;
+
+    @NotNull
+    @NotEmpty
+    private String addressLine1;
+
+    private String addressLine2;
 }
