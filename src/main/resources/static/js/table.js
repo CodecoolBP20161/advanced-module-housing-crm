@@ -15,7 +15,7 @@ $(document).ready(function() {
             {data: 'companyName'},
             {data: 'taxNumber'},
             {data: 'premise'},
-            {data: 'regDate'}
+            {data: 'createDate'}
         ],
         stateSave: true
     });
