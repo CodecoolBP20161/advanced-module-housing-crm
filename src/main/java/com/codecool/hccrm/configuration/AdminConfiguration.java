@@ -21,7 +21,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.codecool.hccrm.model.RoleEnum.ROLE_ADMIN;
 import static com.codecool.hccrm.model.RoleEnum.ROLE_CEO;
@@ -80,7 +81,7 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                                                 HttpServletResponse response,
                                                 Authentication authentication) throws IOException, ServletException {
 
-                String targetUrl = determineTargetUrl(request, response, authentication);
+                String targetUrl = determineTargetUrl(authentication);
 
                 if (response.isCommitted()) {
                     logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
@@ -90,26 +91,14 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                 getRedirectStrategy().sendRedirect(request, response, targetUrl);
             }
 
-            protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-                boolean isUser = false;
-                boolean isAdmin = false;
-                Collection<? extends GrantedAuthority> authorities
-                        = authentication.getAuthorities();
-                for (GrantedAuthority grantedAuthority : authorities) {
-                    if (grantedAuthority.getAuthority().equals(ROLE_CEO.getRole())) {
-                        isUser = true;
-                        break;
-                    } else if (grantedAuthority.getAuthority().equals(ROLE_ADMIN.getRole())) {
-                        isAdmin = true;
-                        break;
-                    }
-                }
-
-                if (isUser) {
-                    return "/user/dashboard";
-                } else if (isAdmin) {
-                    return "/admin";
-                } else {
+            private String determineTargetUrl(Authentication authentication) {
+                Set<String> authorities1 = authentication.getAuthorities()
+                                                    .stream()
+                                                    .map(GrantedAuthority::getAuthority)
+                                                    .collect(Collectors.toSet());
+                if (authorities1.contains(ROLE_ADMIN.getRole())) return "/admin";
+                if (authorities1.contains(ROLE_CEO.getRole())) return "/user/dashboard";
+                else {
                     throw new IllegalStateException();
                 }
             }
