@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = UniqueCompanyTaxNumberConstraintValidator.class)
 @Documented
 public @interface UniqueCompanyTaxNumber {
-    String message() default "Already registered company tax number.";
+    String message() default "{UniqueCompanyTaxNumber}";
 
     Class<?>[] groups() default {};
 

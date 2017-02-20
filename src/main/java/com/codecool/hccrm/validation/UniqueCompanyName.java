@@ -19,7 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = UniqueCompanyNameConstraintValidator.class)
 @Documented
 public @interface UniqueCompanyName {
-    String message() default "Already registered company name.";
+    String message() default "{UniqueCompanyName}";
 
     Class<?>[] groups() default {};
 
