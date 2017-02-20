@@ -45,7 +45,7 @@ public class SignUpDTO {
 
     @NotNull
     @NotEmpty
-    @UnReservedCompanyTaxNumber
+    @UniqueCompanyTaxNumber
     private String taxNumber;
 
     @NotNull
