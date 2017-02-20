@@ -20,7 +20,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = PhoneConstraintValidator.class)
 @Documented
 public @interface Phone {
-    String message() default "Not a valid phone number.";
+    String message() default "{Phone}";
 
     Class<?>[] groups() default {};
 
