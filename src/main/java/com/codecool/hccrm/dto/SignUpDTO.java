@@ -32,8 +32,6 @@ public class SignUpDTO {
     @Size(min = 8)
     private String password;
 
-    @NotNull
-    @NotEmpty
     private String matchingPassword;
 
     @NotNull
