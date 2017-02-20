@@ -14,10 +14,10 @@ import javax.validation.constraints.Size;
 @PasswordMatches
 public class SignUpDTO {
 
-    @Size(min=2, max=30)
+    @ValidPersonName
     private String firstName;
 
-    @Size(min=2, max=30)
+    @ValidPersonName
     private String lastName;
 
     @ValidEmail
