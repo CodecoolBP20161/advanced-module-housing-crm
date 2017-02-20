@@ -1,6 +1,6 @@
 package com.codecool.hccrm.validation;
 
-import com.codecool.hccrm.validation.constraint.UnReservedCompanyNameConstraintValidator;
+import com.codecool.hccrm.validation.constraint.UniqueCompanyNameConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -16,9 +16,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({TYPE, ANNOTATION_TYPE, FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = UnReservedCompanyNameConstraintValidator.class)
+@Constraint(validatedBy = UniqueCompanyNameConstraintValidator.class)
 @Documented
-public @interface UnReservedCompanyName {
+public @interface UniqueCompanyName {
     String message() default "Already registered company name.";
 
     Class<?>[] groups() default {};

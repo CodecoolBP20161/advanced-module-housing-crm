@@ -36,7 +36,7 @@ public class SignUpDTO {
 
     @NotNull
     @NotEmpty
-    @UnReservedCompanyName
+    @UniqueCompanyName
     private String companyName;
 
     @NotNull
