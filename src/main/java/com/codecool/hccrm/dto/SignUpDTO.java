@@ -21,7 +21,7 @@ public class SignUpDTO {
     private String lastName;
 
     @ValidEmail
-    @UnReservedEmail
+    @UniqueEmail
     private String email;
 
     @Phone
