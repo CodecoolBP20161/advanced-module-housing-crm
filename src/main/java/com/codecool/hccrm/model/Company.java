@@ -1,17 +1,15 @@
 package com.codecool.hccrm.model;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Set;
 
+/**
+ * Created by dorasztanko on 2017.02.02..
+ * Last edited by dorasztanko on 2017.02.18..
+ */
 @Entity
 @Table(name = "company")
-public class Company {
-
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Company extends AbstractEntity {
 
     @Column(nullable = false, unique = true)
     private String companyName;
@@ -22,8 +20,9 @@ public class Company {
     @Column(nullable = false)
     private String premise;
 
-    @Column
-    private Calendar regDate;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @ManyToMany
     @JoinTable(name = "company_ceoUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
@@ -33,22 +32,13 @@ public class Company {
     @JoinTable(name = "company_managerUsers", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "companyUser_id"))
     private Set<User> managerUsers;
 
-    protected Company() {
+    public Company() {
     }
 
     public Company(String companyName, String taxNumber, String premise) {
         this.companyName = companyName;
         this.taxNumber = taxNumber;
         this.premise = premise;
-        this.regDate = Calendar.getInstance();
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCompanyName() {
@@ -75,12 +65,12 @@ public class Company {
         this.premise = premise;
     }
 
-    public Calendar getRegDate() {
-        return regDate;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setRegDate(Calendar regDate) {
-        this.regDate = regDate;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Set<User> getCeoUsers() {

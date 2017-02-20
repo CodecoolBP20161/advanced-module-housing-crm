@@ -15,13 +15,11 @@ import java.util.UUID;
 
 /**
  * Created by prezi on 2017. 02. 07..
+ * Last edited by dorasztanko on 2017.02.19..
  */
 @Component
 public class RegistrationListener implements
         ApplicationListener<OnRegistrationCompleteEvent> {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private VerificationTokenService verificationTokenService;
@@ -40,7 +38,7 @@ public class RegistrationListener implements
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         User user = event.getUser();
         String token = UUID.randomUUID().toString();
-        userService.createVerificationToken(user, token);
+        verificationTokenService.createVerificationToken(user, token);
 
         String recipientAddress = user.getEmail();
         String subject = "Registration Confirmation";

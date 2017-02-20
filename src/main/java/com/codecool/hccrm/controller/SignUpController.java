@@ -1,10 +1,12 @@
 package com.codecool.hccrm.controller;
 
-import com.codecool.hccrm.dto.UserDTO;
-import com.codecool.hccrm.error.EmailAlreadyExistsException;
+import com.codecool.hccrm.dto.SignUpDTO;
 import com.codecool.hccrm.event.OnRegistrationCompleteEvent;
+import com.codecool.hccrm.model.Address;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
+import com.codecool.hccrm.service.AddressService;
+import com.codecool.hccrm.service.CompanyService;
 import com.codecool.hccrm.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,31 +15,35 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.codecool.hccrm.logging.LogFormatter.FORMAT;
 
 /**
  * Created by prezi on 2017. 02. 06..
+ * Last edited by dorasztanko on 2017.02.18..
  */
-// TODO: CONFIGURE ROUTES NORMALLY ! pls
 @Controller
-public class UserRegistrationController {
-    private Logger logger = LoggerFactory.getLogger(UserRegistrationController.class);
+public class SignUpController {
+    private Logger logger = LoggerFactory.getLogger(SignUpController.class);
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    CompanyService companyService;
+
+    @Autowired
+    AddressService addressService;
 
     @Autowired
     ApplicationEventPublisher eventPublisher;
@@ -45,67 +51,33 @@ public class UserRegistrationController {
     @Autowired
     private MessageSource messages;
 
-    /**
-     * just a very basic registration form using Thymeleaf (and some magic)
-     */
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String showBasicForm(WebRequest request, Model model) {
-        UserDTO user = new UserDTO();
-        model.addAttribute("user", user);//bind to model (magic)
-        return "register_user";
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String renderSignUp(Model model) {
+        logger.info(FORMAT.getFormatter() + "Sign up page is rendered.");
+
+        SignUpDTO dto = new SignUpDTO();
+        model.addAttribute("signupForm", dto);
+        return "signup";
     }
 
-    /**
-     * NOTES:
-     * we need model to pass on to the view later the e-mail address
-     * we need the request for later security stuff, like check for secure connection, etc
-     * BindingResult is for easy validation http://codetutr.com/2013/05/28/spring-mvc-form-validation/
-     * check for existing e-mail can only be done during the transaction to save user!!!
-     *
-     * @param userDTO
-     * @param result
-     * @param request
-     * @param errors
-     * @param model
-     * @return
-     */
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView submit(
-            @Valid @ModelAttribute("user") UserDTO userDTO,
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String submit(
+            @ModelAttribute("signupForm") @Valid SignUpDTO dto,
             BindingResult result,
-            WebRequest request,
-            Errors errors,
-            ModelMap model) {
+            Model model,
+            WebRequest request) {
 
         if (result.hasErrors()) {
-            return new ModelAndView("register_user", "user", userDTO);
+            return "signup";
         }
-
-        User registered = createFromDTO(userDTO, result);
-        if (registered == null) {
-            result.rejectValue("email", "message.regError");
-        }
-
-        try {
-
-            String appUrl = request.getContextPath();
-            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), appUrl));
-        } catch (Exception me) {
-            return new ModelAndView("emailError", "user", userDTO);
-        }
-
-        return new ModelAndView("userView", "user", userDTO);
-    }
-
-    private User createFromDTO(UserDTO userDTO, BindingResult result) {
-        User user;
-        try {
-            user = userService.createNewUser(userDTO);
-        } catch (EmailAlreadyExistsException e) {
-            return null;
-        }
-        return user;
+        User registeredUser = userService.createNewUser(dto);
+        Address registeredAddress = addressService.createNewAddress(dto);
+        companyService.createNewCompany(dto, registeredUser, registeredAddress);
+        // sending email
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registeredUser, request.getLocale(), request.getContextPath()));
+        // redirecting to index page, successful registration pop up --- please, log in!
+        model.addAttribute("user", registeredUser);
+        return "index";
     }
 
     @RequestMapping(value = "/regitrationConfirm", method = RequestMethod.GET)

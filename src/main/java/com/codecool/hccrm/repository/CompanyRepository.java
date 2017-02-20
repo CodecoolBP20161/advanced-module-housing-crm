@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
     Company findByCompanyName(String name);
 
-    Company findByPremiseAndTaxNumber(String premise, String taxNumber);
+    Company findByCompanyNameOrTaxNumber(String companyName, String taxNumber);
+
+    Company findByTaxNumber(String taxNumber);
 }

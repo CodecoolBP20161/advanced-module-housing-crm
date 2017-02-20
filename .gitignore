@@ -25,3 +25,9 @@ nbdist/
 
 ### Logging ###
 /log
+
+### Maven wrappers ###
+.mvn/
+mvnw
+mvnw.cmd
+

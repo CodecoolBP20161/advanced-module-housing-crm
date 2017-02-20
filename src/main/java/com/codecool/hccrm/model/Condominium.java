@@ -3,16 +3,17 @@ package com.codecool.hccrm.model;
 import javax.persistence.*;
 import java.util.Calendar;
 
+/**
+ * Created by dorasztanko on 2017.02.02..
+ * Last edited by dorasztanko on 2017.02.18..
+ */
 @Entity
 @Table(name = "condominium")
-public class Condominium {
+public class Condominium extends AbstractEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column
-    private String address;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column
     private String topographicalNumber;
@@ -26,9 +27,6 @@ public class Condominium {
     @Column
     private Calendar generalMeetingResolutionDate;
 
-    @Column
-    private Calendar regDate;
-
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
@@ -37,31 +35,22 @@ public class Condominium {
     @JoinColumn(name = "user_id")
     private User managerUser;
 
-    protected Condominium() {
+    public Condominium() {
     }
 
-    public Condominium(String address, String topographicalNumber, Integer parcelNumber, Calendar contractingDate, Calendar generalMeetingResolutionDate) {
+    public Condominium(Address address, String topographicalNumber, Integer parcelNumber, Calendar contractingDate, Calendar generalMeetingResolutionDate) {
         this.address = address;
         this.topographicalNumber = topographicalNumber;
         this.parcelNumber = parcelNumber;
         this.contractingDate = contractingDate;
         this.generalMeetingResolutionDate = generalMeetingResolutionDate;
-        this.regDate = Calendar.getInstance();
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -95,14 +84,6 @@ public class Condominium {
 
     public void setGeneralMeetingResolutionDate(Calendar generalMeetingResolutionDate) {
         this.generalMeetingResolutionDate = generalMeetingResolutionDate;
-    }
-
-    public Calendar getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(Calendar regDate) {
-        this.regDate = regDate;
     }
 
     public Company getCompany() {

@@ -1,17 +1,19 @@
 package com.codecool.hccrm.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Set;
 
+/**
+ * Created by dorasztanko on 2017.02.02..
+ * Last edited by dorasztanko on 2017.02.18..
+ */
 @Entity
 @Table(name = "`user`")
-public class User {
-
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@AttributeOverride(name="createDate", column = @Column(name="reg_date"))
+public class User extends AbstractEntity {
 
     @Column(nullable = false)
     private String firstName;
@@ -29,9 +31,6 @@ public class User {
     private String phoneNumber;
 
     @Column
-    private Calendar regDate;
-
-    @Column
     private Boolean verified;
 
     @ManyToMany
@@ -44,7 +43,7 @@ public class User {
     @ManyToMany(mappedBy = "managerUsers")
     private Set<Company> companyManagers;
 
-    protected User() {
+    public User() {
     }
 
     public User(String firstName, String lastName, String email, String password, String phoneNumber) {
@@ -53,16 +52,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.regDate = Calendar.getInstance();
         this.verified = false;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -103,14 +93,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public Calendar getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(Calendar regDate) {
-        this.regDate = regDate;
     }
 
     public Boolean getVerified() {
