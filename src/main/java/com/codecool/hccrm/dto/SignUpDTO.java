@@ -21,7 +21,7 @@ public class SignUpDTO {
     private String lastName;
 
     @ValidEmail
-    @UnReservedEmail
+    @UniqueEmail
     private String email;
 
     @Phone
@@ -32,13 +32,11 @@ public class SignUpDTO {
     @Size(min = 8)
     private String password;
 
-    @NotNull
-    @NotEmpty
     private String matchingPassword;
 
     @NotNull
     @NotEmpty
-    @UnReservedCompanyName
+    @UniqueCompanyName
     private String companyName;
 
     @NotNull
@@ -47,7 +45,7 @@ public class SignUpDTO {
 
     @NotNull
     @NotEmpty
-    @UnReservedCompanyTaxNumber
+    @UniqueCompanyTaxNumber
     private String taxNumber;
 
     @NotNull

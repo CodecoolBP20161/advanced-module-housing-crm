@@ -1,7 +1,7 @@
 package com.codecool.hccrm.validation.constraint;
 
 import com.codecool.hccrm.service.CompanyService;
-import com.codecool.hccrm.validation.UnReservedCompanyName;
+import com.codecool.hccrm.validation.UniqueCompanyName;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
@@ -10,12 +10,12 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Created by dorasztanko on 2017.02.20..
  */
-public class UnReservedCompanyNameConstraintValidator implements ConstraintValidator<UnReservedCompanyName, String> {
+public class UniqueCompanyNameConstraintValidator implements ConstraintValidator<UniqueCompanyName, String> {
 
     @Autowired
     CompanyService companyService;
 
-    public void initialize(UnReservedCompanyName constraint) {
+    public void initialize(UniqueCompanyName constraint) {
     }
 
     @Override
