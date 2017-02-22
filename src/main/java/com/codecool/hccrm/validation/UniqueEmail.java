@@ -1,6 +1,6 @@
 package com.codecool.hccrm.validation;
 
-import com.codecool.hccrm.validation.constraint.UnReservedCompanyTaxNumberConstraintValidator;
+import com.codecool.hccrm.validation.constraint.UniqueEmailConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -16,10 +16,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({TYPE, ANNOTATION_TYPE, FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = UnReservedCompanyTaxNumberConstraintValidator.class)
+@Constraint(validatedBy = UniqueEmailConstraintValidator.class)
 @Documented
-public @interface UnReservedCompanyTaxNumber {
-    String message() default "Already registered company tax number.";
+public @interface UniqueEmail {
+    String message() default "{UniqueEmail}";
 
     Class<?>[] groups() default {};
 

@@ -19,8 +19,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = PersonNameValidator.class)
 @Documented
 public @interface ValidPersonName {
-
-    String message() default "Invalid name.";
+    String message() default "{ValidPersonName}";
 
     Class<?>[] groups() default {};
 

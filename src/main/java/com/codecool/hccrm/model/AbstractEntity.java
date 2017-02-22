@@ -1,8 +1,8 @@
 package com.codecool.hccrm.model;
 
+import com.codecool.hccrm.service.DateService;
+
 import javax.persistence.*;
-import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * Created by dorasztanko on 2017.02.18..
@@ -10,13 +10,18 @@ import java.util.Locale;
 @MappedSuperclass
 abstract class AbstractEntity {
 
+
+    @Transient
+    private DateService dateService() {
+        return new DateService();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
     @Column
-    private Calendar createDate = Calendar.getInstance(Locale.GERMANY);
+    private String createDate = dateService().currentDate();
 
     public Long getId() {
         return id;
@@ -26,11 +31,11 @@ abstract class AbstractEntity {
         this.id = id;
     }
 
-    public Calendar getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Calendar createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 }

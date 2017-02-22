@@ -9,6 +9,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "company")
+@AttributeOverride(name="createDate", column = @Column(name="reg_date"))
 public class Company extends AbstractEntity {
 
     @Column(nullable = false, unique = true)
