@@ -20,6 +20,6 @@ public class AdminController {
     public String adminIndex() {
         logger.info(FORMAT.getFormatter() + "Admin page is called.");
 
-        return "admin_index";
+        return "admin/admin_index";
     }
 }

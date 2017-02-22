@@ -1,0 +1,31 @@
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.search {
+    display: inline-block;
+    margin-left: 15%;
+}
+
+.card {
+    display: inline-block;
+}
+
+.inside, .under {
+    width: 100%;
+}
+
+.under {
+    padding: 0;
+}
+
+.link {
+    display: none; !important;
+}
+
+nav {
+    background-color: #209fbc;
+}
