@@ -10,10 +10,20 @@
 <p>This is going to be our hypercool dashboard!</p>
 <table>
     <tr th:each="company : ${company_list}">
+        <td th:text="${company.id}"></td>
         <td th:text="${company.companyName}"></td>
         <td th:text="${company.premise}"></td>
         <td th:text="${company.taxNumber}"></td>
         <td th:text="${company.address.country}"></td>
+        <td><a th:href="@{'/user/' + ${company.id} + '/condominiums'}">Link</a></td>
+    </tr>
+</table>
+<table>
+    <tr th:each="condo : ${condominiums}">
+        <td th:text="${condo.id}"></td>
+        <td th:text="${condo.contractingDate}"></td>
+        <td th:text="${condo.parcelNumber}"></td>
+        <td th:text="${condo.address.country}"></td>
     </tr>
 </table>
 <form th:action="@{/logout}" method="post">

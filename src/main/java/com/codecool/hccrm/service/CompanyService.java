@@ -24,6 +24,10 @@ public class CompanyService {
     @Autowired
     CompanyRepository companyRepository;
 
+    public Company findById(Long id) {
+        return companyRepository.findById(id);
+    }
+
     public List<Company> findByCeoUsers(User user) {
         return companyRepository.findByCeoUsers(user);
     }
