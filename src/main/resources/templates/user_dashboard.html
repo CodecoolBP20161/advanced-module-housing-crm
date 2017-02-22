@@ -8,6 +8,14 @@
 <body>
 <h1>Hello, <span sec:authentication="name">Guest</span></h1>
 <p>This is going to be our hypercool dashboard!</p>
+<table>
+    <tr th:each="company : ${company_list}">
+        <td th:text="${company.companyName}"></td>
+        <td th:text="${company.premise}"></td>
+        <td th:text="${company.taxNumber}"></td>
+        <td th:text="${company.address.country}"></td>
+    </tr>
+</table>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
