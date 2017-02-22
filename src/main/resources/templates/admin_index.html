@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="admin_fragments :: head">
+</head>
+<body>
+<div th:replace="admin_fragments :: navbar">
+</div>
+<div class="page-content">
+    <div th:include="admin_fragments :: menu">
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="content-box-large">
+                    <div class="panel-heading">
+                        <div class="panel-title">Company list</div>
+                    </div>
+                    <div class="panel-body">
+                        <table id="company_list" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Company name</th>
+                                <th>Tax number</th>
+                                <th>Premise</th>
+                                <th>Registered at</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Company name</th>
+                                <th>Tax number</th>
+                                <th>Premise</th>
+                                <th>Registered at</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- jQuery UI -->
+    <!--<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>-->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+    <script th:src="@{/js/custom.js}"></script>
+    <script th:src="@{/js/table.js}"></script>
+
+</body>
+</html>

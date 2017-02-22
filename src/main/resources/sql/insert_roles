@@ -1,0 +1,8 @@
+INSERT INTO role (id, name)
+VALUES (1, 'SUPER_USER');
+
+INSERT INTO role (id, name)
+VALUES (2, 'CEO_USER');
+
+INSERT INTO role (id, name)
+VALUES (3, 'MANAGER_USER');
