@@ -10,9 +10,9 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">    <!-- styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" />    <!-- styles -->
     <!-- Custom style -->
-    <link th:href="@{static/css/style.css}" href="static/css/style.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{css/user/style.css}" href="css/user/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <!-- Dropdown Structure -->
@@ -33,7 +33,7 @@
         </ul>
         <form class="search">
             <div class="input-field">
-                <input id="search" type="search" required>
+                <input id="search" type="search" required ="" />
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
             </div>
@@ -41,18 +41,37 @@
     </div>
 </nav>
 <div class="section no-pad-bot" id="index-banner">
-    <div th:each="condom : ${condominiums}" class="container">
-        <div class="card col-md-3">
+    <div class="container">
+        <div th:each="condom : ${condominiums}" class="card col-md-3">
             <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="http://www.freeiconspng.com/uploads/house-from-premier-builders-in-carthage-mo-64836--home-builders-5.png">
+                <img class="activator" src="http://www.freeiconspng.com/uploads/house-from-premier-builders-in-carthage-mo-64836--home-builders-5.png" />
             </div>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4" th:text="${condom.parcelnumber}">Condom title<i class="material-icons right">more_vert</i></span>
+                <span class="card-title activator grey-text text-darken-4" th:text="${condom.getAddress().getAddressLine1()}">Condom title</span>
+                    <i class="material-icons right activator">more_vert</i>
                 <p><a href="#">This is not a link</a></p>
             </div>
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Béla condom<i class="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <span class="card-title grey-text text-darken-4" th:text="${condom.getAddress().getAddressLine1()}">Condom title</span>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td><span th:text="${condom.getManagerUser().getFirstName()}">First name</span>&nbsp;<span th:text="${condom.getManagerUser().getLastName()}">Last name</span></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${condom.getTopographicalNumber()}">TopographicalNum</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${condom.getParcelNumber()}">ParcelNum</td>
+                    </tr>
+                    <tr>
+                        <td><b>Contracting Date:</b></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${#dates.format(condom.getContractingDate(), 'yyyy-MMM-dd')}">Contracting Date</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
