@@ -1,7 +1,6 @@
 package com.codecool.hccrm.service;
 
-import com.codecool.hccrm.dto.UserDTO;
-import com.codecool.hccrm.error.EmailAlreadyExistsException;
+import com.codecool.hccrm.dto.SignUpDTO;
 import com.codecool.hccrm.model.Role;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
@@ -15,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.codecool.hccrm.model.RoleEnum.ROLE_CEO;
 
 /**
  * Created by balag3 on 2017.02.05..
@@ -30,13 +31,16 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
+    VerificationTokenService verificationTokenService;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private VerificationTokenRepository tokenRepository;
 
-    public User save(User user) {
-        return userRepository.save(user);
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     public void delete(User user) {
@@ -55,23 +59,6 @@ public class UserService {
         return userRepository.findByEmailAndVerifiedTrue(email);
     }
 
-    @Transactional
-    public User createNewUser(UserDTO dto) throws EmailAlreadyExistsException {
-        if (alreadyExists(dto.getEmail())) {
-            throw new EmailAlreadyExistsException("Already have user with " + dto.getEmail());
-        }
-        User user = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhoneNumber());
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.findByName("ROLE_USER"));
-        user.setRoles(roles);
-        return userRepository.save(user);
-    }
-
-    private boolean alreadyExists(String email) {
-        User user = findFirstByEmail(email);
-        return user != null;
-    }
-
     public User getUser(String verificationToken) {
         return tokenRepository.findByToken(verificationToken).getUser();
     }
@@ -80,9 +67,13 @@ public class UserService {
         return tokenRepository.findByToken(VerificationToken);
     }
 
-    public void createVerificationToken(User user, String token) {
-        VerificationToken myToken = new VerificationToken(token);
-        myToken.setUser(user);
-        tokenRepository.save(myToken);
+    @Transactional
+    public User createNewUser(SignUpDTO dto) {
+        User newUser = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhoneNumber());
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByName(ROLE_CEO.getRole()));
+        newUser.setRoles(roles);
+        save(newUser);
+        return newUser;
     }
 }
