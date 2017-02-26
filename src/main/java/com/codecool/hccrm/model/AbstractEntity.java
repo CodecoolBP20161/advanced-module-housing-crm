@@ -1,12 +1,17 @@
 package com.codecool.hccrm.model;
 
 import com.codecool.hccrm.service.DateService;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 /**
  * Created by dorasztanko on 2017.02.18..
+ * Last edited by dorasztanko on 2017.02.22..
  */
+@Getter
+@Setter
 @MappedSuperclass
 abstract class AbstractEntity {
 
@@ -22,20 +27,4 @@ abstract class AbstractEntity {
 
     @Column
     private String createDate = dateService().currentDate();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
 }
