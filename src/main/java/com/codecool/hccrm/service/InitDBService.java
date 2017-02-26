@@ -32,6 +32,9 @@ public class InitDBService {
     UserService userService;
 
     @Autowired
+    TestService testService;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @PostConstruct
@@ -55,6 +58,9 @@ public class InitDBService {
         if (roleService.findByName(ROLE_MANAGER.getRole()) == null) {
             Role roleManager = new Role(ROLE_MANAGER.getRole());
             roleService.save(roleManager);
+
+            // generating example data
+            testService.testClient();
         }
     }
 }
