@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="navbar_home">
+    <nav>
+        <div class="navbar-fixed">
+            <!--<a th:href="@{/}" class="brand-logo"></a>-->
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a th:href="@{/signup}">Sign up</a></li>
+                <li><a th:href="@{/login}">Log in</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
