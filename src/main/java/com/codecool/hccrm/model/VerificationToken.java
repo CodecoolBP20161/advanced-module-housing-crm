@@ -1,5 +1,8 @@
 package com.codecool.hccrm.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -7,8 +10,10 @@ import java.util.Date;
 
 /**
  * Created by prezi on 2017. 02. 06..
- * Last edited by dorasztanko on 2017.02.18..
+ * Last edited by dorasztanko on 2017.02.22..
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "verificationToken")
 public class VerificationToken extends AbstractEntity {
@@ -37,33 +42,5 @@ public class VerificationToken extends AbstractEntity {
         cal.setTime(new Timestamp(cal.getTime().getTime()));
         cal.add(Calendar.MINUTE, expirationTimeInMinutes);
         return new Date(cal.getTime().getTime());
-    }
-
-    public static int getExpirationTime() {
-        return EXPIRATION_TIME;
-    }
-
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
