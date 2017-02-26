@@ -38,8 +38,7 @@ public class Condominium extends AbstractEntity {
     public Condominium() {
     }
 
-    public Condominium(Address address, String topographicalNumber, Integer parcelNumber, Calendar contractingDate, Calendar generalMeetingResolutionDate) {
-        this.address = address;
+    public Condominium(String topographicalNumber, Integer parcelNumber, Calendar contractingDate, Calendar generalMeetingResolutionDate) {
         this.topographicalNumber = topographicalNumber;
         this.parcelNumber = parcelNumber;
         this.contractingDate = contractingDate;
