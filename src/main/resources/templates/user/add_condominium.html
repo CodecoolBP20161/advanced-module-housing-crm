@@ -2,33 +2,92 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <body>
-<div th:fragment="condominium_modal">
-<h1>Add new condominium!</h1>
-<form action="#" th:action="@{'/user/'+'${companyId}'+'/condominiums/add'}" th:object="${condominiumDTO}" th:modelAttribute="condominiumDTO" method="post">
-    <p>Name: <input type="text" th:field="*{name}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p></span>
-    <p>Topographical Number: <input type="text" th:field="*{topographicalNumber}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('topographicalNumber')}" th:errors="*{topographicalNumber}"></p></span>
-    <p>------------------------------------------------</p>
-    <p>Parcelnumber: <input type="text" th:field="*{parcelNumber}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('parcelNumber')}" th:errors="*{parcelNumber}"></p></span>
-    <p>Contracting Date: <input type="text" th:field="*{contractingDate}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('contractingDate')}" th:errors="*{contractingDate}"></p></span>
-    <p>General Meeting Resolution Date: <input type="text" th:field="*{generalMeetingDate}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('generalMeetingDate')}" th:errors="*{generalMeetingDate}"></p></span>
-    <p>------------------------------------------------</p>
-    <p>Country: <input type="text" th:field="*{country}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p></span>
-    <p>Zip code: <input type="text" th:field="*{zipCode}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></p></span>
-    <p>City: <input type="text" th:field="*{city}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p></span>
-    <p>Address1: <input type="text" th:field="*{addressLine1}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></p></span>
-    <p>Address2: <input type="text" th:field="*{addressLine2}"/></p>
-    <p>------------------------------------------------</p>
-    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
-</form>
-</div>
+    <div th:fragment="condominium_modal" th:if="${condominiumDTO}" class="modal fade" id="condomModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="condomModalTitle">Add new condominium</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" th:action="@{'/user/'+'${companyId}'+'/condominiums/add'}" th:object="${condominiumDTO}" th:modelAttribute="condominiumDTO" method="post">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input th:field="*{name}" id="condomName" type="text" class="validate" />
+                                    <label for="condomName">Name</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input th:field="*{topographicalNumber}" id="condomTopographicalNumber" type="text" class="validate" />
+                                    <label for="condomTopographicalNumber">Topographical Number</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('topographicalNumber')}" th:errors="*{topographicalNumber}"></p></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input th:field="*{parcelNumber}" id="condomParcelNumber" type="text" class="validate" />
+                                    <label for="condomParcelNumber">Parcelnumber</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('parcelNumber')}" th:errors="*{parcelNumber}"></p></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input th:field="*{contractingDate}" id="condomContractingDate" type="text" class="validate" />
+                                    <label for="condomContractingDate">Contracting Date</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('contractingDate')}" th:errors="*{contractingDate}"></p></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input th:field="*{generalMeetingDate}" id="condomGeneralMeetingDate" type="text" class="validate" />
+                                    <label for="condomGeneralMeetingDate">General Meeting Date</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('generalMeetingDate')}" th:errors="*{generalMeetingDate}"></p></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input th:field="*{country}" id="condomCountry" type="text" class="validate" />
+                                    <label for="condomCountry">Country</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input th:field="*{zipCode}" id="condomZipCode" type="text" class="validate" />
+                                    <label for="condomZipCode">Zip Code</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></p></span>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input th:field="*{city}" id="condomCity" type="text" class="validate" />
+                                    <label for="condomCity">City</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input th:field="*{addressLine1}" id="condomAddress1" type="text" class="validate" />
+                                    <label for="condomAddress1">Address Line 1</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></p></span>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input th:field="*{addressLine2}" id="condomAddress2" type="text" class="validate" />
+                                    <label for="condomAddress2">Address Line 2</label>
+                                    <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine2')}" th:errors="*{addressLine1}"></p></span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 </body>
 </html>
