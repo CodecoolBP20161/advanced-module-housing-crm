@@ -12,10 +12,10 @@ $(document).ready(function() {
             dataSrc: '_embedded.company'
         },
         columns: [
-            {data: 'createDate'},
             {data: 'companyName'},
             {data: 'taxNumber'},
-            {data: 'premise'}
+            {data: 'premise'},
+            {data: 'createDate'}
         ],
         stateSave: true
     });
