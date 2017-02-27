@@ -9,15 +9,15 @@ main {
 }
 
 body {
-    background-color: #BE6F7F;
+    background-color: #ECECEA;
 }
 
 nav {
-    background-color: #8D8582;
+    background-color: #74AFAD;
 }
 
 footer.page-footer {
-    background-color: #8D8582;
+    background-color: #D9853B;
 }
 
 blockquote {
@@ -29,11 +29,11 @@ blockquote {
 }
 
 #login_header {
-    color: #FFFFFF;
+    color: #74AFAD;
 }
 
 #login_button {
-    background-color: #8D8582;
+    background-color: #D9853B;
 }
 
 #forgot_password {
@@ -41,7 +41,7 @@ blockquote {
 }
 
 #signup_button {
-    background-color: #8D8582;
+    background-color: #D9853B;
 }
 
 .input-field input[type=date]:focus + label,
@@ -55,6 +55,6 @@ blockquote {
 .input-field input[type=text]:focus,
 .input-field input[type=email]:focus,
 .input-field input[type=password]:focus {
-    border-bottom: 2px solid #e91e63;
+    border-bottom: 2px solid #D9853B;
     box-shadow: none;
 }
