@@ -27,9 +27,24 @@
 }
 
 nav {
-    background-color: #209fbc;
+    background-color: #74AFAD;
+}
+
+body {
+    background-color: #ECECEA;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 #condomModalTitle {
     display: inline-block;
+}
+
+footer.page-footer {
+    background-color: #D9853B;
 }
