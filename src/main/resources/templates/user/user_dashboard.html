@@ -56,7 +56,6 @@
                 <table class="table table-striped">
                     <tbody>
                     <tr>
-                        <td><span th:text="${condom.getManagerUser().getFirstName()}">First name</span>&nbsp;<span th:text="${condom.getManagerUser().getLastName()}">Last name</span></td>
                     </tr>
                     <tr>
                         <td th:text="${condom.getTopographicalNumber()}">TopographicalNum</td>
@@ -115,49 +114,9 @@
     </div>
 </div>
 
+<div th:replace="user/add_condominium :: condominium_modal">
+</div>
 
-<div th:if="${condominiumDTO}">
-<div class="modal fade" id="condomModal" role="dialog">
-<div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h5 class="modal-title">Add new condominium!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-        <div class="modal-body">
-    <form action="#" th:action="@{'/user/'+'${companyId}'+'/condominiums/add'}" th:object="${condominiumDTO}" th:modelAttribute="condominiumDTO" method="post">
-        <p>Name: <input type="text" th:field="*{name}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p></span>
-        <p>Topographical Number: <input type="text" th:field="*{topographicalNumber}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('topographicalNumber')}" th:errors="*{topographicalNumber}"></p></span>
-        <p>------------------------------------------------</p>
-        <p>Parcelnumber: <input type="text" th:field="*{parcelNumber}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('parcelNumber')}" th:errors="*{parcelNumber}"></p></span>
-        <p>Contracting Date: <input type="text" th:field="*{contractingDate}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('contractingDate')}" th:errors="*{contractingDate}"></p></span>
-        <p>General Meeting Resolution Date: <input type="text" th:field="*{generalMeetingDate}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('generalMeetingDate')}" th:errors="*{generalMeetingDate}"></p></span>
-        <p>------------------------------------------------</p>
-        <p>Country: <input type="text" th:field="*{country}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p></span>
-        <p>Zip code: <input type="text" th:field="*{zipCode}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></p></span>
-        <p>City: <input type="text" th:field="*{city}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p></span>
-        <p>Address1: <input type="text" th:field="*{addressLine1}"/></p>
-        <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></p></span>
-        <p>Address2: <input type="text" th:field="*{addressLine2}"/></p>
-    </form>
-    </div>
-        <div class="modal-footer">
-            <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
-        </div>
-</div>
-</div>
-</div>
-</div>
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
