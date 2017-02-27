@@ -1,5 +1,6 @@
 package com.codecool.hccrm.controller.user;
 
+import com.codecool.hccrm.dto.CondominiumDTO;
 import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.model.Condominium;
 import com.codecool.hccrm.model.User;
@@ -35,7 +36,7 @@ public class UserController {
         User currentUser = userService.findFirstByEmail(principal.getName());
         List<Company> companyList = companyService.findByCeoUsers(currentUser);
         model.addAttribute("company_list", companyList );
-        return "user_dashboard";
+        return "user/user_dashboard";
     }
 
     @RequestMapping(value = {"/user/{company_id}/condominiums"}, method = RequestMethod.GET)
@@ -43,7 +44,15 @@ public class UserController {
         Company company = companyService.findById(new Long(companyId));
         List<Condominium> condominiums = condominiumService.findByCompany(company);
         model.addAttribute("condominiums", condominiums);
-        return "user_dashboard";
-
+        model.addAttribute("companyId", company.getId());
+        CondominiumDTO dto = new CondominiumDTO();
+        model.addAttribute("condominiumDTO", dto);
+        return "user/user_dashboard";
     }
+
+    @RequestMapping(value = {"user/{company_id}/condominiums/add"}, method = RequestMethod.GET)
+    public String addCondominium(@PathVariable("company_id") String companyId, Model model) {
+        return null;
+    }
+
 }
