@@ -29,3 +29,7 @@
 nav {
     background-color: #209fbc;
 }
+
+#condomModalTitle {
+    display: inline-block;
+}
