@@ -10,11 +10,13 @@ import com.codecool.hccrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -50,9 +52,13 @@ public class UserController {
         return "user/user_dashboard";
     }
 
-    @RequestMapping(value = {"user/{company_id}/condominiums/add"}, method = RequestMethod.GET)
-    public String addCondominium(@PathVariable("company_id") String companyId, Model model) {
-        return null;
+    @RequestMapping(value = {"user/{company_id}/condominiums/add"}, method = RequestMethod.POST)
+    public String addCondominium(@PathVariable("company_id") String companyId, @ModelAttribute CondominiumDTO dto, Model model) throws ParseException {
+        Company company = companyService.findById(new Long(companyId));
+        Condominium condominium = condominiumService.createFromDTO(dto);
+        condominium.setCompany(company);
+        condominiumService.save(condominium);
+        return "redirect:/user/"+companyId+"/condominiums";
     }
 
 }
