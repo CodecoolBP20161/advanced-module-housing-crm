@@ -18,9 +18,6 @@ public class PersonNameValidator implements ConstraintValidator<ValidPersonName,
         if (name.isEmpty() || name == null) {
             return false;
         }
-        if (name.contains("ß")) {
-            return false;
-        }
         if (!Character.isUpperCase(name.charAt(0))) {
             return false;
         }

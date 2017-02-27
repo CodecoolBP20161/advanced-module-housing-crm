@@ -1,12 +1,17 @@
 package com.codecool.hccrm.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Set;
 
 /**
  * Created by dorasztanko on 2017.02.02..
- * Last edited by dorasztanko on 2017.02.18..
+ * Last edited by dorasztanko on 2017.02.22..
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "company")
 @AttributeOverride(name="createDate", column = @Column(name="reg_date"))

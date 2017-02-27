@@ -39,7 +39,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
                                 <ul class="dropdown-menu animated fadeInUp">
-                                    <li><a href="admin/profile.html">Profile</a></li>
+                                    <li><a th:href="@{/user/dashboard}">User view</a></li>
                                     <li>
                                         <form th:action="@{/logout}" method="post">
                                             <input type="submit" value="Sign Out"/>

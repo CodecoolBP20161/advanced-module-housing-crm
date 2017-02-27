@@ -9,14 +9,46 @@ main {
 }
 
 body {
-    background: #fff;
+    background-color: #BE6F7F;
+}
+
+nav {
+    background-color: #8D8582;
+}
+
+footer.page-footer {
+    background-color: #8D8582;
+}
+
+blockquote {
+    border-left-color: #FFFFFF;
+}
+
+#new_account {
+    color: #FFFFFF;
+}
+
+#login_header {
+    color: #FFFFFF;
+}
+
+#login_button {
+    background-color: #8D8582;
+}
+
+#forgot_password {
+    color: #8D8582;
+}
+
+#signup_button {
+    background-color: #8D8582;
 }
 
 .input-field input[type=date]:focus + label,
 .input-field input[type=text]:focus + label,
 .input-field input[type=email]:focus + label,
 .input-field input[type=password]:focus + label {
-    color: #e91e63;
+    color: #8D8582;
 }
 
 .input-field input[type=date]:focus,

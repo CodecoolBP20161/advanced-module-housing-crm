@@ -2,6 +2,8 @@ package com.codecool.hccrm.dto;
 
 import com.codecool.hccrm.validation.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -10,7 +12,8 @@ import javax.validation.constraints.Size;
 /**
  * Created by dorasztanko on 2017.02.18..
  */
-@Data
+@Getter
+@Setter
 @PasswordMatches
 public class SignUpDTO {
 

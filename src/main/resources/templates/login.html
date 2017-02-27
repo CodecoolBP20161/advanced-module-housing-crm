@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
-<head>
+<head th:replace="meta :: meta">
     <title>Log in || HCCRM</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css"/>
-    <link th:href="@{css/styles.css}" href="/static/css/admin/login.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
 <div class="section"></div>
 <main>
     <div style="text-align: center;">
-        <!--<img class="responsive-img" style="width: 250px;" src="http://i.imgur.com/ax0NCsK.gif"/>-->
         <div class="section"></div>
 
-        <h5 class="indigo-text">Log in to your HCCRM account!</h5>
+        <h5 id="login_header">Log in to your HCCRM account!</h5>
         <div class="section"></div>
 
         <div class="container">
@@ -44,14 +37,15 @@
                             <label for='password'>Enter your password</label>
                         </div>
                         <label style='float: right;'>
-                            <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                            <a id="forgot_password" href='#!'><b>Forgot Password?</b></a>
                         </label>
                     </div>
 
                     <br/>
                     <div style="text-align: center;">
                         <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>
+                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect'
+                                    id="login_button">
                                 Login
                             </button>
                         </div>
@@ -59,7 +53,7 @@
                 </form>
             </div>
         </div>
-        <a th:href="@{/signup}">Create account</a>
+        <a id="new_account" th:href="@{/signup}">Haven't registered yet? Create account!</a>
     </div>
 
     <div class="section"></div>

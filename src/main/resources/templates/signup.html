@@ -1,47 +1,156 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
-<head>
+<head th:replace="meta :: meta">
     <title>Sign up || HCCRM</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
-<h1>Create a new account!</h1>
-<p th:text="${error}"></p>
-<form action="#" th:action="@{/signup}" th:object="${signupForm}" th:modelAttribute="signupForm" method="post">
-    <p>First name: <input type="text" th:field="*{firstName}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p></span>
-    <p>Last name: <input type="text" th:field="*{lastName}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p></span>
-    <p>------------------------------------------------</p>
-    <p>Company name: <input type="text" th:field="*{companyName}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></p></span>
-    <p>Premise: <input type="text" th:field="*{premise}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('premise')}" th:errors="*{premise}"></p></span>
-    <p>------------------------------------------------</p>
-    <p>Country: <input type="text" th:field="*{country}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p></span>
-    <p>Zip code: <input type="text" th:field="*{zipCode}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></p></span>
-    <p>City: <input type="text" th:field="*{city}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p></span>
-    <p>Address1: <input type="text" th:field="*{addressLine1}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></p></span>
-    <p>Address2: <input type="text" th:field="*{addressLine2}"/></p>
-    <p>------------------------------------------------</p>
-    <p>Tax number: <input type="text" th:field="*{taxNumber}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('taxNumber')}" th:errors="*{taxNumber}"></p></span>
-    <p>------------------------------------------------</p>
-    <p>E-mail: <input type="text" th:field="*{email}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></span>
-    <p>Phone number: <input type="text" th:field="*{phoneNumber}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p></span>
-    <p>Password: <input type="password" th:field="*{password}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p></span>
-    <p>Confirm password: <input type="password" th:field="*{matchingPassword}"/></p>
-    <span style="color: red; "><p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p>
-    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p></span>
-</form>
+<div class="section"></div>
+<main>
+    <div style="text-align: center;">
+        <div class="section"></div>
+
+        <h5 id="login_header">Create account!</h5>
+        <div class="section"></div>
+
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row"
+                 style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                <form class="col s12" action="#" th:action="@{/signup}" th:object="${signupForm}" th:modelAttribute="signupForm" method="post">
+                    <!--FIRST NAME-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{firstName}" id="first_name"/>
+                            <label for='first_name'>First name</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p></span>
+                        </div>
+                    </div>
+                    <!--LAST NAME-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{lastName}" id="last_name"/>
+                            <label for='last_name'>Last name</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p></span>
+                        </div>
+                    </div>
+                    <!--COMPANY NAME-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{companyName}" id="company_name"/>
+                            <label for='company_name'>Company name</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></p></span>
+                        </div>
+                    </div>
+                    <!--PREMISE-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{premise}" id="premise"/>
+                            <label for='premise'>Premise</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('premise')}" th:errors="*{premise}"></p></span>
+                        </div>
+                    </div>
+                    <!--COUNTRY-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{country}" id="country"/>
+                            <label for='country'>Country</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p></span>
+                        </div>
+                    </div>
+                    <!--ZIP CODE-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{zipCode}" id="zip_code"/>
+                            <label for='zip_code'>Zip code</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></p></span>
+                        </div>
+                    </div>
+                    <!--CITY-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{city}" id="city"/>
+                            <label for='city'>City</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p></span>
+                        </div>
+                    </div>
+                    <!--ADDRESS1-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{addressLine1}" id="address_line1"/>
+                            <label for='address_line1'>Address1</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></p></span>
+                        </div>
+                    </div>
+                    <!--ADDRESS2-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{addressLine2}" id="address_line2"/>
+                            <label for='address_line2'>Address2</label>
+                        </div>
+                    </div>
+                    <!--TAX NUMBER-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{taxNumber}" id="tax_number"/>
+                            <label for='tax_number'>Tax number</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('taxNumber')}" th:errors="*{taxNumber}"></p></span>
+                        </div>
+                    </div>
+                    <!--EMAIL-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{email}" id="email"/>
+                            <label for='email'>Email</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></span>
+                        </div>
+                    </div>
+                    <!--PHONE NUMBER-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="text" th:field="*{phoneNumber}" id="phone_number"/>
+                            <label for='phone_number'>Phone number</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p></span>
+                        </div>
+                    </div>
+                    <!--PASSWORD-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="password" th:field="*{password}" id="password"/>
+                            <label for='password'>Password</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p></span>
+                        </div>
+                    </div>
+                    <!--CONFIRM PASSWORD-->
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            <input type="password" th:field="*{matchingPassword}" id="matching_password"/>
+                            <label for='matching_password'>Password confirm</label>
+                            <span style="color: red; "><p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p></span>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div style="text-align: center;">
+                        <div class='row'>
+                            <button type='submit' name='btn_signup' class='col s12 btn btn-large waves-effect'
+                                    id="signup_button" value="Submit">
+                                Sign up
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </body>
 </html>
