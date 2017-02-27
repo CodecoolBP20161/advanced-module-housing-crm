@@ -16,6 +16,9 @@ import java.util.Calendar;
 @Table(name = "condominium")
 public class Condominium extends AbstractEntity {
 
+    @Column
+    private String name;
+
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;

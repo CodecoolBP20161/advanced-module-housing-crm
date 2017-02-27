@@ -55,8 +55,9 @@
                 <span class="card-title grey-text text-darken-4" th:text="${condom.getAddress().getAddressLine1()}">Condom title</span>
                 <table class="table table-striped">
                     <tbody>
-                    <tr>
-                    </tr>
+                    <!--<tr>-->
+                        <!--<td><span th:text="${condom.getManagerUser().getFirstName()}">First name</span>&nbsp;<span th:text="${condom.getManagerUser().getLastName()}">Last name</span></td>-->
+                    <!--</tr>-->
                     <tr>
                         <td th:text="${condom.getTopographicalNumber()}">TopographicalNum</td>
                     </tr>
@@ -72,10 +73,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div th:if="${not #lists.isEmpty(condominiums)}" class="container col-md-3">
-            <!--modal button-->
-            <button type="button" class="btn-floating btn-large waves-effect waves-light red" data-toggle="modal" data-target="#condomModal"><i class="material-icons">add</i></button>
         </div>
     </div>
     <div class="container">
@@ -114,7 +111,13 @@
     </div>
 </div>
 
+
 <div th:replace="user/add_condominium :: condominium_modal">
+</div>
+
+<div id="add_condom" th:if="${condominiums}" class="fixed-action-btn active">
+    <!--modal button-->
+    <button type="button" class="btn-floating btn-large waves-effect waves-light blue" data-placement="top"  title="Add New Condominium" data-toggle="modal" data-target="#condomModal"><i class="material-icons">add</i></button>
 </div>
 
 <!-- Compiled and minified JavaScript -->

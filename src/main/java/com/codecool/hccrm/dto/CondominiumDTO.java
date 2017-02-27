@@ -5,7 +5,6 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
-import java.util.Calendar;
 
 
 /**
@@ -20,9 +19,9 @@ public class CondominiumDTO {
 
     private int parcelNumber;
 
-    private Calendar contractingDate;
+    private String contractingDate;
 
-    private Calendar generalMeetingDate;
+    private String generalMeetingDate;
 
     @NotNull
     @NotEmpty

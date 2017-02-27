@@ -1,5 +1,6 @@
 package com.codecool.hccrm.service;
 
+import com.codecool.hccrm.dto.CondominiumDTO;
 import com.codecool.hccrm.dto.SignUpDTO;
 import com.codecool.hccrm.model.Address;
 import com.codecool.hccrm.repository.AddressRepository;
@@ -33,6 +34,13 @@ public class AddressService {
 
     @Transactional
     public Address createNewAddress(SignUpDTO dto) {
+        Address newAddress = new Address(dto.getCountry(), dto.getZipCode(), dto.getCity(), dto.getAddressLine1(), dto.getAddressLine2());
+        save(newAddress);
+        return newAddress;
+    }
+
+    @Transactional
+    public Address createNewAddress(CondominiumDTO dto) {
         Address newAddress = new Address(dto.getCountry(), dto.getZipCode(), dto.getCity(), dto.getAddressLine1(), dto.getAddressLine2());
         save(newAddress);
         return newAddress;
