@@ -68,7 +68,7 @@ public class TestService {
         company1.setCeoUsers(ceos);
         companyService.save(company1);
 
-        // add condominiums
+//         add condominiums
         Condominium condominium1 = new Condominium("255165", 123456,  GregorianCalendar.getInstance(), GregorianCalendar.getInstance());
         condominium1.setAddress(address1);
         condominium1.setCompany(company1);
