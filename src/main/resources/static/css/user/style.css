@@ -1,0 +1,50 @@
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.search {
+    display: inline-block;
+    margin-left: 15%;
+}
+
+.card {
+    display: inline-block;
+}
+
+.inside, .under {
+    width: 100%;
+}
+
+.under {
+    padding: 0;
+}
+
+.link {
+    display: none; !important;
+}
+
+nav {
+    background-color: #74AFAD;
+}
+
+body {
+    background-color: #ECECEA;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+#condomModalTitle {
+    display: inline-block;
+}
+
+footer.page-footer {
+    background-color: #D9853B;
+}

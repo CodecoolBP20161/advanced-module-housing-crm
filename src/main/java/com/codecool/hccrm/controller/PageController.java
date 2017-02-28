@@ -12,6 +12,7 @@ import static com.codecool.hccrm.logging.LogFormatter.FORMAT;
 public class PageController {
     private Logger logger = LoggerFactory.getLogger(PageController.class);
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() throws Exception {
         logger.info(FORMAT.getFormatter() + "Index page is rendered.");
@@ -23,5 +24,10 @@ public class PageController {
     public String login() {
         return "login";
     }
+
+//    @RequestMapping(value = "/user/dashboard", method = RequestMethod.GET)
+//    public String dashboard(Model model){
+//
+//    }
 }
 

@@ -9,20 +9,52 @@ main {
 }
 
 body {
-    background: #fff;
+    background-color: #ECECEA;
+}
+
+nav {
+    background-color: #74AFAD;
+}
+
+footer.page-footer {
+    background-color: #D9853B;
+}
+
+blockquote {
+    border-left-color: #FFFFFF;
+}
+
+#new_account {
+    color: #FFFFFF;
+}
+
+#login_header {
+    color: #74AFAD;
+}
+
+#login_button {
+    background-color: #D9853B;
+}
+
+#forgot_password {
+    color: #8D8582;
+}
+
+#signup_button {
+    background-color: #D9853B;
 }
 
 .input-field input[type=date]:focus + label,
 .input-field input[type=text]:focus + label,
 .input-field input[type=email]:focus + label,
 .input-field input[type=password]:focus + label {
-    color: #e91e63;
+    color: #8D8582;
 }
 
 .input-field input[type=date]:focus,
 .input-field input[type=text]:focus,
 .input-field input[type=email]:focus,
 .input-field input[type=password]:focus {
-    border-bottom: 2px solid #e91e63;
+    border-bottom: 2px solid #D9853B;
     box-shadow: none;
 }

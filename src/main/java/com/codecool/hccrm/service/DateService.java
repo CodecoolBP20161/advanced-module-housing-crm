@@ -2,7 +2,9 @@ package com.codecool.hccrm.service;
 
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -18,5 +20,12 @@ public class DateService {
     public String currentDate() {
         SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
         return form.format(new java.sql.Timestamp(time()));
+    }
+
+    public Calendar formatToCalendar(String date) throws ParseException {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        cal.setTime(sdf.parse(date));
+        return cal;
     }
 }
