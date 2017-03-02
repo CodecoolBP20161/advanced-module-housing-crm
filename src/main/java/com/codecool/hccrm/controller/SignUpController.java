@@ -91,7 +91,7 @@ public class SignUpController {
         if (verificationToken == null) {
             String message = messages.getMessage("auth.message.invalidToken", null, locale);
             model.addAttribute("message", message);
-            return "redirect:/badUser.html";
+            return "verification_bad";
         }
 
         User user = verificationToken.getUser();
@@ -99,11 +99,11 @@ public class SignUpController {
         if ((verificationToken.getExpirationDate().getTime() - cal.getTime().getTime()) <= 0) {
             String messageValue = messages.getMessage("auth.message.expired", null, locale);
             model.addAttribute("message", messageValue);
-            return "redirect:/badUser.html";
+            return "verification_bad";
         }
 
         user.setVerified(true);
         userService.save(user);
-        return "index";
+        return "login_verified";
     }
 }
