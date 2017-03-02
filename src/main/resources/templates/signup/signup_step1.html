@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+</head>
+<body>
+<div th:fragment="step1" id="signup_step1" class="z-depth-1 row signupf">
+    <h5>User information</h5>
+        <!--FIRST NAME-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{firstName}" id="first_name"/>
+                <label for='first_name'>First name*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p></span>
+            </div>
+        </div>
+        <div class="row">
+            <!--LAST NAME-->
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{lastName}" id="last_name"/>
+                <label for='last_name'>Last name*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p></span>
+            </div>
+        </div>
+        <!--EMAIL-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{email}" id="email"/>
+                <label for='email'>Email*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p></span>
+            </div>
+        </div>
+        <!--PHONE NUMBER-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{phoneNumber}" id="phone_number"/>
+                <label for='phone_number'>Phone number*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p></span>
+            </div>
+        </div>
+        <!--PASSWORD-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="password" th:field="*{password}" id="password"/>
+                <label for='password'>Password*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p></span>
+            </div>
+        </div>
+        <!--CONFIRM PASSWORD-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="password" th:field="*{matchingPassword}" id="matching_password"/>
+                <label for='matching_password'>Password confirm*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p></span>
+            </div>
+        </div>
+    <div id="backandnext" class="right">
+        <button type="button" class="btn btn-small waves-effect waves-light signup disabled" disabled="">Back
+            <i class="material-icons left">skip_previous</i>
+        </button>
+        <button id="next1" type="button" class="btn btn-small waves-effect waves-light signup">Next
+            <i class="material-icons right">skip_next</i>
+        </button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,3 +1,6 @@
+html {
+    font-size: 12px;
+}
 body {
     display: flex;
     min-height: 100vh;
@@ -40,15 +43,48 @@ blockquote {
     color: #8D8582;
 }
 
-#signup_button {
+#signup_button, .signup {
     background-color: #D9853B;
 }
+
+.outer {
+    width: 40%;
+}
+
+.signupform {
+    background-color: #74AFAD;
+}
+
+#signup_header {
+    color: #ECECEA;
+}
+
+.signupf {
+    background-color: #ECECEA;
+    padding: 32px 48px 0px 48px;
+    border: 1px solid #EEE;
+    border-radius: 5px;
+}
+
+.steps {
+    border-radius: 10px;
+}
+
+.tab-selected {
+    background-color: #84bd3e;
+    color: white;
+}
+
+#backandnext {
+    padding-bottom: 5px;
+}
+
 
 .input-field input[type=date]:focus + label,
 .input-field input[type=text]:focus + label,
 .input-field input[type=email]:focus + label,
 .input-field input[type=password]:focus + label {
-    color: #8D8582;
+    color: #D9853B;
 }
 
 .input-field input[type=date]:focus,

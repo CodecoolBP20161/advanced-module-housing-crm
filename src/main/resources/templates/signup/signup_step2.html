@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+</head>
+<body>
+<div th:fragment="step2" id="signup_step2" class="z-depth-1 row signupf">
+    <h5>Company information</h5>
+        <!--COMPANY NAME-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{companyName}" id="company_name"/>
+                <label for='company_name'>Company name*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></p></span>
+            </div>
+        </div>
+        <!--PREMISE-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{premise}" id="premise"/>
+                <label for='premise'>Premise*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('premise')}" th:errors="*{premise}"></p></span>
+            </div>
+        </div>
+        <!--COUNTRY-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{country}" id="country"/>
+                <label for='country'>Country*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></p></span>
+            </div>
+        </div>
+        <!--ZIP CODE-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{zipCode}" id="zip_code"/>
+                <label for='zip_code'>Zip code*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></p></span>
+            </div>
+        </div>
+        <!--CITY-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{city}" id="city"/>
+                <label for='city'>City*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p></span>
+            </div>
+        </div>
+        <!--TAX NUMBER-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{taxNumber}" id="tax_number"/>
+                <label for='tax_number'>Tax number*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('taxNumber')}" th:errors="*{taxNumber}"></p></span>
+            </div>
+        </div>
+        <!--ADDRESS1-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{addressLine1}" id="address_line1"/>
+                <label for='address_line1'>Address1*</label>
+                <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></p></span>
+            </div>
+        </div>
+        <!--ADDRESS2-->
+        <div class='row'>
+            <div class='input-field col s12'>
+                <input type="text" th:field="*{addressLine2}" id="address_line2"/>
+                <label for='address_line2'>Address2</label>
+            </div>
+        </div>
+    <div id="backandnext" class="right">
+        <button id="back2" class="btn btn-small waves-effect waves-light signup" type="button">Back
+            <i class="material-icons left">skip_previous</i>
+        </button>
+        <button id="next2" class="btn btn-small waves-effect waves-light signup" type="submit">Submit
+            <i class="material-icons right">done</i>
+        </button>
+    </div>
+</div>
+</body>
+</html>
