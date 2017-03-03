@@ -57,7 +57,7 @@ public class SignUpController {
 
         SignUpDTO dto = new SignUpDTO();
         model.addAttribute("signupForm", dto);
-        return "signup";
+        return "signup/signup";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -68,7 +68,7 @@ public class SignUpController {
             WebRequest request) {
 
         if (result.hasErrors()) {
-            return "signup";
+            return "signup/signup";
         }
         User registeredUser = userService.createNewUser(dto);
         Address registeredAddress = addressService.createNewAddress(dto);
