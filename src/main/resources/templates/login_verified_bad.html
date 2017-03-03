@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head th:replace="meta :: meta">
+    <title>Ooops... || HCCRM</title>
+</head>
+
+<body>
+<div class="section"></div>
+<main>
+    <div style="text-align: center;">
+        <div class="section"></div>
+
+        <h5 id="login_header">Ooops...</h5>
+        <div class="section"></div>
+
+        <div class="container">
+            <div class="z-depth-1 grey lighten-4 row"
+                 style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+                <div class='row'>
+                    <form class="col s12" action="#" th:action="@{/signup}" th:object="${message}" method="get">
+                        <div class='row'>
+                            <span type="text" th:text="${message}" id="token_error"/></span>
+                        </div>
+                        <div class='row'>
+                            <button type='submit' name='btn_login_verified_signup' class='col s12 btn btn-large waves-effect'
+                                    id="login_button">
+                                Sign Up
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="section"></div>
+    <div class="section"></div>
+</main>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+</body>
+</html>
