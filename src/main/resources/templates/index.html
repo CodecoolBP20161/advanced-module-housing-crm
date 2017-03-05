@@ -7,9 +7,19 @@
 <body>
 
 <header>
+    <div th:if="${message_error}" class="card red lighten-5">
+        <div class="card-content red-text">
+            <p th:text="${message_error}"></p>
+        </div>
+    </div>
+    <div th:if="${message_success}" class="card green lighten-5">
+        <div class="card-content green-text">
+            <p th:text="${message_success}"></p>
+        </div>
+    </div>
+
     <div th:replace="navbar :: navbar_home"></div>
 </header>
-
 <main class="valign-wrapper">
     <span class="container text-lighten-1 ">
       <p class="flow-text">Welcome to</p>
