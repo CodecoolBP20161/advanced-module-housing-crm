@@ -61,7 +61,7 @@ public class SignUpController {
 
         SignUpDTO dto = new SignUpDTO();
         model.addAttribute("signupForm", dto);
-        return "signup";
+        return "signup/signup";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
@@ -72,7 +72,7 @@ public class SignUpController {
             WebRequest request) {
 
         if (result.hasErrors()) {
-            return "signup";
+            return "signup/signup";
         }
         User registeredUser = userService.createNewUser(dto);
         Address registeredAddress = addressService.createNewAddress(dto);
@@ -92,16 +92,30 @@ public class SignUpController {
         VerificationToken verificationToken = userService.getVerificationToken(token);
 
         if (verificationToken == null) {
-            String message = messages.getMessage("message.invalidToken", null, locale);
-            model.addAttribute("tokenError", message);
+            String messageVerified = messages.getMessage("message.invalidToken", null, locale);
+            model.addAttribute("message_error", messageVerified);
             return "index";
         }
 
         User user = verificationToken.getUser();
+        Calendar cal = Calendar.getInstance();
+        if ((verificationToken.getExpirationDate().getTime() - cal.getTime().getTime()) <= 0) {
+            String messageExpired = messages.getMessage("message.token_expired", null, locale);
+            model.addAttribute("message_error", messageExpired);
+            return "index";
+        }
+        if (verificationToken.getUsed()) {
+            String messageUsedToken = messages.getMessage("message.token_used", null, locale);
+            model.addAttribute("message_error", messageUsedToken);
+            return "index";
+
+        }
         user.setVerified(true);
         userService.save(user);
         verificationToken.setUsed(true);
         verificationTokenService.save(verificationToken);
+        String messageTokenVerified = messages.getMessage("message.token_verified", null, locale);
+        model.addAttribute("message_success", messageTokenVerified);
         return "index";
     }
 }
