@@ -25,6 +25,9 @@ public class VerificationToken extends AbstractEntity {
     @Column
     private String token;
 
+    @Column
+    private Boolean used;
+
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
@@ -35,6 +38,7 @@ public class VerificationToken extends AbstractEntity {
     public VerificationToken(final String token) {
         this.token = token;
         this.expirationDate = calculateExpirationDate(EXPIRATION_TIME);
+        this.used = false;
     }
 
     private Date calculateExpirationDate(int expirationTimeInMinutes) {

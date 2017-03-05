@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by balag3 on 2017.02.09..
+ * Last edited by dorasztanko on 2017.03.02..
  */
 @Service
 public class VerificationTokenService {
@@ -37,9 +39,11 @@ public class VerificationTokenService {
         return verificationTokenRepository.findByUser(user);
     }
 
-    public void createVerificationToken(User user, String token) {
-        VerificationToken myToken = new VerificationToken(token);
-        myToken.setUser(user);
-        save(myToken);
+    public VerificationToken createVerificationToken(User user) {
+        String randomToken = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken(randomToken);
+        verificationToken.setUser(user);
+        save(verificationToken);
+        return verificationToken;
     }
 }
