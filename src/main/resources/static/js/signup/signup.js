@@ -9,6 +9,7 @@ $(document).ready(function(){
         $("#signup_step2").show();
         $("#userinfo").removeClass("tab-selected");
         $("#companyinfo").addClass("tab-selected");
+        $('html, body').animate({scrollTop: '0px'}, 300);
     });
 
     $("#back2").click(function(){
@@ -16,6 +17,7 @@ $(document).ready(function(){
         $("#signup_step2").hide();
         $("#companyinfo").removeClass("tab-selected");
         $("#userinfo").addClass("tab-selected");
+        $('html, body').animate({scrollTop: '0px'}, 300);
     });
 
     $("#next2").click(function(){
@@ -23,5 +25,6 @@ $(document).ready(function(){
         $("#signup_step2").hide();
         $("#companyinfo").removeClass("tab-selected");
         $("#success").addClass("tab-selected");
+        $('html, body').animate({scrollTop: '0px'}, 300);
     });
 });
