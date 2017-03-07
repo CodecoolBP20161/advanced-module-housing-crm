@@ -14,10 +14,6 @@
         <h5 id="login_header">Log in to your HCCRM account!</h5>
         <div class="section"></div>
 
-        <!--logout header-->
-        <div class="section"></div>
-        <h4 id="logout_header" th:text="${logout}"></h4>
-        <div class="section"></div>
 
         <div class="container">
             <div class="z-depth-1 grey lighten-4 row"
@@ -28,8 +24,12 @@
                         <div class='col s12'>
                         </div>
                     </div>
+
                     <!--error handling-->
-                    <p th:text="${error}"></p>
+                    <span style="color: red; "><p th:text="${error}"></p></span>
+
+                    <!--logout handling-->
+                    <span style="color: green; "><p id="logout_header" th:text="${logout}"></p></span>
 
                     <div class='row'>
                         <div class='input-field col s12'>

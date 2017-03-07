@@ -4,6 +4,8 @@ import com.codecool.hccrm.controller.user.UserController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +16,15 @@ import java.security.Principal;
 import static com.codecool.hccrm.logging.LogFormatter.FORMAT;
 
 @Controller
+@PropertySource("classpath:messages.properties")
 public class PageController {
     private Logger logger = LoggerFactory.getLogger(PageController.class);
 
+    @Value("${logoutSuccess}")
+    private String logoutSuccess;
+
+    @Value("${loginError}")
+    private String errorMessage;
 
     @Autowired
     UserController userController;
@@ -30,14 +38,15 @@ public class PageController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(String error, String logout, Model model, Principal principal) {
+
         if (principal != null) {
             return userController.renderUserDashboard(model, principal);
         }
         if (error != null) {
-            model.addAttribute("error", "Invalid Password or Username!");
+            model.addAttribute("error", errorMessage);
         }
         if (logout != null) {
-            model.addAttribute("logout", "You successfully logged out!");
+            model.addAttribute("logout", logoutSuccess);
         }
         return "login";
     }
