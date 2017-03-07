@@ -2,6 +2,7 @@ package com.codecool.hccrm.event;
 
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
+import com.codecool.hccrm.service.UserService;
 import com.codecool.hccrm.service.VerificationTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.text.MessageFormat;
 
 import static com.codecool.hccrm.logging.LogFormatter.FORMAT;
 
@@ -54,11 +57,17 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         logger.debug(FORMAT.getFormatter() + builder.toUriString());
 
         String message = messages.getMessage("message.successful_registration", null, event.getLocale());
+        String formattedMessage = MessageFormat.format(message,
+                user.getFirstName(),
+                user.getLastName(),
+                builder.toUriString(),
+                token.getExpirationDate().toString()
+                );
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(user.getEmail());
         email.setSubject(messages.getMessage("message.email_subject", null, event.getLocale()));
-        email.setText(message + "\n" + builder.toUriString());
+        email.setText(formattedMessage);
         mailSender.send(email);
     }
 }
