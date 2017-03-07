@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
@@ -44,6 +42,7 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
     /* Override the configure method and permit all user to see the login and registration page
     and to log out. */
     @Override
@@ -57,7 +56,8 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .successHandler(authenticationSuccessHandler())
-                .failureHandler(authenticationFailureHandler())
+                //.failureHandler(authenticationFailureHandler())
+                .failureUrl("/login?error")
                 .permitAll()
                 .and()
                 .logout()
@@ -111,15 +111,13 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
      *
      * @return AuthenticationFailureHandler
      */
-    @Bean
-    AuthenticationFailureHandler authenticationFailureHandler() {
-        return (request, response, exception) -> {
-            if (exception instanceof DisabledException) {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User account suspended");
-            } else {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed");
-            }
-        };
-    }
+//    @Bean
+//    AuthenticationFailureHandler authenticationFailureHandler() {
+//        return (request, response, exception) -> {
+//                //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User account suspended");
+//                response.sendRedirect("/login?error=Failed");
+//
+//        };
+//    }
 
 }
