@@ -79,7 +79,6 @@ blockquote {
     padding-bottom: 5px;
 }
 
-
 .input-field input[type=date]:focus + label,
 .input-field input[type=text]:focus + label,
 .input-field input[type=email]:focus + label,

@@ -8,6 +8,7 @@ import com.codecool.hccrm.model.VerificationToken;
 import com.codecool.hccrm.service.AddressService;
 import com.codecool.hccrm.service.CompanyService;
 import com.codecool.hccrm.service.UserService;
+import com.codecool.hccrm.service.VerificationTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,9 @@ public class SignUpController {
     AddressService addressService;
 
     @Autowired
+    VerificationTokenService verificationTokenService;
+
+    @Autowired
     ApplicationEventPublisher eventPublisher;
 
     @Autowired
@@ -80,30 +84,38 @@ public class SignUpController {
         return "index";
     }
 
-    @RequestMapping(value = "/regitrationConfirm", method = RequestMethod.GET)
-    public String confirmRegistration
-            (WebRequest request, Model model, @RequestParam("token") String token) {
+    @RequestMapping(value = "/user_verification", method = RequestMethod.GET)
+    public String confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token) {
 
         // We need this for messages to work
         Locale locale = request.getLocale();
-
         VerificationToken verificationToken = userService.getVerificationToken(token);
+
         if (verificationToken == null) {
-            String message = messages.getMessage("auth.message.invalidToken", null, locale);
-            model.addAttribute("message", message);
-            return "redirect:/badUser.html";
+            String messageVerified = messages.getMessage("message.invalidToken", null, locale);
+            model.addAttribute("message_error", messageVerified);
+            return "index";
         }
 
         User user = verificationToken.getUser();
         Calendar cal = Calendar.getInstance();
         if ((verificationToken.getExpirationDate().getTime() - cal.getTime().getTime()) <= 0) {
-            String messageValue = messages.getMessage("auth.message.expired", null, locale);
-            model.addAttribute("message", messageValue);
-            return "redirect:/badUser.html";
+            String messageExpired = messages.getMessage("message.token_expired", null, locale);
+            model.addAttribute("message_error", messageExpired);
+            return "index";
         }
+        if (verificationToken.getUsed()) {
+            String messageUsedToken = messages.getMessage("message.token_used", null, locale);
+            model.addAttribute("message_error", messageUsedToken);
+            return "index";
 
+        }
         user.setVerified(true);
         userService.save(user);
+        verificationToken.setUsed(true);
+        verificationTokenService.save(verificationToken);
+        String messageTokenVerified = messages.getMessage("message.token_verified", null, locale);
+        model.addAttribute("message_success", messageTokenVerified);
         return "index";
     }
 }
