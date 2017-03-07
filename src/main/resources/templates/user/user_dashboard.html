@@ -24,7 +24,9 @@
 </ul>
 <nav>
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">HCCRM</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
         <ul class="right hide-on-med-and-down">
             <li><a href="sass.html">Sass</a></li>
             <li><a href="badges.html">Components</a></li>
