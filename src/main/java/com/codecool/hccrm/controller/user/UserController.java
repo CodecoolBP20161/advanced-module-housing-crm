@@ -42,8 +42,11 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/user/{company_id}/condominiums"}, method = RequestMethod.GET)
-    public String listCondominiums(@PathVariable("company_id") String companyId,  Model model) {
+    public String listCondominiums(@PathVariable("company_id") String companyId,  Model model, Principal currentUser) {
         Company company = companyService.findById(new Long(companyId));
+        if (!userService.currentUserOwnsCompany(currentUser, company)) {
+            return "bad_request";
+        }
         List<Condominium> condominiums = condominiumService.findByCompany(company);
         model.addAttribute("condominiums", condominiums);
         model.addAttribute("companyId", company.getId());
@@ -53,8 +56,11 @@ public class UserController {
     }
 
     @RequestMapping(value = {"user/{company_id}/condominiums/add"}, method = RequestMethod.POST)
-    public String addCondominium(@PathVariable("company_id") String companyId, @ModelAttribute CondominiumDTO dto, Model model) throws ParseException {
+    public String addCondominium(@PathVariable("company_id") String companyId, @ModelAttribute CondominiumDTO dto, Principal currentUser) throws ParseException {
         Company company = companyService.findById(new Long(companyId));
+        if (!userService.currentUserOwnsCompany(currentUser, company)) {
+            return "bad_request";
+        }
         Condominium condominium = condominiumService.createFromDTO(dto);
         condominium.setCompany(company);
         condominiumService.save(condominium);
