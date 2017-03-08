@@ -32,7 +32,7 @@ public class VerificationToken extends AbstractEntity {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
-    protected VerificationToken() {
+    public VerificationToken() {
     }
 
     public VerificationToken(final String token) {
