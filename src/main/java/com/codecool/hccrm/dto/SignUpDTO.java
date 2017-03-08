@@ -1,7 +1,6 @@
 package com.codecool.hccrm.dto;
 
 import com.codecool.hccrm.validation.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -15,7 +14,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @PasswordMatches
-public class SignUpDTO {
+public class SignUpDTO extends AddressDTO {
 
     @ValidPersonName
     private String firstName;
@@ -50,22 +49,4 @@ public class SignUpDTO {
     @NotEmpty
     @UniqueCompanyTaxNumber
     private String taxNumber;
-
-    @NotNull
-    @NotEmpty
-    private String country;
-
-    @NotNull
-    @NotEmpty
-    private String zipCode;
-
-    @NotNull
-    @NotEmpty
-    private String city;
-
-    @NotNull
-    @NotEmpty
-    private String addressLine1;
-
-    private String addressLine2;
 }
