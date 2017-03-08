@@ -1,17 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
+
+<head th:replace="meta :: meta">
+    <title>Sign up || HCCRM</title>
 </head>
-<body>
-<div th:fragment="step3" id="signup_step3" class="z-depth-1 row signupf">
-    <h1>Success!</h1>
 
-    <h5>Confirmation email sent! Please blabla</h5>
+<body class="signupform">
+<div class="hide-on-med-and-up">
+    <h5 id="signup_header_mod" class="signup_header" style="text-align: center;">Create your account!</h5>
+    <div class="row rowtabs">
+        <ul class="tabs tab-demo z-depth-1 steps">
+            <li id="userinfo_mob" class="tab col s3">User information
+            </li>
+            <li id="companyinfo_mob" class="tab col s3">Company information
+            </li>
+            <li id="success_mob" class="success tab col s3 tab-selected">Success!
+            </li>
+        </ul>
+    </div>
+    <div class="signup_step1 z-depth-1 row signupf">
+        <form class="col s12" action="#" th:action="@{/signup}" th:object="${signupForm}" th:modelAttribute="signupForm" method="post">
+            <h1>Success!</h1>
 
-    <div id="backandnext" class="right">
-        <button id="next3" class="btn btn-small waves-effect waves-light signup">Ok
-        </button>
+            <h5>Confirmation email sent! Please blabla</h5>
+
+            <div id="backandnext" class="right">
+                <button type="button" class="next3 btn btn-small waves-effect waves-light signup">Ok
+                </button>
+            </div>
+        </form>
     </div>
 </div>
+<main class="hide-on-small-only">
+    <div style="text-align: center;">
+        <h2 class="signup_header">Create your account!</h2>
+        <div class="section"></div>
+
+        <div class="container outer">
+            <div class="row rowtabs">
+                <ul class="tabs tab-demo z-depth-1 steps">
+                    <li id="userinfo" class="tab col s3">User information
+                    </li>
+                    <li id="companyinfo" class="tab col s3">Company information
+                    </li>
+                    <li id="success" class="success tab col s3 tab-selected">Success!
+                    </li>
+                </ul>
+            </div>
+
+            <div class="signup_step1 z-depth-1 row signupf">
+                <form class="col s12" action="#" th:action="@{/signup}" th:object="${signupForm}" th:modelAttribute="signupForm" method="post">
+                    <h1>Success!</h1>
+
+                    <h5>Confirmation email sent! Please blabla</h5>
+
+                    <div id="backandnext" class="right">
+                        <button type="button" class="next3 btn btn-small waves-effect waves-light signup">Ok
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script th:src="@{/js/signup/signup.js}"></script>
+
+
 </body>
 </html>

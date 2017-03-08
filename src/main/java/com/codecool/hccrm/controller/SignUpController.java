@@ -81,7 +81,7 @@ public class SignUpController {
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registeredUser, request.getLocale(), request.getContextPath()));
         // redirecting to index page, successful registration pop up --- please, log in!
         model.addAttribute("user", registeredUser);
-        return "index";
+        return "signup/signup_step3";
     }
 
     @RequestMapping(value = "/user_verification", method = RequestMethod.GET)
