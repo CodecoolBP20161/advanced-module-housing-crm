@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by balag3 on 2017.02.09..
+ * Created by balag3 on 2017.02.09..30b2f44^..6c968df
  * Last edited by dorasztanko on 2017.03.02..
  */
 @Service
@@ -31,11 +31,11 @@ public class VerificationTokenService {
         verificationTokenRepository.delete(token);
     }
 
-    VerificationToken findByToken(String token) {
+    public VerificationToken findByToken(String token) {
         return verificationTokenRepository.findByToken(token);
     }
 
-    VerificationToken findByUser(User user) {
+    public VerificationToken findByUser(User user) {
         return verificationTokenRepository.findByUser(user);
     }
 
