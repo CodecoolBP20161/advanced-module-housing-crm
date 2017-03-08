@@ -55,7 +55,7 @@ blockquote {
     background-color: #74AFAD;
 }
 
-#signup_header {
+.signup_header {
     color: #ECECEA;
 }
 
@@ -78,7 +78,6 @@ blockquote {
 #backandnext {
     padding-bottom: 5px;
 }
-
 
 .input-field input[type=date]:focus + label,
 .input-field input[type=text]:focus + label,
