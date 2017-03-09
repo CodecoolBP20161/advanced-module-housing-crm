@@ -53,7 +53,7 @@ public class PageController {
 
     @RequestMapping(value = "/403")
     public String accessDenied() {
-        return "index";
+        return "access_denied";
     }
 }
 
