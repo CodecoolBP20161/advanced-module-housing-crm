@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
-
+<head th:replace="meta :: meta">
     <title>Profile || Condominium</title>
 </head>
 <body>
-<div th:if="${condominium.getName()}">
-<h1 th:text="${condominium.getName()}"></h1>
+<div th:if="${condominium}">
+    <h1 th:text="${condominium.getName()}"></h1>
+    <p th:text="${condominium.getAddress().getCountry()}"></p>
+    <p th:text="${condominium.getAddress().getZipCode()}"></p>
+    <p th:text="${condominium.getAddress().getCity()}"></p>
+    <p th:text="${condominium.getAddress().getAddressLine1()}"></p>
+    <p th:text="${condominium.getAddress().getAddressLine2()}"></p>
+    <p th:text="${condominium.getTopographicalNumber()}"></p>
+    <p th:text="${condominium.getParcelNumber()}"></p>
+    <p th:text="${#dates.format(condominium.getContractingDate(), 'yyyy-MMM-dd')}"></p>
+    <p th:text="${#dates.format(condominium.getGeneralMeetingResolutionDate(), 'yyyy-MMM-dd')}"></p>
+    <a th:href="'/user/' + ${companyId} + '/condominiums/' + ${condominium.getId()} + '/edit'">gomb</a>
 </div>
-<h1>Condominium</h1>
-<p th:text="${condominium.getAddress().getCountry()}"></p>
-<p th:text="${condominium.getAddress().getZipCode()}"></p>
-<p th:text="${condominium.getAddress().getCity()}"></p>
-<p th:text="${condominium.getAddress().getAddressLine1()}"></p>
-<p th:text="${condominium.getAddress().getAddressLine2()}"></p>
-<p th:text="${condominium.getTopographicalNumber()}"></p>
-<p th:text="${condominium.getParcelNumber()}"></p>
-<p th:text="${#dates.format(condominium.getContractingDate(), 'yyyy-MMM-dd')}"></p>
-<p th:text="${#dates.format(condominium.getGeneralMeetingResolutionDate(), 'yyyy-MMM-dd')}"></p>
+<div th:if="${condominiumDTO}">
+    <h1 th:text="${condominiumDTO.getName()}"></h1>
+    <input th:value="${condominiumDTO.getCountry()}"/>
+    <input th:value="${condominiumDTO.getZipCode()}"/>
+    <input th:text="${condominiumDTO.getCity()}"/>
+    <input th:text="${condominiumDTO.getAddressLine1()}"/>
+    <input th:text="${condominiumDTO.getAddressLine2()}"/>
+    <input th:text="${condominiumDTO.getTopographicalNumber()}"/>
+    <input th:text="${condominiumDTO.getParcelNumber()}"/>
+    <input th:text="${condominiumDTO.getContractingDate()}"/>
+    <input th:text="${condominiumDTO.getGeneralMeetingDate()}"/>
+    <!--<a th:href="'/user/' + ${company.id} + '/condominiums/' + ${condominium.getId()} + '/edit'"></a>-->
+</div>
 </body>
 </html>

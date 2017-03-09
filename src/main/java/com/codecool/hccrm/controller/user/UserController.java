@@ -67,6 +67,16 @@ public class UserController {
     public String displayCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
         Condominium condominium = condominiumService.findById(new Long(condomId));
         model.addAttribute("condominium", condominium);
+        model.addAttribute("companyId", companyId);
+        return "user/condominium_profile";
+    }
+
+    @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}/edit"}, method = RequestMethod.GET)
+    public String editCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
+        Condominium condominium = condominiumService.findById(new Long(condomId));
+        CondominiumDTOBuilder cb = new CondominiumDTOBuilder();
+        CondominiumDTO condominiumDTO = cb.fromCondominium(condominium);
+        model.addAttribute("condominiumDTO", condominiumDTO);
         return "user/condominium_profile";
     }
 }
