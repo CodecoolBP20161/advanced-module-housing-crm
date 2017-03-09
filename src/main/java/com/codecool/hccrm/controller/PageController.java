@@ -51,6 +51,9 @@ public class PageController {
         return "login";
     }
 
-
+    @RequestMapping(value = "/403")
+    public String accessDenied() {
+        return "access_denied";
+    }
 }
 

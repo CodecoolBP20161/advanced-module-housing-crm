@@ -1,6 +1,7 @@
 package com.codecool.hccrm.service;
 
 import com.codecool.hccrm.dto.SignUpDTO;
+import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.model.Role;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +31,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CompanyService companyService;
 
     @Autowired
     VerificationTokenService verificationTokenService;
@@ -75,5 +80,10 @@ public class UserService {
         newUser.setRoles(roles);
         save(newUser);
         return newUser;
+    }
+
+    public boolean currentUserOwnsCompany(Principal currentUser, String companyId) {
+        Company company = companyService.findById(new Long(companyId));
+        return (company.getCeoUsers().contains(findFirstByEmail(currentUser.getName())));
     }
 }
