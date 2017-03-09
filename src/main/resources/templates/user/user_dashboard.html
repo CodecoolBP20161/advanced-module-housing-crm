@@ -51,7 +51,7 @@
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4" th:text="${condom.getAddress().getAddressLine1()}">Condom title</span>
                     <i class="material-icons right activator">more_vert</i>
-                <p><a href="#">This is not a link</a></p>
+                <p><a th:href="@{'/user/' + ${companyId} + '/condominiums/' + ${condom.getId()}}">Go to Condominium</a></p>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4" th:text="${condom.getAddress().getAddressLine1()}">Condom title</span>

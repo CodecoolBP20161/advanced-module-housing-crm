@@ -13,5 +13,5 @@ import java.util.List;
 public interface CondominiumRepository extends JpaRepository<Condominium, Long> {
     List<Condominium> findByCompany(Company company);
 
-
+    Condominium findById(Long id);
 }
