@@ -33,6 +33,9 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
+    CompanyService companyService;
+
+    @Autowired
     VerificationTokenService verificationTokenService;
 
     @Autowired
@@ -79,7 +82,8 @@ public class UserService {
         return newUser;
     }
 
-    public boolean currentUserOwnsCompany(Principal currentUser, Company company) {
+    public boolean currentUserOwnsCompany(Principal currentUser, String companyId) {
+        Company company = companyService.findById(new Long(companyId));
         return (company.getCeoUsers().contains(findFirstByEmail(currentUser.getName())));
     }
 }
