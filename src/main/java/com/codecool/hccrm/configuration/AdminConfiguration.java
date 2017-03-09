@@ -61,7 +61,9 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout")
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
     }
 
     /* Set the global passwordencoder to bycryptpwencoder. */
