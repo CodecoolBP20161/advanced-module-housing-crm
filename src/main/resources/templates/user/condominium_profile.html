@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head th:replace="meta :: meta">
+<head th:replace="user/user_dashboard :: head">
     <title>Profile || Condominium</title>
 </head>
 <body>
+<div th:replace="user/user_dashboard :: navbar">
+</div>
 <div th:if="${condominium}">
     <h1 th:text="${condominium.getName()}"></h1>
     <p th:text="${condominium.getAddress().getCountry()}"></p>
