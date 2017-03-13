@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="user/user_dashboard :: head">
+</head>
+<body>
+<div th:fragment="usererror" th:if="${error}" id="card-alert" class="card pink lighten-5" style="align-content: center">
+    <div class="card-content pink-text darken-1">
+        <span class="card-title pink-text darken-1">Oops!</span>
+        <p th:text="${error}">Lorem ipsum</p>
+    </div>
+</div>
+</body>
+</html>
