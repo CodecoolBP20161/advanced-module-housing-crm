@@ -24,6 +24,8 @@
             else if(value === "accepteda"){$('#acceptselected').attr("selected","selected")}
             else if(value === "rejecteda"){$('#rejectselected').attr("selected","selected")}
             else {$('#noneselected').attr("selected","selected")}
+
+        //search inputs for everything else
         } else {
             $(this).html('<input name="'+ name +'" value="'+ value +'" class="searchinput" type="text" placeholder="Search ' + title + '" />');
         }
