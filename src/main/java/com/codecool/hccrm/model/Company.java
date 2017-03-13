@@ -26,6 +26,10 @@ public class Company extends AbstractEntity {
     @Column(nullable = false)
     private String premise;
 
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private CompanyStatus companyStatus = CompanyStatus.PENDING;
+
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;

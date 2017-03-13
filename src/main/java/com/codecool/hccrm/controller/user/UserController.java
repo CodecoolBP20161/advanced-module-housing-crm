@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.text.ParseException;
@@ -43,6 +40,10 @@ public class UserController {
     @RequestMapping(value = {"/user/{company_id}/condominiums"}, method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String listCondominiums(@PathVariable("company_id") String companyId,  Model model, Principal currentUser) {
+        if (!companyService.isAllowed(companyId)) {
+            model.addAttribute("error", "Company is Rejected!");
+            return "user/user_dashboard";
+        }
         Company company = companyService.findById(new Long(companyId));
         List<Condominium> condominiums = condominiumService.findByCompany(company);
         model.addAttribute("condominiums", condominiums);
@@ -61,4 +62,5 @@ public class UserController {
         condominiumService.save(condominium);
         return "redirect:/user/"+companyId+"/condominiums";
     }
+
 }
