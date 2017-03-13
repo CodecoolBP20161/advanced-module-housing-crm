@@ -1,6 +1,7 @@
 package com.codecool.hccrm.controller.user;
 
 import com.codecool.hccrm.dto.CondominiumDTO;
+import com.codecool.hccrm.dto.builder.CondominiumDTOBuilder;
 import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.model.Condominium;
 import com.codecool.hccrm.model.User;
@@ -73,7 +74,24 @@ public class UserController {
         Condominium condominium = condominiumService.createFromDTO(dto);
         condominium.setCompany(company);
         condominiumService.save(condominium);
-        return "redirect:/user/"+companyId+"/condominiums";
+        return "redirect:/user/" + companyId + "/condominiums";
+    }
+
+    @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}"}, method = RequestMethod.GET)
+    public String displayCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
+        Condominium condominium = condominiumService.findById(new Long(condomId));
+        model.addAttribute("condominium", condominium);
+        model.addAttribute("companyId", companyId);
+        return "user/condominium_profile";
+    }
+
+    @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}/edit"}, method = RequestMethod.GET)
+    public String editCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
+        Condominium condominium = condominiumService.findById(new Long(condomId));
+        CondominiumDTOBuilder cb = new CondominiumDTOBuilder();
+        CondominiumDTO condominiumDTO = cb.fromCondominium(condominium);
+        model.addAttribute("condominiumDTO", condominiumDTO);
+        return "user/condominium_profile";
     }
 
 }

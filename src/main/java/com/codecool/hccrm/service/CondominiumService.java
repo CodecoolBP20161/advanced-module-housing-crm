@@ -44,6 +44,10 @@ public class CondominiumService {
         return condominiumRepository.findAll();
     }
 
+    public Condominium findById(Long id) {
+        return condominiumRepository.findById(id);
+    }
+
     public Condominium createFromDTO(CondominiumDTO dto) throws ParseException {
         Condominium condominium = new Condominium();
         condominium.setName(dto.getName());
