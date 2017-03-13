@@ -78,6 +78,7 @@ public class UserController {
     }
 
     @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}"}, method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String displayCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
         Condominium condominium = condominiumService.findById(new Long(condomId));
         model.addAttribute("condominium", condominium);
@@ -86,6 +87,7 @@ public class UserController {
     }
 
     @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}/edit"}, method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String editCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
         Condominium condominium = condominiumService.findById(new Long(condomId));
         CondominiumDTOBuilder cb = new CondominiumDTOBuilder();
