@@ -45,7 +45,8 @@
     <div class="container">
 
         <!--error handling-->
-        <div th:if="${error}" th:text="${error}"></div>
+        <div th:replace="user/user_error :: usererror">
+        </div>
         <!--error handling-->
 
         <div th:each="condom : ${condominiums}" class="card col-md-3">
