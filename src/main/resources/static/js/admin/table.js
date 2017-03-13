@@ -2,8 +2,19 @@
     // Setup - add a text input to each footer cell
     $('#company_list tfoot th').each(function () {
         var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        if(title === "Status"){
+            $(this).html('<select class="searchinput" name="status">'
+                +'<option value="" selected>Select status</option>'
+                +'<option value="accepteda">ACCEPTED</option>'
+                +'<option value="rejecteda">REJECTED</option>'
+                +'<option value="pendinga">PENDING</option>'
+                +'</select>');
+        } else {
+            $(this).html('<input class="searchinput" type="text" placeholder="Search ' + title + '" />');
+        }
     });
+
+     // temperature = window.localStorage.getItem("temperature");
 
     // Setup datatable
     var table = $('#company_list').DataTable({
@@ -40,8 +51,11 @@
     table.columns().every(function () {
         var that = this;
 
-        $('input', this.footer()).on('keyup change', function () {
+        $('.searchinput', this.footer()).on('keyup change', function () {
+            // var values = ["pending", "rejected", "accepted"];
+            // window.localStorage.setItem(this, that);
             if (that.search() !== this.value) {
+                // if(values.indexOf(this.value)>-1){that.search(this.value+="a").draw()}
                 that
                     .search(this.value)
                     .draw();
