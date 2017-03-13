@@ -6,31 +6,60 @@
 <body>
 <div th:replace="user/user_dashboard :: navbar">
 </div>
-<div th:if="${condominium}">
-    <h1 th:text="${condominium.getName()}"></h1>
-    <p th:text="${condominium.getAddress().getCountry()}"></p>
-    <p th:text="${condominium.getAddress().getZipCode()}"></p>
-    <p th:text="${condominium.getAddress().getCity()}"></p>
-    <p th:text="${condominium.getAddress().getAddressLine1()}"></p>
-    <p th:text="${condominium.getAddress().getAddressLine2()}"></p>
-    <p th:text="${condominium.getTopographicalNumber()}"></p>
-    <p th:text="${condominium.getParcelNumber()}"></p>
-    <p th:text="${#dates.format(condominium.getContractingDate(), 'yyyy-MMM-dd')}"></p>
-    <p th:text="${#dates.format(condominium.getGeneralMeetingResolutionDate(), 'yyyy-MMM-dd')}"></p>
-    <a th:href="'/user/' + ${companyId} + '/condominiums/' + ${condominium.getId()} + '/edit'">gomb</a>
+<div class="container col-sm-10" style="height: 900px">
+    <div class="upper col-sm-12" style="background-color: #f8f8f6; height: 20%; margin-top: 10px; border-bottom: 10px; border-radius: 5px">
+        <div class="uppereft col-sm-3" style="display: inline-block; height: 100%">
+            <div class="upperleftimage" style="height: 100%; width: 100%">
+                <img style="width: 100%; height: 100%; padding-top: 25px" src="http://www.freeiconspng.com/uploads/house-from-premier-builders-in-carthage-mo-64836--home-builders-5.png"/>
+            </div>
+        </div>
+        <div class="upperright col-sm-9" style="display: inline-block; height: 100%">
+            <!--<h1 th:text="${condominium.getName()}">Condominium Name</h1>-->
+            <h1>Condominium Name</h1>
+        </div>
+    </div>
+    <div class="lower col-sm-12" style="margin-top: 10px; height: 80%; padding: 0">
+        <div class="lowerleft col-sm-3" style="background-color: #f8f8f6; display: inline-block; height: 100%;">
+            <p style="text-align: center; padding-top: 10px">Condominium Profile</p>
+        </div>
+        <div class="lowerright col-sm-9" style="background-color: #f8f8f6; display: inline-block; height: 100%;">
+            <p id="country" th:text="${condominium.getAddress().getCountry()}">Country</p>
+            <p id="zipcode" th:text="${condominium.getAddress().getZipCode()}">Zipcode</p>
+            <p th:text="${condominium.getAddress().getCity()}">City</p>
+            <p th:text="${condominium.getAddress().getAddressLine1()}">AddressLine1</p>
+            <p th:text="${condominium.getAddress().getAddressLine2()}">AddressLine2</p>
+            <p th:text="${condominium.getTopographicalNumber()}">Topographical Number</p>
+            <p th:text="${condominium.getParcelNumber()}">Parcel Number</p>
+            <p th:text="${#dates.format(condominium.getContractingDate(), 'yyyy-MMM-dd')}">Contracting Date</p>
+            <p th:text="${#dates.format(condominium.getGeneralMeetingResolutionDate(), 'yyyy-MMM-dd')}">General Meeting Resolution Date</p>
+        </div>
+    </div>
 </div>
-<div th:if="${condominiumDTO}">
-    <h1 th:text="${condominiumDTO.getName()}"></h1>
-    <input th:value="${condominiumDTO.getCountry()}"/>
-    <input th:value="${condominiumDTO.getZipCode()}"/>
-    <input th:text="${condominiumDTO.getCity()}"/>
-    <input th:text="${condominiumDTO.getAddressLine1()}"/>
-    <input th:text="${condominiumDTO.getAddressLine2()}"/>
-    <input th:text="${condominiumDTO.getTopographicalNumber()}"/>
-    <input th:text="${condominiumDTO.getParcelNumber()}"/>
-    <input th:text="${condominiumDTO.getContractingDate()}"/>
-    <input th:text="${condominiumDTO.getGeneralMeetingDate()}"/>
-    <!--<a th:href="'/user/' + ${company.id} + '/condominiums/' + ${condominium.getId()} + '/edit'"></a>-->
-</div>
+<!--<div th:if="${condominium}">-->
+    <!--<h1 th:text="${condominium.getName()}"></h1>-->
+    <!--<p th:text="${condominium.getAddress().getCountry()}"></p>-->
+    <!--<p th:text="${condominium.getAddress().getZipCode()}"></p>-->
+    <!--<p th:text="${condominium.getAddress().getCity()}"></p>-->
+    <!--<p th:text="${condominium.getAddress().getAddressLine1()}"></p>-->
+    <!--<p th:text="${condominium.getAddress().getAddressLine2()}"></p>-->
+    <!--<p th:text="${condominium.getTopographicalNumber()}"></p>-->
+    <!--<p th:text="${condominium.getParcelNumber()}"></p>-->
+    <!--<p th:text="${#dates.format(condominium.getContractingDate(), 'yyyy-MMM-dd')}"></p>-->
+    <!--<p th:text="${#dates.format(condominium.getGeneralMeetingResolutionDate(), 'yyyy-MMM-dd')}"></p>-->
+    <!--<a th:href="'/user/' + ${companyId} + '/condominiums/' + ${condominium.getId()} + '/edit'">gomb</a>-->
+<!--</div>-->
+<!--<div th:if="${condominiumDTO}">-->
+    <!--<h1 th:text="${condominiumDTO.getName()}"></h1>-->
+    <!--<input th:value="${condominiumDTO.getCountry()}"/>-->
+    <!--<input th:value="${condominiumDTO.getZipCode()}"/>-->
+    <!--<input th:text="${condominiumDTO.getCity()}"/>-->
+    <!--<input th:text="${condominiumDTO.getAddressLine1()}"/>-->
+    <!--<input th:text="${condominiumDTO.getAddressLine2()}"/>-->
+    <!--<input th:text="${condominiumDTO.getTopographicalNumber()}"/>-->
+    <!--<input th:text="${condominiumDTO.getParcelNumber()}"/>-->
+    <!--<input th:text="${condominiumDTO.getContractingDate()}"/>-->
+    <!--<input th:text="${condominiumDTO.getGeneralMeetingDate()}"/>-->
+    <!--&lt;!&ndash;<a th:href="'/user/' + ${company.id} + '/condominiums/' + ${condominium.getId()} + '/edit'"></a>&ndash;&gt;-->
+<!--</div>-->
 </body>
 </html>
