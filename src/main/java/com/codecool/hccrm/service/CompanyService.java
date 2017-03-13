@@ -53,10 +53,17 @@ public class CompanyService {
         return companyRepository.findByCompanyNameOrTaxNumber(companyName, taxNumber);
     }
 
-    public boolean isAllowed(String companyId) {
+    public boolean isRejected(String companyId) {
         Company company = findById(new Long(companyId));
-        return company.getCompanyStatus() != CompanyStatus.REJECTED;
+        return company.getCompanyStatus() == CompanyStatus.REJECTED;
     }
+
+    public boolean isPending(String companyId) {
+        Company company = findById(new Long(companyId));
+        return company.getCompanyStatus() == CompanyStatus.PENDING;
+    }
+
+
 
     public Company findByTaxNumber(String taxNumber) {
         return companyRepository.findByTaxNumber(taxNumber);

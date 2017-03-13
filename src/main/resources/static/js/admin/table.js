@@ -1,9 +1,9 @@
  $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    // $('#company_list tfoot th').each(function () {
-    //     var title = $(this).text();
-    //     $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-    // });
+    $('#company_list tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    });
 
     // Setup datatable
     // var table =
@@ -31,6 +31,7 @@
                 }
             }
         ]
+            ,stateSave:true
     });
 
      // "createDate" : "2017-03-13",
@@ -43,16 +44,16 @@
     // BUT SAVING THE RESULT, FOR QUICK FIX -> delete the empty input fields
 
     // Apply the search
-    // table.columns().every(function () {
-    //     var that = this;
-    //
-    //     $('input', this.footer()).on('keyup change', function () {
-    //         if (that.search() !== this.value) {
-    //             that
-    //                 .search(this.value)
-    //                 .draw();
-    //         }
-    //     });
-    // });
+    table.columns().every(function () {
+        var that = this;
+
+        $('input', this.footer()).on('keyup change', function () {
+            if (that.search() !== this.value) {
+                that
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
 
 });

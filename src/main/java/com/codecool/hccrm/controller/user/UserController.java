@@ -8,6 +8,8 @@ import com.codecool.hccrm.service.CompanyService;
 import com.codecool.hccrm.service.CondominiumService;
 import com.codecool.hccrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,14 @@ import java.text.ParseException;
 import java.util.List;
 
 @Controller
+@PropertySource("classpath:messages.properties")
 public class UserController {
+
+    @Value("${rejected}")
+    String rejected;
+
+    @Value("${pending}")
+    String pending;
 
     @Autowired
     UserService userService;
@@ -40,8 +49,12 @@ public class UserController {
     @RequestMapping(value = {"/user/{company_id}/condominiums"}, method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String listCondominiums(@PathVariable("company_id") String companyId,  Model model, Principal currentUser) {
-        if (!companyService.isAllowed(companyId)) {
-            model.addAttribute("error", "Company is Rejected!");
+        if (companyService.isRejected(companyId)) {
+            model.addAttribute("error", rejected);
+            return "user/user_dashboard";
+        }
+        if (companyService.isPending(companyId)) {
+            model.addAttribute("error", pending);
             return "user/user_dashboard";
         }
         Company company = companyService.findById(new Long(companyId));
