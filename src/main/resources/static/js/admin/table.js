@@ -19,11 +19,17 @@
             {data: 'createDate'},
             {
                 data: 'companyStatus',
-                "render": function ( data, type, full, meta ) {
-                return '<a href="/home">Download</a>';
+                "render": function (data, type, row, meta) {
+                    return '<form action=/admin/'+row.taxNumber+'/status method="get">'
+                        +'<select name="status">'+'<option value="'+data+'" selected>'+data+'</option>'
+                        +'<option value="ACCEPTED">ACCEPTED</option>'
+                        +'<option value="REJECTED">REJECTED</option>'
+                        +'<option value="PENDING">PENDING</option>'
+                        +'</select>'
+                        +'<input type="submit" value="save">'
+                        +'</form>'
+                }
             }
-     }
-
         ]
     });
 

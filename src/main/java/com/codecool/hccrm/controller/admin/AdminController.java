@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import static com.codecool.hccrm.logging.LogFormatter.FORMAT;
 
@@ -32,12 +29,12 @@ public class AdminController {
         return "admin/admin_index";
     }
 
-    @RequestMapping(value = {"admin/{company_id}/status"},method = RequestMethod.POST, consumes = "text/plain")
-    public String changeCompanyStatus(@PathVariable("company_id") String companyId, @RequestBody String status) {
-        Company company = companyService.findById(new Long(companyId));
+    @RequestMapping(value = {"/admin/{tax_number}/status"},method = RequestMethod.GET)
+    public String changeCompanyStatus(@PathVariable("tax_number") String taxNumber, @RequestParam String status) {
+        Company company = companyService.findByTaxNumber(taxNumber);
         CompanyStatus newStatus = CompanyStatus.valueOf(status);
         company.setCompanyStatus(newStatus);
         companyService.save(company);
-        return "admin/admin_index";
+        return "redirect:/admin";
     }
 }
