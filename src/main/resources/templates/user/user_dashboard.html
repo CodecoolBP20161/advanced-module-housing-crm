@@ -44,6 +44,11 @@
 </nav>
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
+
+        <!--error handling-->
+        <div th:if="${error}" th:text="${error}"></div>
+        <!--error handling-->
+
         <div th:each="condom : ${condominiums}" class="card col-md-3">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="http://www.freeiconspng.com/uploads/house-from-premier-builders-in-carthage-mo-64836--home-builders-5.png" />
