@@ -662,3 +662,12 @@ body {
     }
 
 }
+
+/* class for custom search on company list*/
+table.dataTable tfoot th, table.dataTable tfoot td {
+    padding: 5px 0 0 0; !important;
+}
+
+.statuses {
+    text-align: center;
+}
