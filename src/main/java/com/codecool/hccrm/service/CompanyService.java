@@ -3,6 +3,7 @@ package com.codecool.hccrm.service;
 import com.codecool.hccrm.dto.SignUpDTO;
 import com.codecool.hccrm.model.Address;
 import com.codecool.hccrm.model.Company;
+import com.codecool.hccrm.model.CompanyStatus;
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,18 @@ public class CompanyService {
     public Company findByCompanyNameOrTaxNumber(String companyName, String taxNumber) {
         return companyRepository.findByCompanyNameOrTaxNumber(companyName, taxNumber);
     }
+
+    public boolean isRejected(String companyId) {
+        Company company = findById(new Long(companyId));
+        return company.getCompanyStatus() == CompanyStatus.REJECTED;
+    }
+
+    public boolean isPending(String companyId) {
+        Company company = findById(new Long(companyId));
+        return company.getCompanyStatus() == CompanyStatus.PENDING;
+    }
+
+
 
     public Company findByTaxNumber(String taxNumber) {
         return companyRepository.findByTaxNumber(taxNumber);

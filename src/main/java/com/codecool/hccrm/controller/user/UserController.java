@@ -1,6 +1,7 @@
 package com.codecool.hccrm.controller.user;
 
 import com.codecool.hccrm.dto.CondominiumDTO;
+import com.codecool.hccrm.dto.builder.CondominiumDTOBuilder;
 import com.codecool.hccrm.model.Company;
 import com.codecool.hccrm.model.Condominium;
 import com.codecool.hccrm.model.User;
@@ -8,20 +9,26 @@ import com.codecool.hccrm.service.CompanyService;
 import com.codecool.hccrm.service.CondominiumService;
 import com.codecool.hccrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.text.ParseException;
 import java.util.List;
 
 @Controller
+@PropertySource("classpath:messages.properties")
 public class UserController {
+
+    @Value("${rejected}")
+    String rejected;
+
+    @Value("${pending}")
+    String pending;
 
     @Autowired
     UserService userService;
@@ -43,6 +50,14 @@ public class UserController {
     @RequestMapping(value = {"/user/{company_id}/condominiums"}, method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String listCondominiums(@PathVariable("company_id") String companyId,  Model model, Principal currentUser) {
+        if (companyService.isRejected(companyId)) {
+            model.addAttribute("error", rejected);
+            return "user/user_dashboard";
+        }
+        if (companyService.isPending(companyId)) {
+            model.addAttribute("error", pending);
+            return "user/user_dashboard";
+        }
         Company company = companyService.findById(new Long(companyId));
         List<Condominium> condominiums = condominiumService.findByCompany(company);
         model.addAttribute("condominiums", condominiums);
@@ -59,6 +74,26 @@ public class UserController {
         Condominium condominium = condominiumService.createFromDTO(dto);
         condominium.setCompany(company);
         condominiumService.save(condominium);
-        return "redirect:/user/"+companyId+"/condominiums";
+        return "redirect:/user/" + companyId + "/condominiums";
     }
+
+    @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}"}, method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
+    public String displayCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
+        Condominium condominium = condominiumService.findById(new Long(condomId));
+        model.addAttribute("condominium", condominium);
+        model.addAttribute("companyId", companyId);
+        return "user/condominium_profile";
+    }
+
+    @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}/edit"}, method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
+    public String editCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
+        Condominium condominium = condominiumService.findById(new Long(condomId));
+        CondominiumDTOBuilder cb = new CondominiumDTOBuilder();
+        CondominiumDTO condominiumDTO = cb.fromCondominium(condominium);
+        model.addAttribute("condominiumDTO", condominiumDTO);
+        return "user/condominium_profile";
+    }
+
 }

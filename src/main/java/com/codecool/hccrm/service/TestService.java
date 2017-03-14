@@ -66,6 +66,7 @@ public class TestService {
         Set<User> ceos = new HashSet<>();
         ceos.add(user1);
         company1.setCeoUsers(ceos);
+        company1.setCompanyStatus(CompanyStatus.REJECTED);
         companyService.save(company1);
 
 //         add condominiums
