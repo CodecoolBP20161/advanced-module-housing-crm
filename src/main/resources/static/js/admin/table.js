@@ -14,7 +14,7 @@
         //options for status
         if(title === "Status"){
             $(this).html('<select class="searchinput" name="'+ name +'">'
-                +'<option id="noneselected" value="">Select status</option>'
+                +'<option id="noneselected" value="">ALL STATUS</option>'
                 +'<option id="acceptselected" value="accepteda">ACCEPTED</option>'
                 +'<option id="rejectselected" value="rejecteda">REJECTED</option>'
                 +'<option id="pendingselected" value="pendinga">PENDING</option>'
