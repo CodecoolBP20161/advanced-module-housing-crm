@@ -3,6 +3,7 @@
     $('#company_list tfoot th').each(function () {
         var title = $(this).text();
 
+
         //get name for name attribute with some regex and save to localstorage
         var name = title.replace(/\s+/g, '-').toLowerCase();
         var value = window.localStorage.getItem(name);
@@ -46,12 +47,16 @@
             {
                 data: 'companyStatus',
                 "render": function (data, type, row, meta) {
+                    // this makes the option selected!
+                    if(data === "ACCEPTED"){$('#accepted').attr("selected","selected")}
+                    else if(data === "PENDING"){$('#rejected').attr("selected","selected")}
+                    else if(data === "REJECTED"){$('#pending').attr("selected","selected")}
+
                     return '<form class="statuses" action=/admin/'+row.taxNumber+'/status method="get">'
                         +'<select name="status" onchange="this.form.submit()">'
-                        +'<option value="'+data+'" selected>'+data+'</option>'
-                        +'<option value="ACCEPTED">ACCEPTED</option>'
-                        +'<option value="REJECTED">REJECTED</option>'
-                        +'<option value="PENDING">PENDING</option>'
+                        +'<option id="accepted" value="ACCEPTED">ACCEPTED</option>'
+                        +'<option id="rejected" value="REJECTED">REJECTED</option>'
+                        +'<option id="pending" value="PENDING">PENDING</option>'
                         +'</select>'
                         +'</form>'
                     }
@@ -59,6 +64,8 @@
                 ],
             stateSave: true
     });
+
+
 
     // Apply the search
 
