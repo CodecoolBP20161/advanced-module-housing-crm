@@ -47,18 +47,21 @@
             {
                 data: 'companyStatus',
                 "render": function (data, type, row, meta) {
-                    // this makes the option selected!
-                    if(data === "ACCEPTED"){$('#accepted').attr("selected","selected")}
-                    else if(data === "PENDING"){$('#rejected').attr("selected","selected")}
-                    else if(data === "REJECTED"){$('#pending').attr("selected","selected")}
-
-                    return '<form class="statuses" action=/admin/'+row.taxNumber+'/status method="get">'
+                    var form = '<form class="statuses" action=/admin/'+row.taxNumber+'/status method="get">'
                         +'<select name="status" onchange="this.form.submit()">'
-                        +'<option id="accepted" value="ACCEPTED">ACCEPTED</option>'
-                        +'<option id="rejected" value="REJECTED">REJECTED</option>'
-                        +'<option id="pending" value="PENDING">PENDING</option>'
+                        +'<option id="accepted" value="ACCEPTED"';
+                        if(data === "ACCEPTED") {form += ' selected'}
+                        form += '>ACCEPTED</option>'
+                        + '<option id="rejected" value="REJECTED"';
+                        if(data === "REJECTED") {form += ' selected'}
+                        form += '>REJECTED</option>'
+                        + '<option id="pending" value="PENDING"';
+                        if(data === "PENDING") {form += ' selected'}
+                        form += '>PENDING</option>'
                         +'</select>'
-                        +'</form>'
+                        +'</form>';
+
+                    return form;
                     }
             }
                 ],
@@ -67,7 +70,8 @@
 
 
 
-    // Apply the search
+
+     // Apply the search
 
     table.columns().every(function () {
         var that = this;
