@@ -3,6 +3,7 @@
     $('#company_list tfoot th').each(function () {
         var title = $(this).text();
 
+
         //get name for name attribute with some regex and save to localstorage
         var name = title.replace(/\s+/g, '-').toLowerCase();
         var value = window.localStorage.getItem(name);
@@ -13,7 +14,7 @@
         //options for status
         if(title === "Status"){
             $(this).html('<select class="searchinput" name="'+ name +'">'
-                +'<option id="noneselected" value="">Select status</option>'
+                +'<option id="noneselected" value="">ALL STATUS</option>'
                 +'<option id="acceptselected" value="accepteda">ACCEPTED</option>'
                 +'<option id="rejectselected" value="rejecteda">REJECTED</option>'
                 +'<option id="pendingselected" value="pendinga">PENDING</option>'
@@ -46,21 +47,31 @@
             {
                 data: 'companyStatus',
                 "render": function (data, type, row, meta) {
-                    return '<form class="statuses" action=/admin/'+row.taxNumber+'/status method="get">'
+                    var form = '<form class="statuses" action=/admin/'+row.taxNumber+'/status method="get">'
                         +'<select name="status" onchange="this.form.submit()">'
-                        +'<option value="'+data+'" selected>'+data+'</option>'
-                        +'<option value="ACCEPTED">ACCEPTED</option>'
-                        +'<option value="REJECTED">REJECTED</option>'
-                        +'<option value="PENDING">PENDING</option>'
+                        +'<option id="accepted" value="ACCEPTED"';
+                        if(data === "ACCEPTED") {form += ' selected'}
+                        form += '>ACCEPTED</option>'
+                        + '<option id="rejected" value="REJECTED"';
+                        if(data === "REJECTED") {form += ' selected'}
+                        form += '>REJECTED</option>'
+                        + '<option id="pending" value="PENDING"';
+                        if(data === "PENDING") {form += ' selected'}
+                        form += '>PENDING</option>'
                         +'</select>'
-                        +'</form>'
+                        +'</form>';
+
+                    return form;
                     }
             }
                 ],
             stateSave: true
     });
 
-    // Apply the search
+
+
+
+     // Apply the search
 
     table.columns().every(function () {
         var that = this;
