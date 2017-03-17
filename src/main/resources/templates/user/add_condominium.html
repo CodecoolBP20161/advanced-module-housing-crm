@@ -12,7 +12,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" th:action="@{'/user/'+'${companyId}'+'/condominiums/add'}" th:object="${condominiumDTO}" th:modelAttribute="condominiumDTO" method="post">
+                    <form action="#" th:action="@{'/user/'+ ${companyId} +'/condominiums/add'}" th:object="${condominiumDTO}" th:modelAttribute="condominiumDTO" method="post">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input th:field="*{name}" id="condomName" type="text" class="validate" />
@@ -35,15 +35,15 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <input th:field="*{contractingDate}" id="condomContractingDate" type="text" class="validate" />
+                                <div class="col s12">
                                     <label for="condomContractingDate">Contracting Date</label>
+                                    <input th:field="*{contractingDate}" id="condomContractingDate" type="date" class="datepicker" />
                                     <span style="color: red; "><p th:if="${#fields.hasErrors('contractingDate')}" th:errors="*{contractingDate}"></p></span>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <input th:field="*{generalMeetingDate}" id="condomGeneralMeetingDate" type="text" class="validate" />
+                                <div class="col s12">
+                                    <input th:field="*{generalMeetingDate}" id="condomGeneralMeetingDate" type="date" class="datepicker" />
                                     <label for="condomGeneralMeetingDate">General Meeting Date</label>
                                     <span style="color: red; "><p th:if="${#fields.hasErrors('generalMeetingDate')}" th:errors="*{generalMeetingDate}"></p></span>
                                 </div>
