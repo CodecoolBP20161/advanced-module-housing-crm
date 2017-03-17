@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="messages">
+    <div th:if="${message_error}" class="card red lighten-5">
+        <div class="card-content red-text">
+            <p th:text="${message_error}"></p>
+        </div>
+    </div>
+    <div th:if="${message_success}" class="card green lighten-5">
+        <div class="card-content green-text">
+            <p th:text="${message_success}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
