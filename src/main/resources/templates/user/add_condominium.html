@@ -21,9 +21,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <input th:field="*{topographicalNumber}" id="condomTopographicalNumber" type="text" class="validate" />
+                                <div class="col s12">
                                     <label for="condomTopographicalNumber">Topographical Number</label>
+                                    <input th:field="*{topographicalNumber}" id="condomTopographicalNumber" type="text" class="validate" />
                                     <span style="color: red; "><p th:if="${#fields.hasErrors('topographicalNumber')}" th:errors="*{topographicalNumber}"></p></span>
                                 </div>
                             </div>
@@ -43,8 +43,8 @@
                             </div>
                             <div class="row">
                                 <div class="col s12">
-                                    <input th:field="*{generalMeetingDate}" id="condomGeneralMeetingDate" type="date" class="datepicker" />
                                     <label for="condomGeneralMeetingDate">General Meeting Date</label>
+                                    <input th:field="*{generalMeetingDate}" id="condomGeneralMeetingDate" type="date" class="datepicker" />
                                     <span style="color: red; "><p th:if="${#fields.hasErrors('generalMeetingDate')}" th:errors="*{generalMeetingDate}"></p></span>
                                 </div>
                             </div>
@@ -68,14 +68,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="input-field col s6">
-                                    <input th:field="*{addressLine1}" id="condomAddress1" type="text" class="validate" />
+                                <div class="col s6">
                                     <label for="condomAddress1">Address Line 1</label>
+                                    <input th:field="*{addressLine1}" id="condomAddress1" type="text" class="validate" />
                                     <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></p></span>
                                 </div>
-                                <div class="input-field col s6">
-                                    <input th:field="*{addressLine2}" id="condomAddress2" type="text" class="validate" />
+                                <div class="col s6">
                                     <label for="condomAddress2">Address Line 2</label>
+                                    <input th:field="*{addressLine2}" id="condomAddress2" type="text" class="validate" />
                                     <span style="color: red; "><p th:if="${#fields.hasErrors('addressLine2')}" th:errors="*{addressLine1}"></p></span>
                                 </div>
                             </div>
