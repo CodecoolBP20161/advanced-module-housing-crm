@@ -47,7 +47,7 @@ public class UserController {
         return "user/user_dashboard";
     }
 
-    @RequestMapping(value = {"/user/{company_id}/condominiums"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/user/companies/{company_id}/condominiums"}, method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String listCondominiums(@PathVariable("company_id") String companyId,  Model model, Principal currentUser) {
         if (companyService.isRejected(companyId)) {
@@ -67,17 +67,17 @@ public class UserController {
         return "user/user_dashboard";
     }
 
-    @RequestMapping(value = {"user/{company_id}/condominiums/add"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"user/companies/{company_id}/condominiums/add"}, method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String addCondominium(@PathVariable("company_id") String companyId, @ModelAttribute CondominiumDTO dto, Principal currentUser) throws ParseException {
         Company company = companyService.findById(new Long(companyId));
         Condominium condominium = condominiumService.createFromDTO(dto);
         condominium.setCompany(company);
         condominiumService.save(condominium);
-        return "redirect:/user/" + companyId + "/condominiums";
+        return "redirect:/user/companies/" + companyId + "/condominiums";
     }
 
-    @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"user/companies/{company_id}/condominiums/{condominium_id}"}, method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String displayCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
         Condominium condominium = condominiumService.findById(new Long(condomId));
@@ -86,7 +86,7 @@ public class UserController {
         return "user/condominium_profile";
     }
 
-    @RequestMapping(value = {"user/{company_id}/condominiums/{condominium_id}/edit"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"user/companies/{company_id}/condominiums/{condominium_id}/edit"}, method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN') or @userService.currentUserOwnsCompany(#currentUser, #companyId)")
     public String editCondominium(@PathVariable("company_id") String companyId, @PathVariable("condominium_id") String condomId, Principal currentUser, Model model) {
         Condominium condominium = condominiumService.findById(new Long(condomId));
