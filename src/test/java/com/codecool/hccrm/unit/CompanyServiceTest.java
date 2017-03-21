@@ -1,4 +1,4 @@
-package com.codecool.hccrm;
+package com.codecool.hccrm.unit;
 
 import com.codecool.hccrm.dto.SignUpDTO;
 import com.codecool.hccrm.model.Address;
