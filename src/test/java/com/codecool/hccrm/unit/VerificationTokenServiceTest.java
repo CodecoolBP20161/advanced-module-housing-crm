@@ -1,4 +1,4 @@
-package com.codecool.hccrm;
+package com.codecool.hccrm.unit;
 
 import com.codecool.hccrm.model.User;
 import com.codecool.hccrm.model.VerificationToken;

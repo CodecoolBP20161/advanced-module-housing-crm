@@ -14,7 +14,7 @@ public class CondominiumDTO extends AddressDTO {
 
     private String topographicalNumber;
 
-    private int parcelNumber;
+    private Integer parcelNumber;
 
     private String contractingDate;
 
