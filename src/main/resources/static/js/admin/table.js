@@ -15,15 +15,15 @@
         if(title === "Status"){
             $(this).html('<select class="searchinput" name="'+ name +'">'
                 +'<option id="noneselected" value="">ALL STATUS</option>'
-                +'<option id="acceptselected" value="accepteda">ACCEPTED</option>'
-                +'<option id="rejectselected" value="rejecteda">REJECTED</option>'
-                +'<option id="pendingselected" value="pendinga">PENDING</option>'
+                +'<option id="acceptselected" value="ACCEPTEDA">ACCEPTED</option>'
+                +'<option id="rejectselected" value="REJECTEDA">REJECTED</option>'
+                +'<option id="pendingselected" value="PENDINGA">PENDING</option>'
                 +'</select>');
 
             // THIS RESTORES SELECTED FROM LOCALSTORAGE!
-            if(value === "pendinga"){$('#pendingselected').attr("selected","selected")}
-            else if(value === "accepteda"){$('#acceptselected').attr("selected","selected")}
-            else if(value === "rejecteda"){$('#rejectselected').attr("selected","selected")}
+            if(value === "PENDINGA"){$('#pendingselected').attr("selected","selected")}
+            else if(value === "ACCEPTEDA"){$('#acceptselected').attr("selected","selected")}
+            else if(value === "REJECTEDA"){$('#rejectselected').attr("selected","selected")}
             else {$('#noneselected').attr("selected","selected")}
 
         //search inputs for everything else
@@ -49,15 +49,19 @@
                 "render": function (data, type, row, meta) {
                     var form = '<form class="statuses" action=/admin/'+row.taxNumber+'/status method="get">'
                         +'<select name="status" onchange="this.form.submit()">'
+                        +'<option value="'+data+'" selected style="display: none;">'+data+'</option>'
                         +'<option id="accepted" value="ACCEPTED"';
                         if(data === "ACCEPTED") {form += ' selected'}
                         form += '>ACCEPTED</option>'
+
                         + '<option id="rejected" value="REJECTED"';
                         if(data === "REJECTED") {form += ' selected'}
                         form += '>REJECTED</option>'
+
                         + '<option id="pending" value="PENDING"';
                         if(data === "PENDING") {form += ' selected'}
                         form += '>PENDING</option>'
+
                         +'</select>'
                         +'</form>';
 
@@ -70,9 +74,7 @@
 
 
 
-
      // Apply the search
-
     table.columns().every(function () {
         var that = this;
 
